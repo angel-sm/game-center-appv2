@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Grid, Row } from 'react-flexbox-grid';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
-import { Menu, Option, MainContainer } from './Layout.styles';
+import { Menu, Option } from './Layout.styles';
 
 import('../../assets/styles/styles.scss');
 
@@ -39,24 +40,26 @@ const options = [
 
 const Layout = () => {
   return (
-    <MainContainer>
-      <Menu className='color_basic'>
-        <ul>
-          {
-            options.map((option) => {
-              return (
-                <Link to={option.url} style={{ textDecoration: 'none' }}>
-                  <Option>
-                    <div>{option.option}</div>
-                    <div>{option.icon}</div>
-                  </Option>
-                </Link>
-              );
-            })
-          }
-        </ul>
-      </Menu>
-    </MainContainer>
+    <Grid>
+      <Row>
+        <Menu className='color_basic'>
+          <ul>
+            {
+              options.map((option) => {
+                return (
+                  <Link to={option.url} style={{ textDecoration: 'none' }}>
+                    <Option>
+                      <div>{option.option}</div>
+                      <div>{option.icon}</div>
+                    </Option>
+                  </Link>
+                );
+              })
+            }
+          </ul>
+        </Menu>
+      </Row>
+    </Grid>
   );
 };
 
