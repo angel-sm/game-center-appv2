@@ -1,13 +1,13 @@
 import React from 'react';
 import {
   BrowserRouter,
-  Route
+  Route,
 } from 'react-router-dom';
-import HelloWorld from '../components/Hello';
+import Layout from '../containers/Layout';
 
 const App = () => (
   <BrowserRouter>
-    <Route exact path='/' component={HelloWorld} />
+    <Route exact path='/' component={Layout} />
   </BrowserRouter>
 );
 
