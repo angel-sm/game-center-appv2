@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-
 const HelloWorld = () => {
   const classes = useStyles();
 
