@@ -146,7 +146,7 @@ const Competitors = [{
 }];
 
 const initialState = {
-  Competitors,
+  competitors: [],
 };
 
 export { initialState, Competitors };
