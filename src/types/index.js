@@ -1,0 +1,7 @@
+const GET_COMPETITORS = 'GET_COMPETITORS';
+const OTHER = 'OTHER';
+
+export {
+  GET_COMPETITORS,
+  OTHER,
+};

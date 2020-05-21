@@ -145,4 +145,8 @@ const Competitors = [{
   'end': '2020-04-01'
 }];
 
-export default Competitors;
+const initialState = {
+  Competitors,
+};
+
+export { initialState, Competitors };

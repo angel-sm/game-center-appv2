@@ -5,10 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 import TournamentTable from '../../components/TournamentTable';
-import Competitors from '../../utils/mokups';
 import CardInfo from '../../components/CardInfo';
 
 import { CompetitorsContainer, ButtonsContainer } from './Home.style';
+
+import { Competitors } from '../../utils/mokups';
 
 const Home = () => {
   let isPaid = true;
