@@ -1,35 +1,50 @@
 import styled from 'styled-components';
+import { makeStyles } from '@material-ui/core/styles';
+import { ColorsPalette } from '../../assets/styles';
 
-const MainContainer = styled.div`
+const drawerWidth = 240;
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+  },
+  drawer: {
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+    },
+  },
+  appBar: {
+    [theme.breakpoints.up('sm')]: {
+      width: `calc(100% - ${drawerWidth}px)`,
+      marginLeft: drawerWidth,
+    },
+    background: ColorsPalette.background_primary_fill,
+    // eslint-disable-next-line no-dupe-keys
+    background: ColorsPalette.background_primary,
+  },
+  menuButton: {
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
+  },
+  // necessary for content to be below app bar
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(5),
+  },
+}));
+
+const ProfileControllerContent = styled.div`
+  max-height: 40%;
   width: 100%;
-  height: 100vh;
   display: flex;
-  flex-direction: row;
+  flex-direction:column;
+  align-items:center;
 `;
 
-const Menu = styled.div`
-  width: 20%;
-  height: 100vh;
-`;
-
-const Option = styled.li`
-  width: 100%;
-  padding: 1em;
-  margin: auto;
-  display: flex;
-  text-align: center;
-  justify-content: space-between;
-  background: #e8e8e8;
-  list-style: none;
-  color: #4c4c4c;
-
-  &:hover{
-    background: darkslategrey;
-  }
-`;
-
-export {
-  Option,
-  Menu,
-  MainContainer,
-};
+export { ProfileControllerContent, useStyles };

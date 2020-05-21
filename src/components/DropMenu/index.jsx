@@ -4,7 +4,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import useStyles from './DropMenu.style';
+import useStyles from './DropMenu.styles';
 
 const MenuDrop = ({ section, data }) => {
   const classes = useStyles();
