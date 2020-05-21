@@ -27,7 +27,7 @@ const Competitors = [{
 }, {
   'id': '5ec58ed8fc13ae43d0000004',
   'points': 34,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec58ed8fc13ae43d0000005',
   'nickname': 'hjouannin2',
   'name': 'Haroun Jouannin',
@@ -53,7 +53,7 @@ const Competitors = [{
 }, {
   'id': '5ec58ed8fc13ae43d0000008',
   'points': 22,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec58ed8fc13ae43d0000009',
   'nickname': 'vpallent4',
   'name': 'Vaclav Pallent',
@@ -67,7 +67,7 @@ const Competitors = [{
 {
   'id': '5ec58ed8fc13ae4ad0000008',
   'points': 22,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec58ed8fc13ae43d0000009',
   'nickname': 'vpallent4',
   'name': 'Vaclav Pallent',
@@ -94,7 +94,7 @@ const Competitors = [{
 }, {
   'id': '5ec5b06cfc13ae6c06000002',
   'points': 61,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec5b06cfc13ae6c06000003',
   'nickname': 'manthoney1',
   'name': 'Mohandis Anthoney',
@@ -107,7 +107,7 @@ const Competitors = [{
 }, {
   'id': '5ec5b06cfc13ae6c06000004',
   'points': 95,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec5b06cfc13ae6c06000005',
   'nickname': 'kamorts2',
   'name': 'Korie Amorts',
@@ -120,7 +120,7 @@ const Competitors = [{
 }, {
   'id': '5ec5b06cfc13ae6c06000006',
   'points': 20,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec5b06cfc13ae6c06000007',
   'nickname': 'floker3',
   'name': 'Francois Loker',
@@ -133,7 +133,7 @@ const Competitors = [{
 }, {
   'id': '5ec5b06cfc13ae6c06000008',
   'points': 24,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec5b06cfc13ae6c06000009',
   'nickname': 'kgiacobillo4',
   'name': 'Kristine Giacobillo',

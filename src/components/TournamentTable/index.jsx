@@ -10,6 +10,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableHead from '@material-ui/core/TableHead';
 import Paper from '@material-ui/core/Paper';
 import IconButton from '@material-ui/core/IconButton';
+import { DoneOutline, CloseOutlined } from '@material-ui/icons';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Avatar from '@material-ui/core/Avatar';
@@ -86,7 +87,7 @@ const TournamentTable = ({ Competitors }) => {
                 {row.points}
               </TableCell>
               <TableCell align='center'>
-                {row.paid}
+                {row.paid === 1 ? <DoneOutline /> : <CloseOutlined /> }
               </TableCell>
             </TableRow>
           ))}
