@@ -6,12 +6,14 @@ import {
 } from 'react-router-dom';
 import Layout from '../containers/Layout';
 import Home from '../containers/Home';
+import SearchPlayerBar from '../components/SearchPlayerBar';
 
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
-        <Route exact path='/tournament/:id' component={Home} />
+        <Route exact path='/' component={SearchPlayerBar} />
+        <Route exact path='/tournaments/:id' component={Home} />
       </Switch>
     </Layout>
   </BrowserRouter>
