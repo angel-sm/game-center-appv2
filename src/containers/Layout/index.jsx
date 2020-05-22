@@ -17,6 +17,7 @@ import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
 
 import Profile from '../../components/Profile';
+import DropMenu from '../../components/DropMenu';
 
 import useStyles from './Layout-styles';
 
@@ -65,6 +66,10 @@ function Layout({ children }) {
     <div>
       <List>
         <Profile />
+        <Divider />
+        <DropMenu section='Torneos' />
+        <DropMenu section='Temporadas' />
+        <Divider />
         {options.map((option) => (
           <Link
             to={option.url}
