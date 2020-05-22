@@ -17,7 +17,8 @@ import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
 
 import Profile from '../../components/Profile';
-import DropMenu from '../../components/DropMenu';
+import TournamentsMenu from '../../components/TournamentsMenu';
+import SeasonsMenu from '../../components/SeasonsMenu';
 
 import { tournaments } from '../../utils/mokups';
 
@@ -69,9 +70,9 @@ function Layout({ children }) {
       <List>
         <Profile />
         <Divider />
-        <DropMenu section='Torneos' data={tournaments} />
+        <TournamentsMenu section='Torneos' data={tournaments} />
         <Divider />
-        <DropMenu section='Temporadas' data={tournaments} />
+        <SeasonsMenu section='Temporadas' data={tournaments} />
         <Divider />
         {options.map((option) => (
           <Link

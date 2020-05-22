@@ -10,9 +10,9 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import { useStyles, useDetailsStyles, useSpaceStyles } from './DropMenu-styles';
+import { useStyles, useDetailsStyles, useSpaceStyles } from './TournamentsMenu-styles';
 
-const MenuDrop = ({ section, data }) => {
+const TournamentMenu = ({ section, data }) => {
   const classes = useStyles();
   return (
     <ExpansionPanel className={classes.root}>
@@ -44,4 +44,4 @@ const MenuDrop = ({ section, data }) => {
   );
 };
 
-export default MenuDrop;
+export default TournamentMenu;
