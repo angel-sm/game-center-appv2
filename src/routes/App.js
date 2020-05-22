@@ -5,13 +5,13 @@ import {
   Route,
 } from 'react-router-dom';
 import Layout from '../containers/Layout';
-import Hello from '../components/Hello';
+import CompetitorsTable from '../components/CompetitorsTable';
 
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
-        <Route exact path='/' component={Hello} />
+        <Route exact path='/' component={CompetitorsTable} />
       </Switch>
     </Layout>
   </BrowserRouter>
