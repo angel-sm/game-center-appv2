@@ -16,7 +16,6 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Avatar from '@material-ui/core/Avatar';
 
 import { useAvatarStyles, usePaginationStyles, useTableStyles } from './Competitors-styles';
-import { competitors } from '../../utils/mokups';
 
 import('./CompetitorsTable.scss');
 
@@ -49,7 +48,7 @@ function TablePaginationActions(props) {
   );
 }
 
-const CompetitorsTable = () => {
+const CompetitorsTable = ({ competitors }) => {
   const classesTable = useTableStyles();
   const classesAvatar = useAvatarStyles();
   const [page, setPage] = React.useState(0);

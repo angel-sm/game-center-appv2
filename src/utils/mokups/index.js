@@ -1,7 +1,7 @@
 const competitors = [{
   'id': '5ec58ed8fc13ae43d0000000',
   'points': 40,
-  'paid': 0,
+  'paid': 1,
   'tournamentId': '5ec58ed8fc13ae43d0000001',
   'nickname': 'cciccotti0',
   'name': 'Cissiee Ciccotti',

@@ -25,7 +25,7 @@ const TournamentMenu = ({ section, data }) => {
         <List>
           {data.map((option) => (
             <Link
-              to={option.id}
+              to={`/tournament/${option.id}`}
               style={{ textDecoration: 'none', color: '#4e4e4e' }}
               key={option.id}
             >
