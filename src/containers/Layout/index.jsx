@@ -16,6 +16,8 @@ import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
 
+import Profile from '../../components/Profile';
+
 import useStyles from './Layout-styles';
 
 const options = [
@@ -62,6 +64,7 @@ function Layout({ children }) {
   const drawer = (
     <div>
       <List>
+        <Profile />
         {options.map((option) => (
           <Link
             to={option.url}
