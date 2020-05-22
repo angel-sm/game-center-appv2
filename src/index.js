@@ -1,5 +1,24 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
 import ReactDOM from 'react-dom';
-import HelloWorld from './components/Hello';
+import App from './routes/App';
+import reducers from './reducers';
 
-ReactDOM.render(<HelloWorld />, document.getElementById('App'));
+const initialState = {
+  user: {},
+  userData: {},
+  center: {},
+  competitors: [],
+  tournaments: [],
+  seasons: [],
+};
+
+const store = createStore(reducers, initialState);
+
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('App'),
+);
