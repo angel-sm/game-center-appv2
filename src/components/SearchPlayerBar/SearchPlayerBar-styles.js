@@ -1,9 +1,9 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStayles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   children: {
     width: '100%',
   },
 }));
 
-export default useStayles;
+export default useStyles;

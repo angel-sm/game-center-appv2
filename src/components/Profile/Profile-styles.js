@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStayles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     width: theme.spacing(12),
     height: theme.spacing(12),
@@ -14,4 +14,4 @@ const useStayles = makeStyles((theme) => ({
   },
 }));
 
-export default useStayles;
+export default useStyles;
