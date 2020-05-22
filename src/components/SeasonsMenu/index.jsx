@@ -5,7 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import { ListItemIcon, Divider } from '@material-ui/core';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
+import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -30,10 +30,10 @@ const SeasonsMenu = ({ section, data }) => {
               key={option.id}
             >
               <Divider />
-              <ListItem button key={option.option} className={useSpaceStyles().root}>
-                <ListItemText primary={option.tournament} />
+              <ListItem button className={useSpaceStyles().root}>
+                <ListItemText primary={option.season} />
                 <ListItemIcon>
-                  <SportsEsportsIcon />
+                  <EmojiEventsIcon />
                 </ListItemIcon>
               </ListItem>
             </Link>

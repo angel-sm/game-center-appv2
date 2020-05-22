@@ -166,8 +166,42 @@ const tournaments = [{
   'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
 }];
 
+const seasons = [{
+  'id': '123456789123456789123456',
+  'season': 1,
+  'game': 'Wild Gals Of The Naked West',
+  'start': '2019-06-27',
+  'end': '2019-05-31',
+}, {
+  'id': '123456789123456789123412',
+  'season': 2,
+  'game': 'Giuseppe Makes a Movie',
+  'start': '2020-02-25',
+  'end': '2020-03-05',
+}, {
+  'id': '123456789123456789123432',
+  'season': 3,
+  'game': 'Dance, Girl, Dance',
+  'start': '2020-03-16',
+  'end': '2020-02-08',
+}, {
+  'id': '123456789123456789123415',
+  'season': 4,
+  'game': 'Relative Fear',
+  'start': '2020-03-14',
+  'end': '2020-04-01',
+}, {
+  'id': '123456789123456789123448',
+  'season': 5,
+  'game': 'Never Take Candy',
+  'start': '2019-05-22',
+  'end': '2020-04-16',
+},
+];
+
 export {
   competitors,
   tournaments,
+  seasons,
 };
 

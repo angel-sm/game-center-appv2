@@ -20,7 +20,7 @@ import Profile from '../../components/Profile';
 import TournamentsMenu from '../../components/TournamentsMenu';
 import SeasonsMenu from '../../components/SeasonsMenu';
 
-import { tournaments } from '../../utils/mokups';
+import { tournaments, seasons } from '../../utils/mokups';
 
 import useStyles from './Layout-styles';
 
@@ -72,7 +72,7 @@ function Layout({ children }) {
         <Divider />
         <TournamentsMenu section='Torneos' data={tournaments} />
         <Divider />
-        <SeasonsMenu section='Temporadas' data={tournaments} />
+        <SeasonsMenu section='Temporadas' data={seasons} />
         <Divider />
         {options.map((option) => (
           <Link
