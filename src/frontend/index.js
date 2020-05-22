@@ -11,11 +11,12 @@ const history = createBrowserHistory();
 const preloadedState = window.__PRELOADED__STATE__;
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducer, preloadedState, composeEnhancers());
+const renderMethod = module.hot ? ReactDOM.render : ReactDOM.hydrate;
 
 // To client dont have acces
 delete window.__PRELOADED__STATE__;
 
-ReactDOM.hydrate(
+renderMethod(
   <Provider store={store}>
     <Router history={history}>
       <App />

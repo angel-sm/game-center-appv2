@@ -48,8 +48,7 @@ const setResponse = (html, preloadedState, manifest) => {
   const mainBuild = manifest ? manifest[main.js] : 'assets/app.js';
   const vendorBuild = manifest ? manifest[vendors.js] : 'assets/vendor.js';
 
-  return `
-    <!DOCTYPE html>
+  return (`
     <html lang="en">
       <head>
         <meta charset="UTF-8">
@@ -68,7 +67,7 @@ const setResponse = (html, preloadedState, manifest) => {
         <script src=${vendorBuild} type="text/javascript"></script>
       </body>
     </html>
-  `;
+  `);
 };
 
 const renderApp = (req, res) => {
