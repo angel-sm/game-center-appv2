@@ -1,3 +1,5 @@
-export default reducer = (state, action) => {
-  return state;
-};
+import { combineReducers } from 'redux';
+
+export default combineReducers({
+
+});

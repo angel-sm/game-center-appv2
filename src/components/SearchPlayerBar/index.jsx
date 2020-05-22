@@ -7,7 +7,7 @@ import { competitors } from '../../utils/mokups';
 
 export default function FreeSolo() {
   return (
-    <form onSubmit={submitHandler}>
+    <form onSubmit={null}>
       <Autocomplete
         freeSolo
         id='free-solo-2-demo'

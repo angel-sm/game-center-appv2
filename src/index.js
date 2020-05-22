@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import ReactDOM from 'react-dom';
 import App from './routes/App';
-import reducer from './reducers';
+import reducers from './reducers';
 
 const initialState = {
   user: {},
@@ -14,7 +14,7 @@ const initialState = {
   seasons: [],
 };
 
-const store = createStore(reducer, initialState);
+const store = createStore(reducers, initialState);
 
 ReactDOM.render(
   <Provider store={store}>
