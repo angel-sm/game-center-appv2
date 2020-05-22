@@ -19,6 +19,8 @@ import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } f
 import Profile from '../../components/Profile';
 import DropMenu from '../../components/DropMenu';
 
+import { tournaments } from '../../utils/mokups';
+
 import useStyles from './Layout-styles';
 
 const options = [
@@ -67,8 +69,9 @@ function Layout({ children }) {
       <List>
         <Profile />
         <Divider />
-        <DropMenu section='Torneos' />
-        <DropMenu section='Temporadas' />
+        <DropMenu section='Torneos' data={tournaments} />
+        <Divider />
+        <DropMenu section='Temporadas' data={tournaments} />
         <Divider />
         {options.map((option) => (
           <Link

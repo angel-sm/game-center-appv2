@@ -9,4 +9,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default useStyles;
+const useDetailsStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+}));
+
+const useSpaceStyles = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: theme.spacing(0.9),
+    textAlign: 'center',
+  },
+}));
+
+export {
+  useStyles,
+  useDetailsStyles,
+  useSpaceStyles,
+};

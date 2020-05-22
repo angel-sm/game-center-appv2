@@ -1,4 +1,4 @@
-const Competitors = [{
+const competitors = [{
   'id': '5ec58ed8fc13ae43d0000000',
   'points': 40,
   'paid': 0,
@@ -145,5 +145,29 @@ const Competitors = [{
   'end': '2020-04-01',
 }];
 
-export default Competitors;
+const tournaments = [{
+  'id': '123456789123456789123456',
+  'tournament': 'Maae',
+  'cost': 831,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2019-07-28',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+},
+{
+  'id': '123456789123456789123451',
+  'tournament': 'Lool',
+  'cost': 831,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2019-07-28',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+}];
+
+export {
+  competitors,
+  tournaments,
+};
 

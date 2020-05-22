@@ -16,6 +16,9 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import Avatar from '@material-ui/core/Avatar';
 
 import { useAvatarStyles, usePaginationStyles, useTableStyles } from './Competitors-styles';
+import { competitors } from '../../utils/mokups';
+
+import('./CompetitorsTable.scss');
 
 function TablePaginationActions(props) {
   const classesPagination = usePaginationStyles();
@@ -46,7 +49,7 @@ function TablePaginationActions(props) {
   );
 }
 
-const TournamentTable = ({ Competitors }) => {
+const CompetitorsTable = () => {
   const classesTable = useTableStyles();
   const classesAvatar = useAvatarStyles();
   const [page, setPage] = React.useState(0);
@@ -73,21 +76,21 @@ const TournamentTable = ({ Competitors }) => {
         </TableHead>
         <TableBody>
           {(rowsPerPage > 0 ?
-            Competitors.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) :
-            Competitors
-          ).map((row) => (
-            <TableRow key={row.name}>
+            competitors.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage) :
+            competitors
+          ).map((competitor) => (
+            <TableRow key={competitor.name}>
               <TableCell align='center'>
                 <div className='Avatar-content'>
-                  <Avatar className={classesAvatar.root} alt={row.name} src='/static/images/avatar/1.jpg' />
-                  {`${row.name} - ${row.nickname}`}
+                  <Avatar className={classesAvatar.root} alt={competitor.name} src='/static/images/avatar/1.jpg' />
+                  {`${competitor.name} - ${competitor.nickname}`}
                 </div>
               </TableCell>
               <TableCell align='center'>
-                {row.points}
+                {competitor.points}
               </TableCell>
               <TableCell align='center'>
-                {row.paid === 1 ? <DoneOutline /> : <CloseOutlined /> }
+                {competitor.paid === 1 ? <DoneOutline /> : <CloseOutlined />}
               </TableCell>
             </TableRow>
           ))}
@@ -98,7 +101,7 @@ const TournamentTable = ({ Competitors }) => {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
-              count={Competitors.length}
+              count={competitors.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{
@@ -116,4 +119,4 @@ const TournamentTable = ({ Competitors }) => {
   );
 };
 
-export default TournamentTable;
+export default CompetitorsTable;
