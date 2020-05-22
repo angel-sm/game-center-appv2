@@ -25,7 +25,7 @@ export default function FreeSolo() {
           />
         )}
       />
-      <button type="submit">Enviar</button>
+      <button type='submit'>Enviar</button>
     </form>
   );
 };
