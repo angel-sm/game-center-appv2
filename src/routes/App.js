@@ -6,13 +6,13 @@ import {
 } from 'react-router-dom';
 import Layout from '../containers/Layout';
 import Home from '../containers/Home';
-import SearchPlayerBar from '../components/SearchPlayerBar';
+import TournamentForm from '../components/TournamentForm';
 
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
-        <Route exact path='/' component={SearchPlayerBar} />
+        <Route exact path='/' component={TournamentForm} />
         <Route exact path='/tournaments/:id' component={Home} />
       </Switch>
     </Layout>
