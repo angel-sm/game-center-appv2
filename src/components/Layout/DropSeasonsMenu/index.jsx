@@ -10,7 +10,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import { useStyles, useDetailsStyles, useSpaceStyles } from './SeasonsMenu-styles';
+import { useStyles, useDetailsStyles, useSpaceStyles } from './DropSeasonsMenu-styles';
 
 const SeasonsMenu = ({ section, data }) => {
   const classes = useStyles();

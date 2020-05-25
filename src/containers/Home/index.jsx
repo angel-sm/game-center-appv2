@@ -5,8 +5,8 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import CardInfo from '../../components/CardInfo';
-import CompetitorsTable from '../../components/CompetitorsTable';
+import CardInfo from '../../components/Home/CardInfo';
+import CompetitorsTable from '../../components/Home/CompetitorsTable';
 
 import useButtonStyles from './Home-styles';
 

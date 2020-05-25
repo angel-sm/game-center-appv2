@@ -10,7 +10,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import { useStyles, useDetailsStyles, useSpaceStyles } from './TournamentsMenu-styles';
+import { useStyles, useDetailsStyles, useSpaceStyles } from './DropTournamentsMenu-styles';
 
 const TournamentMenu = ({ section, data }) => {
   const classes = useStyles();

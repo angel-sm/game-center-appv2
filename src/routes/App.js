@@ -6,7 +6,7 @@ import {
 } from 'react-router-dom';
 import Layout from '../containers/Layout';
 import Home from '../containers/Home';
-import TournamentForm from '../components/TournamentForm';
+import TournamentForm from '../components/NewTournament/TournamentForm';
 
 const App = () => (
   <BrowserRouter>

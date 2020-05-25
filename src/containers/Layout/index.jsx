@@ -16,9 +16,9 @@ import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
 
-import Profile from '../../components/Profile';
-import TournamentsMenu from '../../components/TournamentsMenu';
-import SeasonsMenu from '../../components/SeasonsMenu';
+import Profile from '../../components/Layout/Profile';
+import TournamentsMenu from '../../components/Layout/DropTournamentsMenu';
+import SeasonsMenu from '../../components/Layout/DropSeasonsMenu';
 
 import { tournaments, seasons } from '../../utils/mokups';
 
