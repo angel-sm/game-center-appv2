@@ -7,13 +7,13 @@ import {
 import Layout from '../containers/Layout';
 import Home from '../containers/Home';
 import NewTournament from '../containers/NewTournament';
-import DescriptionCard from '../components/SearchTournament/DescriptionCard';
+import SearchTournament from '../containers/SearchTournament';
 
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
-        <Route exact path='/' component={DescriptionCard} />
+        <Route exact path='/' component={SearchTournament} />
         <Route exact path='/tournaments/:id' component={Home} />
         <Route exact path='/new-tournament' component={NewTournament} />
       </Switch>

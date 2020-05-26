@@ -6,7 +6,7 @@ import TextField from '@material-ui/core/TextField';
 
 import useStyles from './SearchBar-styles';
 
-import('./SearchTournament.scss');
+import('./SearchBar.scss');
 
 const submitHandler = () => {
   console.log('enviar');

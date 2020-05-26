@@ -71,7 +71,7 @@ export default function CustomizedSteppers() {
 
   return (
     <div className={classes.root}>
-      <Grid>
+      <Grid container justify='center'>
         <Grid item lg={6} xs={12}>
           <Stepper
             alternativeLabel
@@ -90,7 +90,7 @@ export default function CustomizedSteppers() {
           </Stepper>
         </Grid>
       </Grid>
-      <Grid>
+      <Grid container justify='center'>
         <Grid item lg={6} xs={12}>
           <div>
             <div>
