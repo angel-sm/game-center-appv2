@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
 import { Button, Paper } from '@material-ui/core';
 
-import useStyles from './DataPlayerForm';
+import useStyles from './DataPlayerForm-styles';
 
 const DataPlayerForm = () => {
   return (
