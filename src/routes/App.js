@@ -16,6 +16,7 @@ const App = () => (
         <Route exact path='/' component={SearchTournament} />
         <Route exact path='/tournaments/:id' component={Home} />
         <Route exact path='/new-tournament' component={NewTournament} />
+        <Route exact path='/search' component={SearchTournament} />
       </Switch>
     </Layout>
   </BrowserRouter>
