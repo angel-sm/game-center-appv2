@@ -199,9 +199,61 @@ const seasons = [{
 },
 ];
 
+const lastTournaments = [{
+  'id': '123456789123456789123456',
+  'tournament': 'Maae',
+  'cost': 831,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2019-07-29',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+},
+{
+  'id': '123456789123456789123451',
+  'tournament': 'Lool',
+  'cost': 191,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2019-07-28',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+},
+{
+  'id': '123456789123456789123498',
+  'tournament': 'Lool',
+  'cost': 200,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2019-01-28',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+},
+{
+  'id': '123456789123456789123423',
+  'tournament': 'Lool',
+  'cost': 1000,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2020-07-28',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+},
+{
+  'id': '123456789123456789123445',
+  'tournament': 'Lool',
+  'cost': 233,
+  'organizer': 'Cristian Merrydew',
+  'credit': 641,
+  'start': '2020-07-02',
+  'end': '2020-01-29',
+  'description': 'Nullam orci pede, venenatis non, sodales sed, tincidunt eu, felis. Fusce posuere felis sed lacus.',
+}];
+
 export {
   competitors,
   tournaments,
   seasons,
+  lastTournaments,
 };
 

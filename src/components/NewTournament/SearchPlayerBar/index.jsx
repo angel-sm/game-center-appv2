@@ -11,7 +11,7 @@ import useStyles from './SearchPlayerBar-styles';
 
 import('./SearchPlayerBar.scss');
 
-export default function FreeSolo() {
+export default function SearchPlayerBar() {
   const [value, setValue] = React.useState('');
 
   const inputHandler = useSetInputValue({
