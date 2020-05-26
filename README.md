@@ -1,2 +1,7 @@
-# React-initial-configuration
-Configuration react app using babel, webpack and eslint 
+# Game Center app
+
+#### Install
+	npm run install
+
+#### Run app
+	npm run start
