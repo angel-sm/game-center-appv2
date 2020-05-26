@@ -15,6 +15,7 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
 import { usePaginationStyles, useTableStyles } from './SearchTournamentTable-styles';
 import { tournaments } from '../../../utils/mokups';
+import DescriptionButton from '../DescriptionButton';
 
 function TablePaginationActions(props) {
   const classesPagination = usePaginationStyles();
@@ -66,6 +67,7 @@ const SearchTournamentTable = () => {
           <TableRow>
             <TableCell>Torneo</TableCell>
             <TableCell align='center'>Comienzo</TableCell>
+            <TableCell align='right'>Detalles</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -80,6 +82,9 @@ const SearchTournamentTable = () => {
                 </TableCell>
                 <TableCell align='center'>
                   {tournament.start}
+                </TableCell>
+                <TableCell align='right'>
+                  <DescriptionButton id={tournament.id} />
                 </TableCell>
               </TableRow>
             ))

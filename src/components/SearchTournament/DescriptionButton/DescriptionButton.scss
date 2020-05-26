@@ -1,0 +1,14 @@
+
+.Description-button{
+  padding: .5em;
+  cursor: pointer;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  background: none;
+}
+.Description-button:hover{
+  border: none;
+  padding: .5em;
+  border-radius: .2em;
+  cursor: pointer;
+  background: rgba(0, 0, 0, 0.2);
+}
