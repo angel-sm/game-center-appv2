@@ -4,7 +4,7 @@ import { Button } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
 
-import useStyles from './SearchTournament-styles';
+import useStyles from './SearchBar-styles';
 
 import('./SearchTournament.scss');
 
