@@ -6,11 +6,9 @@ import { Button, Paper } from '@material-ui/core';
 
 import useStyles from './TournamentForm-styles';
 
-import('./TournamentForm.scss');
-
-const TournamentForm = ({ step }) => {
+const TournamentForm = () => {
   return (
-    <form onSubmit={null} className='Tournament-form-container' component={Paper}>
+    <form onSubmit={null} className='form-container' component={Paper}>
       <FormControl className={useStyles().children}>
         <FormControl className={useStyles().children}>
           <TextField

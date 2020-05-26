@@ -24,6 +24,8 @@ import { tournaments, seasons } from '../../utils/mokups';
 
 import useStyles from './Layout-styles';
 
+import('../../assets/styles/styles.scss');
+
 const options = [
   {
     option: 'Nuevo torneo',

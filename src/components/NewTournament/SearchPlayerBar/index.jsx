@@ -9,8 +9,6 @@ import { competitors } from '../../../utils/mokups';
 import useSetInputValue from '../../../hooks/useSetInputValue';
 import useStyles from './SearchPlayerBar-styles';
 
-import('./SearchPlayerBar.scss');
-
 export default function SearchPlayerBar() {
   const [value, setValue] = React.useState('');
 
@@ -26,7 +24,7 @@ export default function SearchPlayerBar() {
   };
 
   return (
-    <form onSubmit={submitHandler} className='Player-form-content'>
+    <form onSubmit={submitHandler} className='form-content'>
       <FormControl className={useStyles().children}>
         <Autocomplete
           freeSolo

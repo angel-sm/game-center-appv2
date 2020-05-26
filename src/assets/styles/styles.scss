@@ -1,2 +1,10 @@
-$background_primary_fill: 'rgb(92,39,243)';
-$background_primary: 'linear-gradient(256deg, rgba(92,39,243,1) 0%, rgba(193,101,221,1) 73%)';
+.form-container{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: flex-end;
+  background: #fff;
+  padding: 1em;
+  margin: auto;
+}
