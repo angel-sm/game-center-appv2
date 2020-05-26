@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
     flexWrap: 'wrap',
   },
   textField: {
-    margin: '.5em',
+    margin: '.5em 0',
   },
   children: {
     width: '100%',

@@ -6,13 +6,14 @@ import {
 } from 'react-router-dom';
 import Layout from '../containers/Layout';
 import Home from '../containers/Home';
-import CompetitorsTable from '../components/NewTournament/CompetitorsTable';
+import NewTournament from '../containers/NewTournament';
+
 
 const App = () => (
   <BrowserRouter>
     <Layout>
       <Switch>
-        <Route exact path='/' component={CompetitorsTable} />
+        <Route exact path='/' component={NewTournament} />
         <Route exact path='/tournaments/:id' component={Home} />
       </Switch>
     </Layout>

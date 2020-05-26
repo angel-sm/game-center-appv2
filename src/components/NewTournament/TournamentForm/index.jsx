@@ -2,15 +2,15 @@ import React from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import TextField from '@material-ui/core/TextField';
 import FormControl from '@material-ui/core/FormControl';
-import { Button } from '@material-ui/core';
+import { Button, Paper } from '@material-ui/core';
 
 import useStyles from './TournamentForm-styles';
 
 import('./TournamentForm.scss');
 
-const TournamentForm = () => {
+const TournamentForm = ({ step }) => {
   return (
-    <form onSubmit={null} className='Tournament-form-container'>
+    <form onSubmit={null} className='Tournament-form-container' component={Paper}>
       <FormControl className={useStyles().children}>
         <FormControl className={useStyles().children}>
           <TextField
@@ -79,7 +79,14 @@ const TournamentForm = () => {
           />
         </FormControl>
       </FormControl>
-      <Button variant='contained' color='primary' type='submit'>Agregar torneo</Button>
+      <Button
+        variant='contained'
+        color='primary'
+        type='submit'
+        size='large'
+      >
+        Agregar torneo
+      </Button>
     </form>
   );
 };

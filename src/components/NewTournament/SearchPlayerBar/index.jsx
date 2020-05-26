@@ -5,8 +5,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import { Button } from '@material-ui/core';
 import FormControl from '@material-ui/core/FormControl';
 
-import { competitors } from '../../utils/mokups';
-import useSetInputValue from '../../hooks/useSetInputValue';
+import { competitors } from '../../../utils/mokups';
+import useSetInputValue from '../../../hooks/useSetInputValue';
 import useStyles from './SearchPlayerBar-styles';
 
 import('./SearchPlayerBar.scss');
