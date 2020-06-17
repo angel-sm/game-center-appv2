@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
-import TournamentTable from '../../components/TournamentTable';
-import CardInfo from '../../components/CardInfo';
+import TournamentTable from '../../components/Home/TournamentTable';
+import CardInfo from '../../components/Home/CardInfo';
 
 import { CompetitorsContainer, ButtonsContainer } from './Home.style';
 

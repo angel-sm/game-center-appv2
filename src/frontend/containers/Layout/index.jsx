@@ -15,8 +15,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
-import Profile from '../../components/Profile';
-import DropMenu from '../../components/DropMenu';
+import Profile from '../../components/Layout/Profile';
+import DropMenu from '../../components/Layout/DropMenu';
 import { useStyles, ProfileControllerContent } from './Layout.styles';
 
 const options = [
