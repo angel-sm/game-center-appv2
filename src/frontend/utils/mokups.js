@@ -90,7 +90,7 @@ const Competitors = [{
   'game': 'China',
   'tournamentCredit': 97,
   'start': '2019-09-20',
-  'end': '2019-08-18'
+  'end': '2019-08-18',
 }, {
   'id': '5ec5b06cfc13ae6c06000002',
   'points': 61,
@@ -103,7 +103,7 @@ const Competitors = [{
   'game': 'Czech Republic',
   'tournamentCredit': 30,
   'start': '2020-01-15',
-  'end': '2019-07-17'
+  'end': '2019-07-17',
 }, {
   'id': '5ec5b06cfc13ae6c06000004',
   'points': 95,
@@ -116,7 +116,7 @@ const Competitors = [{
   'game': 'Honduras',
   'tournamentCredit': 93,
   'start': '2019-09-13',
-  'end': '2019-10-25'
+  'end': '2019-10-25',
 }, {
   'id': '5ec5b06cfc13ae6c06000006',
   'points': 20,
@@ -129,7 +129,7 @@ const Competitors = [{
   'game': 'China',
   'tournamentCredit': 27,
   'start': '2019-10-28',
-  'end': '2019-10-31'
+  'end': '2019-10-31',
 }, {
   'id': '5ec5b06cfc13ae6c06000008',
   'points': 24,
@@ -142,11 +142,18 @@ const Competitors = [{
   'game': 'China',
   'tournamentCredit': 13,
   'start': '2019-10-27',
-  'end': '2020-04-01'
+  'end': '2020-04-01',
 }];
 
 const initialState = {
   competitors: [],
 };
 
-export { initialState, Competitors };
+const user = {
+  id: 1,
+  name: 'usuario prueba',
+  credit: 1000,
+  nickname: 'ususario prueba',
+};
+
+export { initialState, Competitors, user };
