@@ -72,6 +72,7 @@ const setResponse = (html, preloadedState, manifest) => {
 };
 
 const renderApp = async (req, res) => {
+  let initialState;
   try {
     const tournamentList = await axios({
       url: 'http://localhost:3000/api/center-tournaments',
