@@ -10,6 +10,7 @@ import { createStore } from 'redux';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import helmet from 'helmet';
+import axios from 'axios';
 import reducer from '../frontend/reducers';
 import { initialState } from '../frontend/utils/mokups';
 import serverRoutes from '../frontend/routes/serverRoutes';
@@ -70,7 +71,26 @@ const setResponse = (html, preloadedState, manifest) => {
   `);
 };
 
-const renderApp = (req, res) => {
+const renderApp = async (req, res) => {
+  try {
+    const tournamentList = await axios({
+      url: 'http://localhost:3000/api/center-tournaments',
+      method: 'GET',
+    });
+    console.log(tournamentList);
+    initialState = {
+      user: {},
+      tournaments: [],
+      seasons: [],
+    }
+  } catch (error) {
+    initialState = {
+      user: {},
+      tournaments: [],
+      seasons: [],
+    }
+  }
+
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
   const html = renderToString(

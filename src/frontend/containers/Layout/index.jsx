@@ -34,7 +34,7 @@ const options = [
     icon: <CreditCard />,
   }, {
     option: 'Jugadores',
-    url: '/player',
+    url: '/players',
     icon: <Face />,
   }, {
     option: 'Puntos tienda',

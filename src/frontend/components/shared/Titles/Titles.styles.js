@@ -4,7 +4,7 @@ import {
 
 const useStyles = makeStyles({
   root: {
-    marginBottom: '1em',
+    margin: '1em 0',
     minWidth: 600,
   },
 });
