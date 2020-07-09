@@ -12,7 +12,6 @@ import { StaticRouter } from 'react-router-dom';
 import helmet from 'helmet';
 import axios from 'axios';
 import reducer from '../frontend/reducers';
-import { initialState } from '../frontend/utils/mokups';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import getManifest from './getManifest';
 
@@ -83,21 +82,23 @@ const renderApp = async (req, res) => {
       user: {},
       tournaments: [],
       seasons: [],
-    }
+      competitors: [],
+    };
   } catch (error) {
     initialState = {
       user: {},
       tournaments: [],
       seasons: [],
-    }
+      competitors: [],
+    };
   }
-
+  const isLogged = false;
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
   const html = renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={{}}>
-        {renderRoutes(serverRoutes)}
+        {renderRoutes(serverRoutes(isLogged))}
       </StaticRouter>
     </Provider>,
   );
