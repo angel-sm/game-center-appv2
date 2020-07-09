@@ -3,6 +3,7 @@ import SearchTournament from '../containers/SearchTournament';
 import Credit from '../containers/Credit';
 import Players from '../containers/Players';
 import SignIn from '../containers/SignIn';
+import Center from '../containers/Centers';
 
 const routes = (isLogged) => {
   return [
@@ -25,6 +26,11 @@ const routes = (isLogged) => {
       path: '/players',
       exact: true,
       component: Players,
+    },
+    {
+      path: '/centers',
+      exact: true,
+      component: Center,
     },
   ];
 };
