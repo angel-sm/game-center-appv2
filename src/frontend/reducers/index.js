@@ -1,6 +1,19 @@
-import { combineReducers } from 'redux';
-import competitors from './competitors.reducer';
+import {
+  signIn,
+} from '../types';
 
-export default combineReducers({
-  competitors,
-});
+const reducer = (state, action) => {
+  switch (action.type) {
+    case signIn:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export default reducer;
