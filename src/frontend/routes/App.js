@@ -30,7 +30,7 @@ const loggedRoutes = [
   },
 ];
 
-const logged = ({ isLogged }) => {
+const logged = (isLogged) => {
   return isLogged ? (
     <Layout>
       <Switch>

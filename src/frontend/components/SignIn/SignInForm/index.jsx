@@ -1,18 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { FormControl, InputLabel, TextField, InputAdornment, OutlinedInput, Button } from '@material-ui/core';
 import { VisibilityOff, Visibility } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
+import { signInSolve } from '../../../actions/auth';
 
 import useStyles from './Form.styles';
 
-const SignInForm = () => {
+const SignInForm = (props) => {
   const classes = useStyles();
   const [values, setValues] = React.useState({
-    amount: '',
     password: '',
-    weight: '',
-    weightRange: '',
-    showPassword: false,
+    email: '',
   });
 
   const handleChange = (prop) => (event) => {
@@ -26,10 +25,17 @@ const SignInForm = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
+  const handlerSubmit = (event) => {
+    event.preventDefault();
+    console.log('entro');
+    props.signInSolve(values, '/competitors');
+  };
+
   return (
-    <form noValidate autoComplete='off' className={classes.root}>
+    <form noValidate autoComplete='off' className={classes.root} onSubmit={handlerSubmit}>
       <FormControl className={classes.chaild}>
-        <TextField id='outlined-basic' label='Correo electronico' variant='outlined' />
+        <TextField onChange={handleChange('email')} id='outlined-basic' label='Correo electronico' variant='outlined' name='email' />
       </FormControl>
       <FormControl variant='outlined' className={classes.chaild}>
         <InputLabel htmlFor='outlined-adornment-password'>Contraseña</InputLabel>
@@ -54,7 +60,7 @@ const SignInForm = () => {
         />
       </FormControl>
       <FormControl className={classes.chaild}>
-        <Button href='/centers' variant='contained' color='primary'>
+        <Button type='submit' variant='contained' color='primary'>
           Iniciar sesion
         </Button>
       </FormControl>
@@ -62,5 +68,9 @@ const SignInForm = () => {
   );
 };
 
-export default SignInForm;
+const dispatchStateToProps = { signInSolve };
+
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps, dispatchStateToProps)(SignInForm);
 

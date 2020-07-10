@@ -1,5 +1,6 @@
 import {
   GET_COMPETITORS,
+  signIn,
 } from '../types';
 
 const reducer = (state, action) => {
@@ -7,6 +8,11 @@ const reducer = (state, action) => {
     case GET_COMPETITORS:
       return {
         ...state,
+      };
+    case signIn:
+      return {
+        ...state,
+        user: action.payload,
       };
     default:
       return {

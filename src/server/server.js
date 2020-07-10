@@ -10,10 +10,13 @@ import { createStore } from 'redux';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import helmet from 'helmet';
-import axios from 'axios';
+import cookieParser from 'cookie-parser';
+import bodyParser from 'body-parser';
+import passport from 'passport';
 import reducer from '../frontend/reducers';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import getManifest from './getManifest';
+import auth from './routes/auth';
 
 dotenv.config();
 
@@ -22,6 +25,14 @@ const {
   ENV,
   PORT,
 } = process.env;
+
+app.use(express.json());
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+//app.use(express.static(`${__dirname}/public`));
 
 if (ENV === 'development') {
   const webpackConfig = require('../../webpack.config');
@@ -61,38 +72,36 @@ const setResponse = (html, preloadedState, manifest) => {
         <script>
           // WARNING: See the following for security issues around embedding JSON in HTML:
           // https://redux.js.org/recipes/server-rendering/#security-considerations
-          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(/</g, '\\u003c')}
+          window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
+      /</g,
+      '\\u003c',
+    )}
         </script>
-        <script src=${mainBuild} type="text/javascript"></script>
-        <script src=${vendorBuild} type="text/javascript"></script>
+          <script src="${mainBuild}"></script>
+          <script src="${vendorBuild}"></script>
       </body>
     </html>
   `);
 };
 
 const renderApp = async (req, res) => {
+  const { USER, USERM } = req.cookies;
+
   let initialState;
+
   try {
-    const tournamentList = await axios({
-      url: 'http://localhost:3000/api/center-tournaments',
-      method: 'GET',
-    });
-    console.log(tournamentList);
     initialState = {
-      user: {},
-      tournaments: [],
-      seasons: [],
-      competitors: [],
+      user: {
+        email: USERM,
+        id: USER,
+      },
     };
   } catch (error) {
     initialState = {
       user: {},
-      tournaments: [],
-      seasons: [],
-      competitors: [],
     };
   }
-  const isLogged = false;
+  const isLogged = USER && USERM;
   const store = createStore(reducer, initialState);
   const preloadedState = store.getState();
   const html = renderToString(
@@ -106,6 +115,7 @@ const renderApp = async (req, res) => {
 };
 
 app.get('*', renderApp);
+auth(app);
 
 app.listen(PORT || 3001, (err) => {
   if (!err) console.log(`Server listen in http://localhost:${PORT || 3001}`);

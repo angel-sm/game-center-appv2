@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 require('dotenv').config();
 
 const isDev = (process.env.ENV === 'development');
-const entry = ['./src/frontend/index.js'];
+const entry = ['@babel/polyfill', './src/frontend/index.js'];
 
 if (isDev) {
   entry.push('webpack-hot-middleware/client?path=/__webpack_hmr&timeout=2000&reload=true');
