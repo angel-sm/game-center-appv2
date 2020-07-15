@@ -3,7 +3,7 @@ import SearchTournament from '../containers/SearchTournament';
 import Credit from '../containers/Credit';
 import Players from '../containers/Players';
 import SignIn from '../containers/SignIn';
-import Center from '../containers/Centers';
+import Centers from '../containers/Centers';
 
 const routes = (isLogged) => {
   return [
@@ -13,24 +13,29 @@ const routes = (isLogged) => {
       component: isLogged ? Home : SignIn,
     },
     {
+      path: '/sign-in',
+      exact: true,
+      component: isLogged ? Home : SignIn,
+    },
+    {
       path: '/credit',
       exact: true,
-      component: Credit,
+      component: isLogged ? Credit : SignIn,
     },
     {
       path: '/search',
       exact: true,
-      component: SearchTournament,
+      component: isLogged ? SearchTournament : SignIn,
     },
     {
       path: '/players',
       exact: true,
-      component: Players,
+      component: isLogged ? Players : SignIn,
     },
     {
       path: '/centers',
       exact: true,
-      component: Center,
+      component: isLogged ? Centers : SignIn,
     },
   ];
 };

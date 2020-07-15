@@ -10,11 +10,11 @@ import SignIn from '../containers/SignIn';
 import SearchTournament from '../containers/SearchTournament';
 import Credit from '../containers/Credit';
 import Players from '../containers/Players';
-import Center from '../containers/Centers';
+import Centers from '../containers/Centers';
 
 const loggedRoutes = [
   {
-    path: '/home',
+    path: '/',
     component: Home,
   },
   {
@@ -28,6 +28,10 @@ const loggedRoutes = [
   {
     path: '/players',
     component: Players,
+  },
+  {
+    path: '/centers',
+    component: Centers,
   },
 ];
 
@@ -44,12 +48,12 @@ const logged = (isLogged) => {
     (
       <Switch>
         <Route exact path='/' component={SignIn} />
-        <Route exact path='/centers' component={Center} />
       </Switch>
     );
 };
 
 const App = ({ isLogged }) => (
+
   <BrowserRouter>
     {
       logged(isLogged)
