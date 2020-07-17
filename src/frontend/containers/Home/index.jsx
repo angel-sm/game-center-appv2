@@ -1,5 +1,7 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable consistent-return */
 import React from 'react';
+import { connect } from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
@@ -11,31 +13,35 @@ import { CompetitorsContainer, ButtonsContainer } from './Home.style';
 
 import { Competitors } from '../../utils/mokups';
 
-const Home = () => {
+const Home = (props) => {
+
+  const [tournamentSelected] = props.tournaments.filter((t) => (t.id === props.match.params.id ? t : null));
+  const { tournament, cost, start, end, game, organizer } = tournamentSelected;
+
   let isPaid = true;
   return (
     <>
       <Grid container spacing={2}>
         <Grid item lg={3} sm={6} xs={12}>
-          <CardInfo title='Torneo' />
+          <CardInfo title='Torneo' data={tournament} />
         </Grid>
         <Grid item lg={3} sm={6} xs={12}>
-          <CardInfo title='Costo' />
+          <CardInfo title='Costo' data={cost} />
         </Grid>
         <Grid item lg={3} sm={6} xs={12}>
-          <CardInfo title='Organizador' />
+          <CardInfo title='Organizador' data={organizer} />
         </Grid>
         <Grid item lg={3} sm={6} xs={12}>
           <CardInfo title='Credito total' />
         </Grid>
         <Grid item lg={3} sm={6} xs={12}>
-          <CardInfo title='Juego' />
+          <CardInfo title='Juego' data={game} />
         </Grid>
         <Grid item lg={3} sm={6} xs={12}>
-          <CardInfo title='Inicia' />
+          <CardInfo title='Inicia' data={start} />
         </Grid>
         <Grid item lg={3} sm={6} xs={12}>
-          <CardInfo title='Finaliza' />
+          <CardInfo title='Finaliza' data={end} />
         </Grid>
       </Grid>
       <Grid container spacing={2}>
@@ -83,4 +89,6 @@ const Home = () => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps, null)(Home);

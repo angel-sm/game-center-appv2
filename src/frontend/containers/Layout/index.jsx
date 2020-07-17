@@ -1,4 +1,6 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -51,7 +53,12 @@ const options = [
   },
 ];
 
-function Layout({ children }) {
+const Layout = (props) => {
+  const { children } = props;
+  const { tournaments } = props;
+  const { center, credit } = props.center;
+  const { email } = props.user;
+
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -63,11 +70,16 @@ function Layout({ children }) {
   const drawer = (
     <div>
       <ProfileControllerContent>
-        <Profile userName='Jose Angel' url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg' />
+        <Profile
+          userName={email}
+          url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'
+          center={center}
+          credit={credit}
+        />
       </ProfileControllerContent>
-      <DropMenu section='Torneos' />
+      <DropMenu section='Torneos' data={tournaments} />
       <Divider />
-      <DropMenu section='Temporadas' />
+      <DropMenu section='Temporadas' data={tournaments} />
       <Divider />
       <List>
         {options.map((option) => (
@@ -143,4 +155,6 @@ function Layout({ children }) {
   );
 };
 
-export default Layout;
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps, null)(Layout);

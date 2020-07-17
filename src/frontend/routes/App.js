@@ -14,22 +14,27 @@ import Centers from '../containers/Centers';
 
 const loggedRoutes = [
   {
-    path: '/',
+    exact: true,
+    path: '/tournament/:id',
     component: Home,
   },
   {
+    exact: true,
     path: '/search',
     component: SearchTournament,
   },
   {
+    exact: true,
     path: '/credit',
     component: Credit,
   },
   {
+    exact: true,
     path: '/players',
     component: Players,
   },
   {
+    exact: true,
     path: '/centers',
     component: Centers,
   },

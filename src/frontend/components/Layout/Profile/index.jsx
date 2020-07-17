@@ -4,7 +4,7 @@ import Avatar from '@material-ui/core/Avatar';
 
 import { Container, useStyles } from './Profile.styles';
 
-const Profile = ({ url, userName }) => {
+const Profile = ({ url, userName, center, credit }) => {
   const classes = useStyles();
 
   return (
@@ -12,6 +12,12 @@ const Profile = ({ url, userName }) => {
       <Avatar alt={userName} src={url} className={classes.root} />
       <Typography variant='h6' component='h6'>
         {userName}
+      </Typography>
+      <Typography variant='subtitle1' component='span'>
+        {`Centro: ${center}`}
+      </Typography>
+      <Typography variant='body2' component='span'>
+        {`Credito: ${credit}`}
       </Typography>
     </Container>
   );

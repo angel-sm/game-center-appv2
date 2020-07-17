@@ -13,6 +13,11 @@ const routes = (isLogged) => {
       component: isLogged ? Home : SignIn,
     },
     {
+      path: '/tournament/:id',
+      exact: true,
+      component: isLogged ? Home : SignIn,
+    },
+    {
       path: '/sign-in',
       exact: true,
       component: isLogged ? Home : SignIn,

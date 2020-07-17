@@ -65,6 +65,9 @@ module.exports = {
       },
     ],
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [
     isDev ?
       new webpack.HotModuleReplacementPlugin() :
@@ -75,7 +78,7 @@ module.exports = {
         filename: '[path].gz',
       }) : () => { },
     isDev ?
-      () => {} :
+      () => { } :
       new ManifestPlugin(),
     new MiniCssExtractPlugin({
       filename: isDev ? 'assets/app.css' : 'assets/app-[hash].css',

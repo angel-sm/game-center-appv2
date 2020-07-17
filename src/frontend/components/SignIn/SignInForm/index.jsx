@@ -28,8 +28,7 @@ const SignInForm = (props) => {
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    console.log('entro');
-    props.signInSolve(values, '/competitors');
+    props.signInSolve(values, '/new-tournament');
   };
 
   return (

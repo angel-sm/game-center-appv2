@@ -28,9 +28,9 @@ const setResponse = (html, preloadedState, manifest) => {
           // WARNING: See the following for security issues around embedding JSON in HTML:
           // https://redux.js.org/recipes/server-rendering/#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
-    /</g,
-    '\\u003c',
-  )}
+      /</g,
+      '\\u003c',
+    )}
         </script>
           <script src="${mainBuild}"></script>
           <script src="${vendorBuild}"></script>
@@ -41,8 +41,7 @@ const setResponse = (html, preloadedState, manifest) => {
 
 const renderApp = async (req, res) => {
   const { USER, USERM } = req.cookies;
-  initialState(USER, USERM).then(state => {
-    console.log(state);
+  initialState(USER, USERM).then((state) => {
     const store = createStore(reducer, state);
     const preloadedState = store.getState();
     const html = renderToString(
