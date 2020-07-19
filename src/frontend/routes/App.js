@@ -6,11 +6,12 @@ import {
 } from 'react-router-dom';
 import Layout from '../containers/Layout';
 import SignIn from '../containers/SignIn';
+import NotFound from '../containers/NotFound';
 
 const loggedRoutes = [
   {
     exact: true,
-    component: Home,
+    component: NotFound,
   },
 ];
 
@@ -27,6 +28,7 @@ const logged = (isLogged) => {
     (
       <Switch>
         <Route exact path='/' component={SignIn} />
+        <Route exact component={NotFound} />
       </Switch>
     );
 };

@@ -1,11 +1,16 @@
 import SignIn from '../containers/SignIn';
+import NotFound from '../containers/NotFound';
 
 const routes = (isLogged) => {
   return [
     {
       path: '/',
       exact: true,
-      component: isLogged ? Home : SignIn,
+      component: isLogged ? NotFound : SignIn,
+    },
+    {
+      exact: true,
+      component: NotFound,
     },
   ];
 };

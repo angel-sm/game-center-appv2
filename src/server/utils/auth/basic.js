@@ -21,6 +21,7 @@ passport.use(new BasicStrategy((email, password, cb) => {
       cb(null, data);
     })
     .catch(({ respose }) => {
+      console.log(respose);
       return cb(respose, false);
     });
 }));

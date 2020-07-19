@@ -1,6 +1,4 @@
-import {
-  signIn,
-} from '../types';
+import { signIn } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {

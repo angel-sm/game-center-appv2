@@ -1,13 +1,16 @@
+/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormControl, InputLabel, TextField, InputAdornment, OutlinedInput, Button } from '@material-ui/core';
 import { VisibilityOff, Visibility } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import { signInSolve } from '../../../actions/auth';
+import NotifyBar from '../../shared/NotifyBar';
 
 import useStyles from './Form.styles';
 
 const SignInForm = (props) => {
+
   const classes = useStyles();
   const [values, setValues] = React.useState({
     password: '',
@@ -62,6 +65,13 @@ const SignInForm = (props) => {
         <Button type='submit' variant='contained' color='primary'>
           Iniciar sesion
         </Button>
+      </FormControl>
+      <FormControl className={classes.chaild}>
+        {
+          props.states.error ? (
+            <NotifyBar message={props.states.error} />
+          ) : (null)
+        }
       </FormControl>
     </form>
   );

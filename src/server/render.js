@@ -47,7 +47,7 @@ const renderApp = async (req, res) => {
     const html = renderToString(
       <Provider store={store}>
         <StaticRouter location={req.url} context={{}}>
-          {renderRoutes(serverRoutes(USER !== undefined && USERM !== undefined))}
+          {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24))}
         </StaticRouter>
       </Provider>,
     );

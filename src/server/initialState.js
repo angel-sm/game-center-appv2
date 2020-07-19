@@ -6,20 +6,25 @@ const initiaState = async (USER, USERM) => {
   let state;
 
   try {
-
     state = {
-      user: {
-        email: USERM,
-        id: USER,
+      auth: {
+        user: {
+          email: USERM,
+          id: USER,
+        },
       },
-      center: centerData.data.center,
-      tournaments: tournamentsList.data.tournament,
+      states: {
+        error: '',
+      },
     };
   } catch (error) {
     state = {
-      user: {},
-      center: {},
-      tournaments: {},
+      auth: {
+        user: {},
+      },
+      states: {
+        error: '',
+      },
     };
   }
   return state;

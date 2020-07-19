@@ -1,5 +1,7 @@
 const signIn = 'SIGNIN';
+const setError = 'ERROR';
 
-export default {
+export {
   signIn,
+  setError,
 };

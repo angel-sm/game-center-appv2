@@ -10,8 +10,6 @@ import {
 
 import useStyles from './SearchPlayer.styles';
 
-import { Competitors } from '../../../utils/mokups';
-
 const SearchPlayer = () => {
   const classes = useStyles();
   return (

@@ -13,12 +13,12 @@ const authRoutes = (app) => {
     passport.authenticate('basic', (error, data) => {
       try {
         if (error || !data) {
-          return next(boom.unauthorized());
+          return next(boom.unauthorized().message);
         }
 
         req.login(data, { session: false }, async (err) => {
           if (err) {
-            return next(boom.unauthorized());
+            return next(boom.unauthorized().message);
           }
 
           const { token, ...user } = data;
@@ -31,7 +31,7 @@ const authRoutes = (app) => {
           res.status(200).json(user);
         });
       } catch (err) {
-        next(err);
+        res.status(500).json('error');
       }
     })(req, res, next);
   });
