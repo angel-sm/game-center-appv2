@@ -1,14 +1,20 @@
 /* eslint-disable import/extensions */
-
 import React from 'react';
-
 import SignInForm from '../../components/SignIn/SignInForm';
+import {
+  FormContainer,
+  SingInContainer,
+  Title,
+} from './styles';
 
 const SignIn = () => {
   return (
-    <div>
-      <SignInForm />
-    </div>
+    <SingInContainer>
+      <FormContainer>
+        <Title>Inicia sesion</Title>
+        <SignInForm />
+      </FormContainer>
+    </SingInContainer>
   );
 };
 

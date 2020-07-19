@@ -1,4 +1,4 @@
-import { setError } from '../types';
+import { setError, setLoad } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -6,6 +6,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+    case setLoad:
+      return {
+        ...state,
+        load: action.payload,
+        error: '',
       };
     default:
       return {

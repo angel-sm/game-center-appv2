@@ -2,15 +2,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { FormControl, InputLabel, TextField, InputAdornment, OutlinedInput, Button } from '@material-ui/core';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { VisibilityOff, Visibility } from '@material-ui/icons';
 import IconButton from '@material-ui/core/IconButton';
 import { signInSolve } from '../../../actions/auth';
-import NotifyBar from '../../shared/NotifyBar';
+
+import ErrorBar from '../../shared/ErrorBar';
 
 import useStyles from './Form.styles';
 
 const SignInForm = (props) => {
-
   const classes = useStyles();
   const [values, setValues] = React.useState({
     password: '',
@@ -66,17 +67,23 @@ const SignInForm = (props) => {
           Iniciar sesion
         </Button>
       </FormControl>
-      <FormControl className={classes.chaild}>
-        {
-          props.states.error ? (
-            <NotifyBar message={props.states.error} />
-          ) : (null)
-        }
-      </FormControl>
+      {
+        props.status.error ? (
+          <FormControl className={classes.chaild}>
+            <ErrorBar error={props.status.error} />
+          </FormControl>
+        ) : null
+      }
+      {
+        props.status.load ? (
+          <FormControl className={classes.chaild}>
+            <CircularProgress />
+          </FormControl>
+        ) : null
+      }
     </form>
   );
 };
-
 const dispatchStateToProps = { signInSolve };
 
 const mapStateToProps = (state) => state;

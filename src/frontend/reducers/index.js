@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
-import states from './states';
+import status from './status';
 
 export default combineReducers({
   auth,
-  states,
+  status,
 });

@@ -2,7 +2,7 @@
 /* eslint-disable import/named */
 import axios from 'axios';
 import { signIn } from '../types';
-import setError from './states';
+import { setErrorRequest, setLoadRequest } from './status';
 
 export const signInRequest = (payload) => ({
   type: signIn,
@@ -21,8 +21,12 @@ export const signInSolve = ({ email, password }, url) => async (dispatch) => {
     .then(({ data }) => {
       document.cookie = `USER=${data.userKey}`;
       document.cookie = `USERM=${data.email}`;
+      dispatch(setLoadRequest(true));
+    })
+    .then(() => {
+      window.location.href = url;
     })
     .catch((error) => {
-      dispatch(setError('Usuario o contraseña invalidos'));
+      dispatch(setErrorRequest('Usuario o contraseña incorrectos'));
     });
 };

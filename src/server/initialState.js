@@ -13,8 +13,9 @@ const initiaState = async (USER, USERM) => {
           id: USER,
         },
       },
-      states: {
+      status: {
         error: '',
+        load: false,
       },
     };
   } catch (error) {
@@ -22,8 +23,9 @@ const initiaState = async (USER, USERM) => {
       auth: {
         user: {},
       },
-      states: {
+      status: {
         error: '',
+        load: false,
       },
     };
   }

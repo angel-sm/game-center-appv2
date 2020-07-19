@@ -6,6 +6,8 @@ const reducer = (state, action) => {
       return {
         ...state,
         user: action.payload,
+        error: '',
+        load: false,
       };
     default:
       return {
