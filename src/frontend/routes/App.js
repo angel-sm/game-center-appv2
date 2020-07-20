@@ -4,11 +4,17 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import Layout from '../containers/Layout';
+//import Layout from '../containers/Layout';
 import SignIn from '../containers/SignIn';
 import NotFound from '../containers/NotFound';
+import NewTournament from '../containers/NewTournament';
 
 const loggedRoutes = [
+  {
+    path: '/registertournament',
+    exact: true,
+    component: NewTournament,
+  },
   {
     exact: true,
     component: NotFound,
@@ -16,14 +22,15 @@ const loggedRoutes = [
 ];
 
 const logged = (isLogged) => {
+  console.log(isLogged);
   return isLogged ? (
-    <Layout>
-      <Switch>
-        {
-          loggedRoutes.map((r) => <Route key={r.path} exact path={r.path} component={r.component} />)
-        }
-      </Switch>
-    </Layout>
+    <Switch>
+      {
+        loggedRoutes.map((r) => <Route key={r.path} exact path={r.path} component={r.component} />)
+      }
+    </Switch>
+    //<Layout>
+    //</Layout>
   ) :
     (
       <Switch>

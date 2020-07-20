@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default Bar = styled.div`
+const Bar = styled.div`
   width: ${(props) => (props.error !== '' ? '100%' : '0%')};
   transition: all ease .5s;
   padding: .8em 0;
@@ -11,3 +11,5 @@ export default Bar = styled.div`
   box-shadow: 1px 1px 5px 5px rgba(0,0,0,.1);
   font-family: 'Muli', sans-serif;
 `;
+
+export default Bar;

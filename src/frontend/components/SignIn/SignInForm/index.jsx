@@ -9,7 +9,7 @@ import { signInSolve } from '../../../actions/auth';
 
 import ErrorBar from '../../shared/ErrorBar';
 
-import useStyles from './Form.styles';
+import useStyles from './styles';
 
 const SignInForm = (props) => {
   const classes = useStyles();
