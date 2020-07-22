@@ -11,18 +11,20 @@ import InputLabel from '@material-ui/core/InputLabel';
 import { FormControl, Button, Toolbar } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import useInputValueHandle from '../../../hooks/useInputHandler';
+import { addPrizeRequest } from '../../../actions/prizes';
+import { nextStep } from '../../../actions/pending';
 
 import useStyles from './styles';
 
-let numPlace = 0;
+let numPlace = 1;
 
-const Earn = () => {
+const Earn = (props) => {
 
   const classes = useStyles();
   const handleValue = useInputValueHandle({});
 
   const [places, setPlace] = useState([{
-    position: 0,
+    place: 0,
   }]);
 
   const handlerSubmit = (event) => {
@@ -41,7 +43,10 @@ const Earn = () => {
       console.log('No jala');
       return false;
     }
-    console.log('si jala');
+    placesList.map((pl) => {
+      props.addPrizeRequest(pl);
+    });
+    props.nextStep(0);
   };
 
   //Eliminar un lugar
@@ -50,13 +55,15 @@ const Earn = () => {
     delete handleValue.form[`${places.length - 1}`];
     const updatePlaces = [];
     cleanPlaces.map((pl) => {
-      pl.place = pl.place - 1;
-      updatePlaces.push(pl);
+      if (pl.place !== 0) {
+        pl.place = pl.place - 1;
+        updatePlaces.push(pl);
+      } else {
+        updatePlaces.push(pl);
+      }
     });
     setPlace([...updatePlaces]);
     numPlace--;
-    recalculatePercent();
-    console.log(percentUsed);
   };
 
   //Agregar un lugar
@@ -106,7 +113,10 @@ const Earn = () => {
 };
 
 const dispatchStateToProps = {
-
+  nextStep,
+  addPrizeRequest,
 };
 
-export default connect(null, dispatchStateToProps)(Earn);
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps, dispatchStateToProps)(Earn);

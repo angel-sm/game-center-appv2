@@ -1,18 +1,12 @@
 /* eslint-disable import/named */
-import { ERROR, LOAD } from '../types';
+import { ADD_PRIZE } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ERROR:
+    case ADD_PRIZE:
       return {
         ...state,
-        error: action.payload,
-      };
-    case LOAD:
-      return {
-        ...state,
-        load: action.payload,
-        error: '',
+        prizes: [...state.prizes.prizes, action.payload],
       };
     default:
       return {

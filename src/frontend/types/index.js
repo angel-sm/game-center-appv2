@@ -1,8 +1,19 @@
-const signIn = 'SIGNIN';
-const setError = 'ERROR';
-const setLoad = 'LOAD';
+const SIGNIN = 'SIGNIN';
+const ERROR = 'ERROR';
+const LOAD = 'LOAD';
+const NEW_TOURNAMENT = 'NEW_TOURNAMENT';
+const STEP_PENDING = 'STEP_PENDING';
+const GET_ALL_PLAYERS = 'GET_ALL_PLAYERS';
+const REGISTER_COMPETITOR = 'REGISTER_COMPETITOR';
+const ADD_PRIZE = 'ADD_PRIZE';
+
 export {
-  signIn,
-  setError,
-  setLoad,
+  SIGNIN,
+  ERROR,
+  LOAD,
+  NEW_TOURNAMENT,
+  STEP_PENDING,
+  GET_ALL_PLAYERS,
+  REGISTER_COMPETITOR,
+  ADD_PRIZE,
 };

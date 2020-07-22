@@ -1,8 +1,9 @@
-import { signIn } from '../types';
+/* eslint-disable import/named */
+import { SIGNIN } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case signIn:
+    case SIGNIN:
       return {
         ...state,
         user: action.payload,

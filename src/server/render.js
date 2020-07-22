@@ -40,8 +40,8 @@ const setResponse = (html, preloadedState, manifest) => {
 };
 
 const renderApp = async (req, res) => {
-  const { USER, USERM } = req.cookies;
-  initialState(USER, USERM).then((state) => {
+  const { USER, USERM, PENDINGSTEP } = req.cookies;
+  initialState(USER, USERM, PENDINGSTEP).then((state) => {
     const store = createStore(reducer, state);
     const preloadedState = store.getState();
     const html = renderToString(

@@ -1,18 +1,12 @@
 /* eslint-disable import/named */
-import { ERROR, LOAD } from '../types';
+import { GET_ALL_PLAYERS } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ERROR:
+    case GET_ALL_PLAYERS:
       return {
         ...state,
-        error: action.payload,
-      };
-    case LOAD:
-      return {
-        ...state,
-        load: action.payload,
-        error: '',
+        players: action.payload,
       };
     default:
       return {

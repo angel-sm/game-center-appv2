@@ -1,11 +1,11 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable import/named */
 import axios from 'axios';
-import { signIn } from '../types';
+import { SIGNIN } from '../types';
 import { setErrorRequest, setLoadRequest } from './status';
 
 export const signInRequest = (payload) => ({
-  type: signIn,
+  type: SIGNIN,
   payload,
 });
 
@@ -21,6 +21,7 @@ export const signInSolve = ({ email, password }, url) => async (dispatch) => {
     .then(({ data }) => {
       document.cookie = `USER=${data.userKey}`;
       document.cookie = `USERM=${data.email}`;
+      document.cookie = `PENDINGSTEP=${0}`;
       dispatch(setLoadRequest(true));
     })
     .then(() => {

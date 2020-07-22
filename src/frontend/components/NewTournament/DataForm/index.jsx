@@ -2,43 +2,50 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import 'date-fns';
 import React from 'react';
+import { connect } from 'react-redux';
 import DateFnsUtils from '@date-io/date-fns';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import { FormControl, Button } from '@material-ui/core';
+import { FormControl, Button, TextField } from '@material-ui/core';
 import InputAdornment from '@material-ui/core/InputAdornment';
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from '@material-ui/core/Select';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 import moment from 'moment';
+import { newtournamentRequest } from '../../../actions/tournaments';
 import useInputValueHandle from '../../../hooks/useInputHandler';
 
 import useStyles from './styles';
 
-const DataForm = () => {
+const DataForm = (props) => {
   const classes = useStyles();
   const handleValue = useInputValueHandle({
     organizer: '',
     cost: '',
+    description: '',
+    tournament: '',
+    game: '',
   });
 
-  const [selectedDate, setSelectedDate] = React.useState(new Date());
+  const [start, setStart] = React.useState(new Date());
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
+    setStart(date);
   };
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    console.log({ ...handleValue.form, startDate: moment(selectedDate).locale('e').format('YYYY-MM-DD') });
+    props.newtournamentRequest({ ...handleValue.form, start: moment(start).locale('e').format('YYYY-MM-DD') });
+    console.log();
   };
 
   return (
 
     <form noValidate autoComplete='off' className={classes.root} onSubmit={handlerSubmit}>
+      <FormControl className={classes.chaild}>
+        <TextField id='standard-basic' label='Nombre del torneo' name='tournament' {...handleValue} />
+      </FormControl>
       <FormControl variant='outlined' className={classes.chaild}>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <KeyboardDatePicker
@@ -49,13 +56,16 @@ const DataForm = () => {
             margin='normal'
             id='date-picker-inline'
             label='Date picker inline'
-            value={selectedDate}
+            value={start}
             onChange={handleDateChange}
             KeyboardButtonProps={{
               'aria-label': 'change date',
             }}
           />
         </MuiPickersUtilsProvider>
+      </FormControl>
+      <FormControl className={classes.chaild}>
+        <TextField id='standard-basic' label='Nombre del organizador' name='organizer' {...handleValue} />
       </FormControl>
       <FormControl className={classes.chaild}>
         <InputLabel htmlFor='standard-adornment-amount'>Costo del torneo</InputLabel>
@@ -69,46 +79,10 @@ const DataForm = () => {
         />
       </FormControl>
       <FormControl className={classes.chaild}>
-        <InputLabel id='demo-simple-select-label'>Organizador</InputLabel>
-        <Select
-          name='organizer'
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={handleValue.form.organizer}
-          {...handleValue}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+        <TextField id='standard-basic' label='Juego' name='game' {...handleValue} />
       </FormControl>
       <FormControl className={classes.chaild}>
-        <InputLabel id='demo-simple-select-label'>Juego</InputLabel>
-        <Select
-          name='organizer'
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={handleValue.form.organizer}
-          {...handleValue}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <InputLabel id='demo-simple-select-label'>Temporada</InputLabel>
-        <Select
-          name='organizer'
-          labelId='demo-simple-select-label'
-          id='demo-simple-select'
-          value={handleValue.form.organizer}
-          {...handleValue}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+        <TextField id='standard-basic' label='Descripcion' name='description' {...handleValue} />
       </FormControl>
       <FormControl className={classes.chaild}>
         <Button type='submit' variant='contained' color='primary'>
@@ -119,4 +93,11 @@ const DataForm = () => {
   );
 };
 
-export default DataForm;
+const dispatchStateToProps = {
+  newtournamentRequest,
+};
+
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps, dispatchStateToProps)(DataForm);
+

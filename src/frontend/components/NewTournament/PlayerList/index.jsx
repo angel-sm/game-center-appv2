@@ -1,14 +1,14 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -18,50 +18,9 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
-
-const users = [
-  {
-    name: 'a',
-    lastname: 'r',
-  },
-  {
-    name: 'b',
-    lastname: 'r',
-  },
-  {
-    name: 'c',
-    lastname: 'r',
-  },
-  {
-    name: 'd',
-    lastname: 'r',
-  },
-];
-
-function EnhancedTableHead(props) {
-  const { onSelectAllClick, numSelected, rowCount } = props;
-
-  return (
-    <TableHead>
-      <TableRow>
-        <TableCell padding='checkbox'>
-          <Checkbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
-        </TableCell>
-      </TableRow>
-    </TableHead>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
+import { getAllPlayersRequest } from '../../../actions/players';
+import { registerCompetitorsRequest } from '../../../actions/competitors';
+import { nextStep } from '../../../actions/pending';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -110,13 +69,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const PlayerList = () => {
+const PlayerList = (props) => {
   const classes = useStyles();
   const toolbar = useToolbarStyles();
 
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  useEffect(() => {
+    props.getAllPlayersRequest();
+  }, []);
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -149,12 +112,13 @@ const PlayerList = () => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.players.players.length - page * rowsPerPage);
 
   const handleAdd = () => {
     selected.map((player) => {
-      return console.log(player);
+      props.registerCompetitorsRequest(player.id);
     });
+    props.nextStep(2);
   };
 
   return (
@@ -188,7 +152,7 @@ const PlayerList = () => {
             aria-label='enhanced table'
           >
             <TableBody>
-              {users
+              {props.players.players
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row);
@@ -227,7 +191,7 @@ const PlayerList = () => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component='div'
-          count={users.length}
+          count={props.players.players.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -238,4 +202,12 @@ const PlayerList = () => {
   );
 };
 
-export default PlayerList;
+const dispatchStateToProps = {
+  getAllPlayersRequest,
+  registerCompetitorsRequest,
+  nextStep,
+};
+
+const mapStateToPros = (state) => state;
+
+export default connect(mapStateToPros, dispatchStateToProps)(PlayerList);

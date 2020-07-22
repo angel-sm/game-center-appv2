@@ -1,18 +1,12 @@
 /* eslint-disable import/named */
-import { ERROR, LOAD } from '../types';
+import { REGISTER_COMPETITOR } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ERROR:
+    case REGISTER_COMPETITOR:
       return {
         ...state,
-        error: action.payload,
-      };
-    case LOAD:
-      return {
-        ...state,
-        load: action.payload,
-        error: '',
+        competitors: [...state.competitors.competitors, action.payload],
       };
     default:
       return {

@@ -1,18 +1,17 @@
 /* eslint-disable import/named */
-import { ERROR, LOAD } from '../types';
+import { NEW_TOURNAMENT, STEP_PENDING } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case ERROR:
+    case STEP_PENDING:
       return {
         ...state,
-        error: action.payload,
+        step: action.payload,
       };
-    case LOAD:
+    case NEW_TOURNAMENT:
       return {
         ...state,
-        load: action.payload,
-        error: '',
+        tournamentId: action.payload,
       };
     default:
       return {

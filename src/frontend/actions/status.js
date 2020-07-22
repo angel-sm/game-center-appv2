@@ -1,13 +1,13 @@
 /* eslint-disable import/named */
-import { setError, setLoad } from '../types';
+import { ERROR, LOAD } from '../types';
 
 const setErrorRequest = (payload) => ({
-  type: setError,
+  type: ERROR,
   payload,
 });
 
 const setLoadRequest = (payload) => ({
-  type: setLoad,
+  type: LOAD,
   payload,
 });
 

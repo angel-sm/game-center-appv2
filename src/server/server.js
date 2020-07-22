@@ -8,9 +8,13 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import passport from 'passport';
+import cors from 'cors';
 import getManifest from './getManifest';
 import auth from './routes/auth';
-
+import tournamentRoutes from './routes/touenaments';
+import playersRoutes from './routes/players';
+import competitorsRoutes from './routes/competitors';
+import prizesRoutes from './routes/prizes';
 import renderApp from './render';
 
 dotenv.config();
@@ -27,6 +31,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(cors());
 //app.use(express.static(`${__dirname}/public`));
 
 if (ENV === 'development') {
@@ -49,8 +54,13 @@ if (ENV === 'development') {
   app.disable('x-powered-by');
 };
 
-app.get('*', renderApp);
 auth(app);
+tournamentRoutes(app);
+playersRoutes(app);
+competitorsRoutes(app);
+prizesRoutes(app);
+
+app.get('*', renderApp);
 
 app.listen(PORT || 3001, (err) => {
   if (!err) console.log(`Server listen in http://localhost:${PORT || 3001}`);
