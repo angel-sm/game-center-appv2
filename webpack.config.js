@@ -1,7 +1,9 @@
 const path = require('path');
 const webpack = require('webpack');
+const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 require('dotenv').config();
 
@@ -16,9 +18,7 @@ module.exports = {
   entry,
   mode: process.env.ENV,
   output: {
-    path: isDev ?
-      path.resolve(__dirname, 'dist') :
-      path.resolve(__dirname, 'src/server/public'),
+    path: isDev ? path.resolve(__dirname, 'dist') : path.resolve(__dirname, 'src/server/public'),
     filename: isDev ? 'assets/app.js' : 'assets/app-[hash].js',
   },
   resolve: {
@@ -73,7 +73,7 @@ module.exports = {
       new webpack.HotModuleReplacementPlugin() :
       () => { },
     !isDev ?
-      new CompresionPlugin({
+      new CompressionWebpackPlugin({
         test: /\.js$|\.css$/,
         filename: '[path].gz',
       }) : () => { },

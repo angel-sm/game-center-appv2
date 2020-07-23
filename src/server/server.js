@@ -8,7 +8,6 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import passport from 'passport';
-import cors from 'cors';
 import getManifest from './getManifest';
 import auth from './routes/auth';
 import tournamentRoutes from './routes/touenaments';
@@ -31,8 +30,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(cors());
-//app.use(express.static(`${__dirname}/public`));
 
 if (ENV === 'development') {
   const webpackConfig = require('../../webpack.config');

@@ -24,8 +24,8 @@ const authRoutes = (app) => {
           const { token, ...user } = data;
 
           res.cookie('_api_token', token, {
-            httpOnly: (process.env.ENV === 'development'),
-            secure: (process.env.ENV === 'development'),
+            httpOnly: !(process.env.ENV === 'development'),
+            secure: !(process.env.ENV === 'development'),
           });
 
           res.status(200).json(user);

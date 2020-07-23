@@ -6,7 +6,6 @@ dotenv.config();
 const initiaState = async (USER, USERM, PENDINGSTEP) => {
   let state;
   try {
-    console.log('estado bien');
     state = {
       competitors: {
         competitors: [],
@@ -30,7 +29,6 @@ const initiaState = async (USER, USERM, PENDINGSTEP) => {
       },
     };
   } catch (error) {
-    console.log(error);
     state = {
       players: {
         players: [],
