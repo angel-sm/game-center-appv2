@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable radix */
 /* eslint-disable react/jsx-props-no-spreading */
 import 'date-fns';
