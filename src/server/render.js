@@ -10,21 +10,24 @@ import reducer from '../frontend/reducers';
 import initialState from './initialState';
 
 const setResponse = (html, preloadedState, manifest) => {
-  const mainStyles = manifest ? manifest[main.css] : 'assets/app.css';
-  const mainBuild = manifest ? manifest[main.js] : 'assets/app.js';
-  const vendorBuild = manifest ? manifest[vendors.js] : 'assets/vendor.js';
-
-  return (`
-    <html lang="en">
-      <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href=${mainStyles} type="text/css">
-        <title>Game center</title>
-      </head>
-      <body>
-        <div id="App">${html}</div>
-        <script>
+  const mainStyles = manifest ? manifest['main.css'] : '/assets/app.css';
+  const mainBuild = manifest ? manifest['main.js'] : '/assets/app.js';
+  const vendorBuild = manifest ? manifest['vendors.js'] : 'assets/vendor.js';
+  return (
+    `
+      <!DOCTYPE html>
+      <html lang="es">
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <meta charset="utf-8" />
+          <link rel="stylesheet" href="${mainStyles}" type="text/css"/>
+          <title>Incidencias Runasys</title>
+        </head>
+        <body>
+          <div id="App">${html}</div>
+           <script>
           // WARNING: See the following for security issues around embedding JSON in HTML:
           // https://redux.js.org/recipes/server-rendering/#security-considerations
           window.__PRELOADED_STATE__ = ${JSON.stringify(preloadedState).replace(
@@ -34,20 +37,20 @@ const setResponse = (html, preloadedState, manifest) => {
         </script>
           <script src="${mainBuild}"></script>
           <script src="${vendorBuild}"></script>
-      </body>
-    </html>
-  `);
+        </body>
+      </html>`
+  );
 };
 
 const renderApp = async (req, res) => {
-  const { USER, USERM, PENDINGSTEP } = req.cookies;
-  initialState(USER, USERM, PENDINGSTEP).then((state) => {
+  const { USER, USERM, PENDINGSTEP, TOKEN, CENTERID } = req.cookies;
+  initialState(USER, USERM, PENDINGSTEP, CENTERID).then((state) => {
     const store = createStore(reducer, state);
     const preloadedState = store.getState();
     const html = renderToString(
       <Provider store={store}>
         <StaticRouter location={req.url} context={{}}>
-          {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24))}
+          {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24 && TOKEN))}
         </StaticRouter>
       </Provider>,
     );

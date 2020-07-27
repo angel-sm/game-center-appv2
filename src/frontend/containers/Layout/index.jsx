@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
+//import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -54,10 +54,6 @@ const options = [
 ];
 
 const Layout = (props) => {
-  const { children } = props;
-  const { tournaments } = props;
-  const { center, credit } = props.center;
-  const { email } = props.user;
 
   const classes = useStyles();
   const theme = useTheme();
@@ -71,16 +67,13 @@ const Layout = (props) => {
     <div>
       <ProfileControllerContent>
         <Profile
-          userName={email}
           url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'
-          center={center}
-          credit={credit}
         />
       </ProfileControllerContent>
-      <DropMenu section='Torneos' data={tournaments} />
-      <Divider />
-      <DropMenu section='Temporadas' data={tournaments} />
-      <Divider />
+      <DropMenu section='Torneos' center={props.center.id} search='tournaments' />
+      {/*<Divider />
+      <DropMenu section='Temporadas' center={props.center.id} search='seasons' />
+      <Divider />*/}
       <List>
         {options.map((option) => (
           <Link
@@ -149,7 +142,7 @@ const Layout = (props) => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {children}
+        {props.children}
       </main>
     </div>
   );

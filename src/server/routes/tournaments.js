@@ -7,7 +7,6 @@ const tournamentRoutes = (app) => {
   app.use('/client/tournaments', router);
 
   router.get('/', async (req, res, next) => {
-    console.log('si');
     try {
       const { data } = await Axios({
         url: `${process.env.API_URL}/api/tournaments`,

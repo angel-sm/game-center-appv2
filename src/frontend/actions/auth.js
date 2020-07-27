@@ -19,9 +19,11 @@ export const signInSolve = ({ email, password }, url) => async (dispatch) => {
     },
   })
     .then(({ data }) => {
+      const [c] = data.center;
       document.cookie = `USER=${data.userKey}`;
       document.cookie = `USERM=${data.email}`;
       document.cookie = `PENDINGSTEP=${0}`;
+      document.cookie = `CENTERID=${c.id}`;
       dispatch(setLoadRequest(true));
     })
     .then(() => {

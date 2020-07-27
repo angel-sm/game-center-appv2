@@ -44,8 +44,7 @@
     "react-router-dom": "^5.2.0",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
-    "styled-components": "^5.1.1",
-    "webpack-manifest-plugin": "^2.2.0"
+    "styled-components": "^5.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
@@ -56,8 +55,9 @@
     "babel-loader": "^8.1.0",
     "compression-webpack-plugin": "^4.0.0",
     "css-loader": "^3.5.3",
-    "eslint": "^7.0.0",
+    "eslint": "^7.5.0",
     "eslint-config-airbnb": "^18.1.0",
+    "eslint-loader": "^4.0.2",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
@@ -72,6 +72,7 @@
     "webpack-cli": "^3.3.11",
     "webpack-dev-middleware": "^3.7.2",
     "webpack-dev-server": "^3.11.0",
-    "webpack-hot-middleware": "^2.25.0"
+    "webpack-hot-middleware": "^2.25.0",
+    "webpack-manifest-plugin": "^2.2.0"
   }
 }

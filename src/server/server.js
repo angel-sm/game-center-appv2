@@ -11,19 +11,17 @@ import passport from 'passport';
 import cors from 'cors';
 import getManifest from './getManifest';
 import auth from './routes/auth';
-import tournamentRoutes from './routes/touenaments';
+import tournamentRoutes from './routes/tournaments';
 import playersRoutes from './routes/players';
 import competitorsRoutes from './routes/competitors';
 import prizesRoutes from './routes/prizes';
 import renderApp from './render';
+import centerTournamentRoutes from './routes/centerTournaments';
 
 dotenv.config();
 
 const app = express();
-const {
-  ENV,
-  PORT,
-} = process.env;
+const { ENV, PORT } = process.env;
 
 app.use(express.json());
 app.use(cookieParser());
@@ -32,33 +30,32 @@ app.use(passport.session());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
-//app.use(express.static(`${__dirname}/public`));
+app.use(express.static(`${__dirname}/public`));
 
 if (ENV === 'development') {
-  const webpackConfig = require('../../webpack.config');
+  const webPackConfig = require('../../webpack.config');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackHotMiddleware = require('webpack-hot-middleware');
-  const compiler = webpack(webpackConfig);
+  const compiler = webpack(webPackConfig);
   const serverConfig = { port: PORT, hot: true };
-
   app.use(webpackDevMiddleware(compiler, serverConfig));
   app.use(webpackHotMiddleware(compiler));
 } else {
   app.use((req, res, next) => {
-    if (req.hashManifest) req.hashManifest = getManifest();
+    req.hashManifest = getManifest();
     next();
   });
-  app.use(express.static(`${__dirname}/public`));
   app.use(helmet());
   app.use(helmet.permittedCrossDomainPolicies());
   app.disable('x-powered-by');
-};
+}
 
 auth(app);
 tournamentRoutes(app);
 playersRoutes(app);
 competitorsRoutes(app);
 prizesRoutes(app);
+centerTournamentRoutes(app);
 
 app.get('*', renderApp);
 
