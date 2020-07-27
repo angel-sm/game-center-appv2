@@ -3,12 +3,18 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const initiaState = async (USER, USERM, PENDINGSTEP) => {
+const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
   let state;
   try {
     state = {
-      competitors: {
+      tournaments: {
+        tournament: {},
+        tournaments: [],
         competitors: [],
+        prizes: [],
+      },
+      center: {
+        id: CENTERID,
       },
       players: {
         players: [],

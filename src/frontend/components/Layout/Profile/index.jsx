@@ -11,13 +11,13 @@ const Profile = ({ url, userName, center, credit }) => {
     <Container>
       <Avatar alt={userName} src={url} className={classes.root} />
       <Typography variant='h6' component='h6'>
-        {userName}
+        {userName || 'name'}
       </Typography>
       <Typography variant='subtitle1' component='span'>
-        {`Centro: ${center}`}
+        {`Centro: ${center || 'center'}`}
       </Typography>
       <Typography variant='body2' component='span'>
-        {`Credito: ${credit}`}
+        {`Credito: ${credit || '0'}`}
       </Typography>
     </Container>
   );

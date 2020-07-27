@@ -1,23 +1,20 @@
 /* eslint-disable consistent-return */
-import express from 'express';
-import Axios from 'axios';
+const express = require('express');
+const Axios = require('axios');
 
 const tournamentRoutes = (app) => {
   const router = express.Router();
   app.use('/client/tournaments', router);
 
   router.get('/', async (req, res, next) => {
-    console.log('si');
     try {
       const { data } = await Axios({
         url: `${process.env.API_URL}/api/tournaments`,
         method: 'GET',
       });
-      console.log(data);
       res.status(201).json(data);
     } catch (error) {
       console.log(error);
-
     }
   });
 

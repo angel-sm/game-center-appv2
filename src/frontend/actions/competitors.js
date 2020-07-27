@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
-import { REGISTER_COMPETITOR } from '../types';
+import { RETRIBE_COMPETITOR } from '../types';
 
 export const registerCompetitors = (payload) => ({
-  type: REGISTER_COMPETITOR,
+  type: RETRIBE_COMPETITOR,
   payload,
 });
 

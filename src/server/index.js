@@ -1,5 +1,4 @@
 /* eslint-disable import/no-extraneous-dependencies */
-// eslint-disable-next-line import/no-extraneous-dependencies
 require('ignore-styles');
 
 require('@babel/polyfill');

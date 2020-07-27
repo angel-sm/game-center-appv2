@@ -1,9 +1,10 @@
 /* eslint-disable consistent-return */
-import express from 'express';
-import passport from 'passport';
-import boom from '@hapi/boom';
+const express = require('express');
+const passport = require('passport');
+const boom = require('@hapi/boom');
+const Axios = require('axios');
 
-import '../utils/auth/basic';
+require('../utils/auth/basic');
 
 const authRoutes = (app) => {
   const router = express.Router();
@@ -23,12 +24,20 @@ const authRoutes = (app) => {
 
           const { token, ...user } = data;
 
-          res.cookie('_api_token', token, {
+          res.cookie('TOKEN', token, {
             httpOnly: !(process.env.ENV === 'development'),
             secure: !(process.env.ENV === 'development'),
           });
 
-          res.status(200).json(user);
+          const center = await Axios({
+            url: `${process.env.API_URL}/api/center-users?user=${user.userKey}`,
+            method: 'GET',
+          });
+
+          res.status(200).json({
+            center: center.data.center,
+            ...user,
+          });
         });
       } catch (err) {
         res.status(500).json('error');

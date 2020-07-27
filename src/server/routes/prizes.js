@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
-import express from 'express';
-import Axios from 'axios';
+const express = require('express');
+const Axios = require('axios');
 
 const prizesRoutes = (app) => {
   const router = express.Router();
