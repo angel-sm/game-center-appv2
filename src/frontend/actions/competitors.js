@@ -1,9 +1,9 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
-import { RETRIBE_COMPETITOR } from '../types';
+import { GET_COMPETITORS } from '../types';
 
-export const registerCompetitors = (payload) => ({
-  type: RETRIBE_COMPETITOR,
+export const getCompetitors = (payload) => ({
+  type: GET_COMPETITORS,
   payload,
 });
 
@@ -18,6 +18,18 @@ export const registerCompetitorsRequest = (data) => (dispatch) => {
   })
     .then((data) => {
       console.log(data.data);
+    })
+    .catch((error) => console.log(error));
+};
+
+export const getCompetitorsRequest = (id) => (dispatch) => {
+  console.log(id);
+  axios({
+    url: `/client/competitors/tournament/${id}}`,
+    method: 'GET',
+  })
+    .then(({ data }) => {
+      dispatch(getCompetitors(data.competitors));
     })
     .catch((error) => console.log(error));
 };

@@ -36,15 +36,27 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
     };
   } catch (error) {
     state = {
+      tournaments: {
+        tournament: {},
+        tournaments: [],
+        competitors: [],
+        prizes: [],
+      },
+      center: {
+        id: CENTERID,
+      },
       players: {
         players: [],
       },
       pending: {
         tournamentId: '',
-        step: -1,
+        step: parseInt(PENDINGSTEP),
       },
       auth: {
-        user: {},
+        user: {
+          email: USERM,
+          id: USER,
+        },
       },
       status: {
         error: '',

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
@@ -29,7 +30,7 @@ const SetLink = styled(Link)`
   }
 `;
 
-const MenuDrop = (props) => {
+const Tournaments = (props) => {
   const { section, center, search } = props;
   const classes = useStyles();
 
@@ -47,13 +48,14 @@ const MenuDrop = (props) => {
       <ExpansionPanelDetails>
         <LinkContainer>
           {
-            props.tournaments.tournaments.map((t) => {
-              return (
-                <SetLink to={`/${search}/${t.id}`}>
-                  {t.tournament}
-                </SetLink>
-              );
-            })
+            props.tournaments.tournaments !== undefined ?
+              props.tournaments.tournaments.map((t) => {
+                return (
+                  <SetLink to={`/${search}/${t.id}`} key={t.id}>
+                    {t.tournament}
+                  </SetLink>
+                );
+              }) : null
           }
         </LinkContainer>
       </ExpansionPanelDetails>
@@ -67,4 +69,4 @@ const dispatchStateToProps = {
   getRequest,
 };
 
-export default connect(mapSatateToProps, dispatchStateToProps)(MenuDrop);
+export default connect(mapSatateToProps, dispatchStateToProps)(Tournaments);

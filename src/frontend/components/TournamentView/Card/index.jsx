@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
+import styled from 'styled-components';
 
 const useStyles = makeStyles({
   root: {
@@ -21,16 +22,26 @@ const useStyles = makeStyles({
   },
 });
 
-export default function SimpleCard() {
+const DescribeCard = styled(Card)`
+  &:hover{
+    background: rgba(0,0,0,.2);
+    color: #fff;
+  }
+`;
+
+const SimpleCard = ({ title, data }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <DescribeCard className={classes.root}>
       <CardContent>
         <Typography className={classes.title} color='textSecondary' gutterBottom>
-          Word of the Day
+          {`${title} - ${data}`}
         </Typography>
       </CardContent>
-    </Card>
+    </DescribeCard>
   );
-}
+};
+
+export default SimpleCard;
+

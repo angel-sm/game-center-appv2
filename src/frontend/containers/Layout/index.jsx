@@ -18,8 +18,8 @@ import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
 import Profile from '../../components/Layout/Profile';
-import DropMenu from '../../components/Layout/DropMenu';
 import { useStyles, ProfileControllerContent } from './Layout.styles';
+import Tournaments from '../../components/Layout/Tournaments';
 
 const options = [
   {
@@ -70,7 +70,7 @@ const Layout = (props) => {
           url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'
         />
       </ProfileControllerContent>
-      <DropMenu section='Torneos' center={props.center.id} search='tournaments' />
+      <Tournaments section='Torneos' />
       {/*<Divider />
       <DropMenu section='Temporadas' center={props.center.id} search='seasons' />
       <Divider />*/}

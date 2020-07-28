@@ -22,6 +22,19 @@ const playersRoutes = (app) => {
       console.log(error);
     }
   });
+
+  router.get('/tournament/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const { data } = await Axios({
+        url: `${process.env.API_URL}/api/competitors?tournament=${id}`,
+        method: 'GET',
+      });
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 };
 
 module.exports = playersRoutes;
