@@ -1,6 +1,7 @@
 import SignIn from '../containers/SignIn';
 import NotFound from '../containers/NotFound';
 import NewTournament from '../containers/NewTournament';
+import TournamentInfo from '../containers/TournamentInfo';
 
 const routes = (isLogged) => {
   return [
@@ -13,6 +14,11 @@ const routes = (isLogged) => {
       path: '/registertournament',
       exact: true,
       component: NewTournament,
+    },
+    {
+      path: '/tournaments/:id',
+      exact: true,
+      component: TournamentInfo,
     },
     {
       exact: true,

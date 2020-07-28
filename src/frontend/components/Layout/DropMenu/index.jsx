@@ -7,8 +7,27 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 import { getRequest } from '../../../actions/tournaments';
 import useStyles from './DropMenu.styles';
+
+const LinkContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
+const SetLink = styled(Link)`
+  text-decoration: none;
+  width: 100%;
+  padding: .5em 0;
+  color: #000;
+  
+  &:hover{
+    background: rgba(0,0,0,.2);
+    color: #fff
+  }
+`;
 
 const MenuDrop = (props) => {
   const { section, center, search } = props;
@@ -26,15 +45,17 @@ const MenuDrop = (props) => {
         {section}
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        {
-          props.tournaments.tournaments.map((t) => {
-            return (
-              <Link to={`/tournament/${t.id}`}>
-                {t.tournament}
-              </Link>
-            );
-          })
-        }
+        <LinkContainer>
+          {
+            props.tournaments.tournaments.map((t) => {
+              return (
+                <SetLink to={`/${search}/${t.id}`}>
+                  {t.tournament}
+                </SetLink>
+              );
+            })
+          }
+        </LinkContainer>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

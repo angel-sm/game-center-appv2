@@ -24,7 +24,7 @@ import { useStyles, ProfileControllerContent } from './Layout.styles';
 const options = [
   {
     option: 'Nuevo torneo',
-    url: '/new-tournament',
+    url: '/registertournament',
     icon: <Create />,
   }, {
     option: 'Buscar torneo',
