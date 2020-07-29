@@ -1,5 +1,5 @@
 /* eslint-disable import/named */
-import { GET_TOURNAMENTS, GET_COMPETITORS } from '../types';
+import { GET_TOURNAMENTS, GET_COMPETITORS, GET_TOURNAMENT } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -12,6 +12,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         tournaments: action.payload,
+      };
+    case GET_TOURNAMENT:
+      return {
+        ...state,
+        tournament: action.payload,
       };
     default:
       return {

@@ -6,10 +6,11 @@ const tournamentRoutes = (app) => {
   const router = express.Router();
   app.use('/client/tournaments', router);
 
-  router.get('/', async (req, res, next) => {
+  router.get('/:id', async (req, res, next) => {
+    const { id } = req.params;
     try {
       const { data } = await Axios({
-        url: `${process.env.API_URL}/api/tournaments`,
+        url: `${process.env.API_URL}/api/tournaments/tournament/${id}`,
         method: 'GET',
       });
       res.status(201).json(data);

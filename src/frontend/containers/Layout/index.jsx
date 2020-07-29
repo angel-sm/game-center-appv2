@@ -70,7 +70,7 @@ const Layout = (props) => {
           url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'
         />
       </ProfileControllerContent>
-      <Tournaments section='Torneos' />
+      <Tournaments />
       {/*<Divider />
       <DropMenu section='Temporadas' center={props.center.id} search='seasons' />
       <Divider />*/}

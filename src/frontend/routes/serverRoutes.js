@@ -17,7 +17,7 @@ const routes = (isLogged) => {
     },
     {
       path: '/tournaments/:id',
-      exact: true,
+      exact: false,
       component: TournamentView,
     },
     {

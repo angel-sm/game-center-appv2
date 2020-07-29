@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
+import TableHead from '@material-ui/core/TableHead';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
@@ -14,12 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
-import { registerCompetitorsRequest, getCompetitorsRequest } from '../../../actions/competitors';
-import { nextStep } from '../../../actions/pending';
+import { getCompetitorsRequest, paidCompetitorRequest } from '../../../actions/competitors';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -68,8 +64,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Competitors = (props) => {
-  console.log(props);
+const Paids = (props) => {
+
   const classes = useStyles();
   const toolbar = useToolbarStyles();
 
@@ -78,8 +74,9 @@ const Competitors = (props) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
+    setSelected([]);
     props.getCompetitorsRequest(props.tournamentId);
-  }, []);
+  }, [props.tournamentId]);
 
   const handleClick = (event, name) => {
     const selectedIndex = selected.indexOf(name);
@@ -114,12 +111,7 @@ const Competitors = (props) => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.competitors.length - page * rowsPerPage);
 
-  const handleAdd = () => {
-    selected.map((player) => {
-      props.registerCompetitorsRequest(player.id);
-    });
-    props.nextStep(2);
-  };
+  const headCells = ['Nombre', 'Nickname', 'Puntos'];
 
   return (
     <div className={classes.root}>
@@ -128,22 +120,9 @@ const Competitors = (props) => {
           [toolbar.highlight]: selected.length > 0,
         })}
         >
-          {selected.length > 0 ? (
-            <Typography className={classes.title} color='inherit' variant='subtitle1' component='div'>
-              {selected.length}
-              {' '}
-              jugadores a inscribir
-            </Typography>
-          ) : (
-            <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-              Jugadores
-            </Typography>
-          )}
-          <Tooltip title='agregar'>
-            <IconButton aria-label='agregar' onClick={handleAdd}>
-              <GroupAddIcon />
-            </IconButton>
-          </Tooltip>
+          <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
+            Pagos
+          </Typography>
         </Toolbar>
         <TableContainer>
           <Table
@@ -151,8 +130,17 @@ const Competitors = (props) => {
             aria-labelledby='tableTitle'
             aria-label='enhanced table'
           >
+            <TableHead>
+              <TableRow>
+                {headCells.map((hc) => (
+                  <TableCell>
+                    {hc}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
             <TableBody>
-              {props.tournaments.competitors
+              {props.tournaments.competitors.filter((c) => c.paid === 1)
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row);
@@ -168,14 +156,14 @@ const Competitors = (props) => {
                       key={row.name}
                       selected={isItemSelected}
                     >
-                      <TableCell padding='checkbox'>
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                      </TableCell>
-                      <TableCell component='th' id={labelId} scope='row' padding='none'>
+                      <TableCell component='th' id={labelId} scope='row' padding='default'>
                         {row.name}
+                      </TableCell>
+                      <TableCell component='th' id={labelId} scope='row' padding='default'>
+                        {row.nickname}
+                      </TableCell>
+                      <TableCell component='th' id={labelId} scope='row' padding='default'>
+                        {row.points}
                       </TableCell>
                     </TableRow>
                   );
@@ -204,10 +192,9 @@ const Competitors = (props) => {
 
 const dispatchStateToProps = {
   getCompetitorsRequest,
-  registerCompetitorsRequest,
-  nextStep,
+  paidCompetitorRequest,
 };
 
 const mapStateToPros = (state) => state;
 
-export default connect(mapStateToPros, dispatchStateToProps)(Competitors);
+export default connect(mapStateToPros, dispatchStateToProps)(Paids);

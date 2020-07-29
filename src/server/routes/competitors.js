@@ -14,7 +14,7 @@ const playersRoutes = (app) => {
         method: 'POST',
         data: {
           tournament: req.cookies.PENDINGID,
-          ...competitor,
+          player: competitor.id,
         },
       });
       res.status(201).json(data);
@@ -29,6 +29,21 @@ const playersRoutes = (app) => {
       const { data } = await Axios({
         url: `${process.env.API_URL}/api/competitors?tournament=${id}`,
         method: 'GET',
+      });
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
+  router.put('/paid/:id', async (req, res, next) => {
+    const { id } = req.params;
+    const { body: paid } = req;
+    try {
+      const { data } = await Axios({
+        url: `${process.env.API_URL}/api/competitors/paid/${id}`,
+        method: 'PUT',
+        data: paid,
       });
       res.status(201).json(data);
     } catch (error) {

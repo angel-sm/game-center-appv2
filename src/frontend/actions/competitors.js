@@ -25,11 +25,26 @@ export const registerCompetitorsRequest = (data) => (dispatch) => {
 export const getCompetitorsRequest = (id) => (dispatch) => {
   console.log(id);
   axios({
-    url: `/client/competitors/tournament/${id}}`,
+    url: `/client/competitors/tournament/${id}`,
     method: 'GET',
   })
     .then(({ data }) => {
       dispatch(getCompetitors(data.competitors));
+    })
+    .catch((error) => console.log(error));
+};
+
+export const paidCompetitorRequest = (id) => (dispatch) => {
+  console.log(id);
+  axios({
+    url: `/client/competitors/paid/${id}`,
+    method: 'PUT',
+    data: {
+      paid: 1,
+    },
+  })
+    .then(({ data }) => {
+      console.log(data);
     })
     .catch((error) => console.log(error));
 };

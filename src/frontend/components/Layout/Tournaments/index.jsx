@@ -31,11 +31,10 @@ const SetLink = styled(Link)`
 `;
 
 const Tournaments = (props) => {
-  const { section, center, search } = props;
   const classes = useStyles();
 
   useEffect(() => {
-    props.getRequest(center, search);
+    props.getRequest(props.center, 'tournaments');
   }, []);
 
   return (
@@ -43,19 +42,18 @@ const Tournaments = (props) => {
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        {section}
+        <h3>Tourneos</h3>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <LinkContainer>
           {
-            props.tournaments.tournaments !== undefined ?
-              props.tournaments.tournaments.map((t) => {
-                return (
-                  <SetLink to={`/${search}/${t.id}`} key={t.id}>
-                    {t.tournament}
-                  </SetLink>
-                );
-              }) : null
+            props.tournaments.tournaments.map((t) => {
+              return (
+                <SetLink to={`/tournaments/${t.id}`} key={t.id}>
+                  {t.tournament}
+                </SetLink>
+              );
+            })
           }
         </LinkContainer>
       </ExpansionPanelDetails>
