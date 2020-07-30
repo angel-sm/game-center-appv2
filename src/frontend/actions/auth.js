@@ -1,11 +1,16 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable import/named */
 import axios from 'axios';
-import { SIGNIN } from '../types';
+import { SIGNIN, LOGOUT } from '../types';
 import { setErrorRequest, setLoadRequest } from './status';
 
 export const signInRequest = (payload) => ({
   type: SIGNIN,
+  payload,
+});
+
+export const logout = (payload) => ({
+  type: LOGOUT,
   payload,
 });
 

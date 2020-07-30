@@ -15,7 +15,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { getCompetitorsRequest, paidCompetitorRequest } from '../../../actions/competitors';
+import { getCompetitorsRequest } from '../../../actions/competitors';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -65,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Paids = (props) => {
-
   const classes = useStyles();
   const toolbar = useToolbarStyles();
 
@@ -109,7 +108,7 @@ const Paids = (props) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.competitors.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.tournaments.length - page * rowsPerPage);
 
   const headCells = ['Nombre', 'Nickname', 'Puntos'];
 
@@ -133,14 +132,14 @@ const Paids = (props) => {
             <TableHead>
               <TableRow>
                 {headCells.map((hc) => (
-                  <TableCell>
+                  <TableCell key='hc'>
                     {hc}
                   </TableCell>
                 ))}
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.tournaments.competitors.filter((c) => c.paid === 1)
+              {props.tournaments.competitors.filter((c) => c.paid === 'paid')
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row);
@@ -179,7 +178,7 @@ const Paids = (props) => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component='div'
-          count={props.tournaments.competitors.length}
+          count={props.tournaments.tournaments.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -192,7 +191,6 @@ const Paids = (props) => {
 
 const dispatchStateToProps = {
   getCompetitorsRequest,
-  paidCompetitorRequest,
 };
 
 const mapStateToPros = (state) => state;

@@ -12,6 +12,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
         tournaments: [],
         competitors: [],
         prizes: [],
+        newPaid: false,
       },
       center: {
         id: CENTERID,
@@ -35,6 +36,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
       },
     };
   } catch (error) {
+    console.log(error);
     state = {
       tournaments: {
         tournament: {},

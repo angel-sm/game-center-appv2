@@ -17,9 +17,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
+import Button from '@material-ui/core/Button';
 import Profile from '../../components/Layout/Profile';
 import { useStyles, ProfileControllerContent } from './Layout.styles';
 import Tournaments from '../../components/Layout/Tournaments';
+import { logout } from '../../actions/auth';
 
 const options = [
   {
@@ -63,6 +65,18 @@ const Layout = (props) => {
     setMobileOpen(!mobileOpen);
   };
 
+  const hanldeCloseSesion = (event) => {
+    event.preventDefault();
+    document.cookie = 'USER=';
+    document.cookie = 'USERM=';
+    document.cookie = 'PENDINGSTEP=';
+    document.cookie = 'CENTERID=';
+    document.cookie = 'TOKEN=';
+    document.cookie = 'PENDINGID=';
+    props.logout({});
+    window.location.href = '/';
+  };
+
   const drawer = (
     <div>
       <ProfileControllerContent>
@@ -87,6 +101,7 @@ const Layout = (props) => {
             </ListItem>
           </Link>
         ))}
+        <Button color='primary' onClick={hanldeCloseSesion}>Cerrar sesion</Button>
       </List>
     </div>
   );
@@ -150,4 +165,8 @@ const Layout = (props) => {
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, null)(Layout);
+const dispatchStateToProps = {
+  logout,
+};
+
+export default connect(mapStateToProps, dispatchStateToProps)(Layout);

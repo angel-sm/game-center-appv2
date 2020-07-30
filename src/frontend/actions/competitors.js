@@ -1,9 +1,14 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
-import { GET_COMPETITORS } from '../types';
+import { GET_COMPETITORS, SET_PAID } from '../types';
 
 export const getCompetitors = (payload) => ({
   type: GET_COMPETITORS,
+  payload,
+});
+
+export const setPaid = (payload) => ({
+  type: SET_PAID,
   payload,
 });
 
@@ -39,9 +44,6 @@ export const paidCompetitorRequest = (id) => (dispatch) => {
   axios({
     url: `/client/competitors/paid/${id}`,
     method: 'PUT',
-    data: {
-      paid: 1,
-    },
   })
     .then(({ data }) => {
       console.log(data);

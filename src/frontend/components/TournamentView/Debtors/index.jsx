@@ -18,7 +18,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import PaymentIcon from '@material-ui/icons/Payment';
-import { getCompetitorsRequest, paidCompetitorRequest } from '../../../actions/competitors';
+import { getCompetitorsRequest, paidCompetitorRequest, setPaid } from '../../../actions/competitors';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -75,10 +75,11 @@ const Debtors = (props) => {
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  console.log(props);
+
   useEffect(() => {
     setSelected([]);
     props.getCompetitorsRequest(props.tournamentId);
+    props.setPaid(false);
   }, [props.tournamentId]);
 
   const handleClick = (event, name) => {
@@ -112,12 +113,13 @@ const Debtors = (props) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.competitors.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.tournaments.length - page * rowsPerPage);
 
   const handleAdd = () => {
     selected.map((player) => {
       props.paidCompetitorRequest(player.cprId);
     });
+    props.setPaid(true);
   };
 
   return (
@@ -151,7 +153,7 @@ const Debtors = (props) => {
             aria-label='enhanced table'
           >
             <TableBody>
-              {props.tournaments.competitors.filter((c) => c.paid === 0)
+              {props.tournaments.competitors.filter((c) => c.paid === 'debtor')
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row);
@@ -190,7 +192,7 @@ const Debtors = (props) => {
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component='div'
-          count={props.tournaments.competitors.length}
+          count={props.tournaments.tournaments.length}
           rowsPerPage={rowsPerPage}
           page={page}
           onChangePage={handleChangePage}
@@ -204,6 +206,7 @@ const Debtors = (props) => {
 const dispatchStateToProps = {
   getCompetitorsRequest,
   paidCompetitorRequest,
+  setPaid,
 };
 
 const mapStateToPros = (state) => state;

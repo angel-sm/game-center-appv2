@@ -38,12 +38,13 @@ const playersRoutes = (app) => {
 
   router.put('/paid/:id', async (req, res, next) => {
     const { id } = req.params;
-    const { body: paid } = req;
     try {
       const { data } = await Axios({
         url: `${process.env.API_URL}/api/competitors/paid/${id}`,
         method: 'PUT',
-        data: paid,
+        data: {
+          paid: 'paid',
+        },
       });
       res.status(201).json(data);
     } catch (error) {
