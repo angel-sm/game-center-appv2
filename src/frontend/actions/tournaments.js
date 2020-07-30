@@ -74,3 +74,17 @@ export const getRequest = (data, search) => (dispatch) => {
       console.log(error);
     });
 };
+
+export const closeTournamentRequest = (id, data) => (dispatch) => {
+  Axios({
+    url: `/client/tournaments/tournament/${id}`,
+    method: 'PUT',
+    data,
+  })
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

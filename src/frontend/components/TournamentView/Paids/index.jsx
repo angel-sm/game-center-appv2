@@ -132,7 +132,7 @@ const Paids = (props) => {
             <TableHead>
               <TableRow>
                 {headCells.map((hc) => (
-                  <TableCell key='hc'>
+                  <TableCell key={hc}>
                     {hc}
                   </TableCell>
                 ))}

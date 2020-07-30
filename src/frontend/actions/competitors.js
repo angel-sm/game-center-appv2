@@ -28,7 +28,6 @@ export const registerCompetitorsRequest = (data) => (dispatch) => {
 };
 
 export const getCompetitorsRequest = (id) => (dispatch) => {
-  console.log(id);
   axios({
     url: `/client/competitors/tournament/${id}`,
     method: 'GET',
@@ -40,7 +39,6 @@ export const getCompetitorsRequest = (id) => (dispatch) => {
 };
 
 export const paidCompetitorRequest = (id) => (dispatch) => {
-  console.log(id);
   axios({
     url: `/client/competitors/paid/${id}`,
     method: 'PUT',

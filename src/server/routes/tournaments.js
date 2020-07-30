@@ -33,6 +33,22 @@ const tournamentRoutes = (app) => {
 
     }
   });
+
+  router.put('/tournament/:id', async (req, res, next) => {
+    const { body: tournament } = req;
+    const { id } = req.params;
+    try {
+      const { data } = await Axios({
+        url: `${process.env.API_URL}/api/tournaments/tournament/${id}`,
+        method: 'PUT',
+        data: tournament,
+      });
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+
+    }
+  });
 };
 
 module.exports = tournamentRoutes;

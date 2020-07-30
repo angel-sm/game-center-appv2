@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import TournamentInfo from '../../components/TournamentView/TournamentInfo';
 import Debtors from '../../components/TournamentView/Debtors';
 import Paids from '../../components/TournamentView/Paids';
+import CloseButton from '../../components/TournamentView/CloseButton';
 
 const TournamentView = (props) => {
   return (
@@ -11,6 +12,7 @@ const TournamentView = (props) => {
       <TournamentInfo tournamentId={props.match.params.id} />
       <Debtors tournamentId={props.match.params.id} />
       <Paids tournamentId={props.match.params.id} />
+      <CloseButton tournamentId={props.match.params.id} />
     </>
   );
 };
