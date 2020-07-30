@@ -8,7 +8,7 @@ import { StaticRouter } from 'react-router-dom';
 import serverRoutes from '../frontend/routes/serverRoutes';
 import reducer from '../frontend/reducers';
 
-//import initialState from './initialState';
+import initialState from './initialState';
 
 const setResponse = (html, preloadedState, manifest) => {
   const mainStyles = manifest ? manifest['main.css'] : '/assets/app.css';
@@ -45,64 +45,19 @@ const setResponse = (html, preloadedState, manifest) => {
 
 const renderApp = async (req, res) => {
   const { USER, USERM, PENDINGSTEP, TOKEN, CENTERID } = req.cookies;
-  let state;
-  try {
-    state = {
-      tournaments: {
-        tournament: {},
-        tournaments: [],
-        competitors: [],
-        prizes: [],
-      },
-      center: {
-        id: CENTERID,
-      },
-      players: {
-        players: [],
-      },
-      pending: {
-        tournamentId: '',
-        step: parseInt(PENDINGSTEP),
-      },
-      auth: {
-        user: {
-          email: USERM,
-          id: USER,
-        },
-      },
-      status: {
-        error: '',
-        load: false,
-      },
-    };
-  } catch (error) {
-    state = {
-      players: {
-        players: [],
-      },
-      pending: {
-        tournamentId: '',
-        step: -1,
-      },
-      auth: {
-        user: {},
-      },
-      status: {
-        error: '',
-        load: false,
-      },
-    };
-  }
-  const store = createStore(reducer, state);
-  const preloadedState = store.getState();
-  const html = renderToString(
-    <Provider store={store}>
-      <StaticRouter location={req.url} context={{}}>
-        {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24 && TOKEN))}
-      </StaticRouter>
-    </Provider>,
-  );
-  res.send(setResponse(html, preloadedState, req.hashManifest));
+  initialState(USER, USERM, PENDINGSTEP, CENTERID).then((state) => {
+    console.log(state);
+    const store = createStore(reducer, state);
+    const preloadedState = store.getState();
+    const html = renderToString(
+      <Provider store={store}>
+        <StaticRouter location={req.url} context={{}}>
+          {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24 && TOKEN))}
+        </StaticRouter>
+      </Provider>,
+    );
+    res.send(setResponse(html, preloadedState, req.hashManifest));
+  });
 };
 
 export default renderApp;
