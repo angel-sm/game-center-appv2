@@ -1,5 +1,5 @@
 /* eslint-disable import/named */
-import { GET_ALL_PLAYERS } from '../types';
+import { GET_ALL_PLAYERS, SEARCH_PLAYER } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -7,6 +7,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         players: action.payload,
+      };
+    case SEARCH_PLAYER:
+      return {
+        ...state,
+        player: action.payload,
       };
     default:
       return {

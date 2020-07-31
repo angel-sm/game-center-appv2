@@ -9,6 +9,7 @@ import SignIn from '../containers/SignIn';
 import NotFound from '../containers/NotFound';
 import NewTournament from '../containers/NewTournament';
 import TournamentView from '../containers/TournamentView';
+import Players from '../containers/Players';
 
 const loggedRoutes = [
   {
@@ -20,6 +21,11 @@ const loggedRoutes = [
     path: '/tournaments/:id',
     exact: false,
     component: TournamentView,
+  },
+  {
+    path: '/players',
+    exact: true,
+    component: Players,
   },
   {
     exact: true,

@@ -19,6 +19,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
       },
       players: {
         players: [],
+        player: {},
       },
       pending: {
         tournamentId: '',
@@ -49,6 +50,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
       },
       players: {
         players: [],
+        player: {},
       },
       pending: {
         tournamentId: '',

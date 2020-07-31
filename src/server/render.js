@@ -46,7 +46,6 @@ const setResponse = (html, preloadedState, manifest) => {
 const renderApp = async (req, res) => {
   const { USER, USERM, PENDINGSTEP, TOKEN, CENTERID } = req.cookies;
   initialState(USER, USERM, PENDINGSTEP, CENTERID).then((state) => {
-    console.log(state);
     const store = createStore(reducer, state);
     const preloadedState = store.getState();
     const html = renderToString(
