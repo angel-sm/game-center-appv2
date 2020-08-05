@@ -33,7 +33,15 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     padding: theme.spacing(5),
   },
+  aling: {
+    flexGrow: 1,
+  },
 }));
+
+const BannerFont = styled.h1`
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1em;
+`;
 
 const ProfileControllerContent = styled.div`
   max-height: 40%;
@@ -43,4 +51,4 @@ const ProfileControllerContent = styled.div`
   align-items:center;
 `;
 
-export { ProfileControllerContent, useStyles };
+export { ProfileControllerContent, useStyles, BannerFont };

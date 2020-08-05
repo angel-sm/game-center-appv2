@@ -19,9 +19,10 @@ import { useTheme } from '@material-ui/core/styles';
 import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
 import Button from '@material-ui/core/Button';
 import Profile from '../../components/Layout/Profile';
-import { useStyles, ProfileControllerContent } from './Layout.styles';
+import { useStyles, ProfileControllerContent, BannerFont } from './Layout.styles';
 import Tournaments from '../../components/Layout/Tournaments';
 import { logout } from '../../actions/auth';
+import AddUserButton from '../../components/Layout/AddPlayerButton';
 
 const options = [
   {
@@ -109,7 +110,7 @@ const Layout = (props) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position='fixed' color='secondary' className={classes.appBar}>
+      <AppBar position='fixed' color='primary' className={classes.appBar}>
         <Toolbar>
           <IconButton
             color='inherit'
@@ -120,9 +121,12 @@ const Layout = (props) => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant='h6'>
-            Game Center
+          <Typography variant='h6' className={classes.aling}>
+            <BannerFont>Game Center</BannerFont>
           </Typography>
+
+          <AddUserButton />
+
         </Toolbar>
       </AppBar>
       <nav className={classes.drawer}>

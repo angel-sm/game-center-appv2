@@ -56,7 +56,7 @@ const DataForm = (props) => {
             format='dd/MM/yyyy'
             margin='normal'
             id='date-picker-inline'
-            label='Date picker inline'
+            label='Fecha de inicio del torneo'
             value={start}
             onChange={handleDateChange}
             KeyboardButtonProps={{

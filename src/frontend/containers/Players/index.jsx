@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import SearchPlayer from '../../components/Players/SearchPlayer';
 import SimpleCard from '../../components/Players/Card';
-import Form from '../../components/Players/Form';
 import EditButton from '../../components/Players/EditButton';
 import DeleteButton from '../../components/Players/DeleteButton';
 
@@ -16,7 +15,7 @@ const Players = (props) => {
       <>
         <EditButton player={props.players.player} />
         <DeleteButton playerId={props.players.player.id} />
-        <Button color='primary' disableElevation type='submit'>Usar credito</Button>
+        <Button color='primary' disableElevation type='submit' href={`/credit/player/${props.players.player.id}`}>Usar credito</Button>
       </>
     );
   };
@@ -33,7 +32,6 @@ const Players = (props) => {
       {Object.keys(props.players.player).length > 0 ?
         setButtons() :
         null}
-      <Form />
     </>
   );
 };

@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
+import { deletePlayerRequest } from '../../../actions/players';
 
-const DeleteButton = ({ playerId }) => {
+const DeleteButton = (props) => {
   const handleDelete = () => {
-    console.log(playerId);
+    props.deletePlayerRequest(props.playerId);
+    window.location.href = '/players';
   };
   return (
     <Button color='secondary' disableElevation onClick={handleDelete}>
@@ -12,4 +15,10 @@ const DeleteButton = ({ playerId }) => {
   );
 };
 
-export default DeleteButton;
+const mapStateToProps = (state) => state;
+
+const mapDispatchState = {
+  deletePlayerRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchState)(DeleteButton);

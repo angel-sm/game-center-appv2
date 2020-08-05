@@ -57,3 +57,14 @@ export const updatePlayerRequest = (id, data) => (dispatch) => {
     })
     .catch((error) => console.log(error));
 };
+
+export const deletePlayerRequest = (id) => (dispatch) => {
+  axios({
+    url: `/client/players/player/${id}`,
+    method: 'DELETE',
+  })
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
+};
