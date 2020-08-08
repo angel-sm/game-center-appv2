@@ -13,6 +13,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
         competitors: [],
         prizes: [],
         newPaid: false,
+        searchResult: [],
       },
       center: {
         id: CENTERID,
@@ -44,6 +45,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
         tournaments: [],
         competitors: [],
         prizes: [],
+        searchResult: [],
       },
       center: {
         id: CENTERID,

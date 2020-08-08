@@ -24,7 +24,7 @@ const setResponse = (html, preloadedState, manifest) => {
           <meta http-equiv="X-UA-Compatible" content="ie=edge">
           <meta charset="utf-8" />
           <link rel="stylesheet" href="${mainStyles}" type="text/css"/>
-          <title>Incidencias Runasys</title>
+          <title>Game Center</title>
         </head>
         <body>
           <div id="App">${html}</div>

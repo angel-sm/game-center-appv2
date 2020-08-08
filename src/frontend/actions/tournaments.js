@@ -1,7 +1,7 @@
 /* eslint-disable import/named */
 /* eslint-disable no-restricted-globals */
 import Axios from 'axios';
-import { NEW_TOURNAMENT, GET_TOURNAMENTS, GET_TOURNAMENT } from '../types';
+import { NEW_TOURNAMENT, GET_TOURNAMENTS, GET_TOURNAMENT, SEARCH_RESULT } from '../types';
 import { nextStep } from './pending';
 
 export const newTournament = (payload) => ({
@@ -16,6 +16,11 @@ export const getTournaments = (payload) => ({
 
 export const getTournament = (payload) => ({
   type: GET_TOURNAMENT,
+  payload,
+});
+
+export const searchResult = (payload) => ({
+  type: SEARCH_RESULT,
   payload,
 });
 
@@ -56,6 +61,21 @@ export const getTournamentRequest = (id) => (dispatch) => {
   })
     .then(({ data }) => {
       dispatch(getTournament(data.tournament));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const searchTournamentRequest = (data) => (dispatch) => {
+  const { tournament, game } = data;
+  Axios({
+    url: `/client/tournaments/tournament/${tournament}/game/${game}`,
+    method: 'GET',
+  })
+    .then(({ data }) => {
+      console.log(data);
+      dispatch(searchResult(data.tournament));
     })
     .catch((error) => {
       console.log(error);

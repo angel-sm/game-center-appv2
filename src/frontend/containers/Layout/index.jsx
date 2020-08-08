@@ -31,7 +31,7 @@ const options = [
     icon: <Create />,
   }, {
     option: 'Buscar torneo',
-    url: '/search',
+    url: '/search-tournaments',
     icon: <Search />,
   }, {
     option: 'Credito',

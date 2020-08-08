@@ -23,13 +23,17 @@ export const getAllPlayersRequest = () => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export const searchPlayerRequest = (id) => (dispatch) => {
+export const searchPlayerRequest = (nickname) => (dispatch) => {
+  console.log(nickname);
   axios({
-    url: `/client/players/player/${id}`,
+    url: `/client/players/player/${nickname}`,
     method: 'GET',
   })
-    .then((data) => {
-      dispatch(searchPlayer(data.data.player));
+    .then(({ data }) => {
+      const [player] = data.player;
+      if (player !== undefined) {
+        dispatch(searchPlayer(player));
+      }
     })
     .catch((error) => console.log(error));
 };
