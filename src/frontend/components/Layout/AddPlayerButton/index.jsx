@@ -34,6 +34,7 @@ const AddUserButton = (props) => {
     event.preventDefault();
     props.registerPlayerRequest(handleInput.form);
     handleClose();
+    window.location.href = '/players';
   };
 
   return (
