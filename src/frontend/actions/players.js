@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
 import { GET_ALL_PLAYERS, SEARCH_PLAYER } from '../types';
+import { setErrorRequest } from './status';
 
 export const getAllPlayers = (payload) => ({
   type: GET_ALL_PLAYERS,
@@ -31,9 +32,9 @@ export const searchPlayerRequest = (nickname) => (dispatch) => {
   })
     .then(({ data }) => {
       const [player] = data.player;
-      if (player !== undefined) {
-        dispatch(searchPlayer(player));
-      }
+      console.log(player);
+      player !== undefined ? dispatch(searchPlayer(player)) :
+        dispatch(setErrorRequest('No existe ningun jugador con ese nombre'));
     })
     .catch((error) => console.log(error));
 };

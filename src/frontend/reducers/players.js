@@ -12,6 +12,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         player: action.payload,
+        error: '',
       };
     default:
       return {

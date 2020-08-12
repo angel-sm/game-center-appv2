@@ -32,7 +32,7 @@ const SignInForm = (props) => {
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-    props.signInSolve(values, '/registertournament');
+    props.signInSolve(values, '/');
   };
 
   return (

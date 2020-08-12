@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 /* eslint-disable consistent-return */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-param-reassign */
@@ -13,8 +14,11 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import useInputValueHandle from '../../../hooks/useInputHandler';
 import { addPrizeRequest } from '../../../actions/prizes';
 import { nextStep } from '../../../actions/pending';
+import { setErrorRequest } from '../../../actions/status';
+import { cancelRegisterTournamentRequest } from '../../../actions/tournaments';
 
 import useStyles from './styles';
+import ErrorBar from '../../shared/ErrorBar';
 
 let numPlace = 1;
 
@@ -40,7 +44,7 @@ const Earn = (props) => {
     });
 
     if (total !== 100) {
-      console.log('No jala');
+      props.setErrorRequest('El porcentaje debe sumar un total del 100%');
       return false;
     }
     placesList.map((pl) => {
@@ -74,8 +78,22 @@ const Earn = (props) => {
     numPlace++;
   };
 
+  const handleCancel = () => {
+    props.cancelRegisterTournamentRequest(props.pending.tournamentId);
+    document.cookie = 'PENDINGSTEP=0';
+    document.cookie = 'PENDINGID=';
+    window.location.href = '/registertournament';
+  };
+
   return (
     <>
+      {
+        props.status.error ? (
+          <FormControl className={classes.chaild}>
+            <ErrorBar error={props.status.error} />
+          </FormControl>
+        ) : null
+      }
       <Toolbar>
         <Button onClick={handleAddPlace} variant='contained' color='primary'>
           Agregar posicion
@@ -107,6 +125,11 @@ const Earn = (props) => {
             Agregar torneo
           </Button>
         </FormControl>
+        <FormControl className={classes.chaild}>
+          <Button type='submit' variant='contained' color='secondary' onClick={handleCancel}>
+            Cancelar
+          </Button>
+        </FormControl>
       </form>
     </>
   );
@@ -115,6 +138,8 @@ const Earn = (props) => {
 const dispatchStateToProps = {
   nextStep,
   addPrizeRequest,
+  setErrorRequest,
+  cancelRegisterTournamentRequest,
 };
 
 const mapStateToProps = (state) => state;

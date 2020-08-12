@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
+const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
   let state;
   try {
     state = {
@@ -23,7 +23,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
         player: {},
       },
       pending: {
-        tournamentId: '',
+        tournamentId: PENDINGID,
         step: parseInt(PENDINGSTEP),
       },
       auth: {
@@ -55,7 +55,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID) => {
         player: {},
       },
       pending: {
-        tournamentId: '',
+        tournamentId: PENDINGID,
         step: parseInt(PENDINGSTEP),
       },
       auth: {

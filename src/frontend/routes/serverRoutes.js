@@ -4,13 +4,14 @@ import NewTournament from '../containers/NewTournament';
 import TournamentView from '../containers/TournamentView';
 import Players from '../containers/Players';
 import SearchTournaments from '../containers/SearchTournaments';
+import Home from '../containers/Home';
 
 const routes = (isLogged) => {
   return [
     {
       path: '/',
       exact: true,
-      component: isLogged ? NotFound : SignIn,
+      component: isLogged ? Home : SignIn,
     },
     {
       path: '/registertournament',

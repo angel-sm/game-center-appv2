@@ -6,6 +6,7 @@ import SearchPlayer from '../../components/Players/SearchPlayer';
 import SimpleCard from '../../components/Players/Card';
 import EditButton from '../../components/Players/EditButton';
 import DeleteButton from '../../components/Players/DeleteButton';
+import AddPlayerButton from '../../components/Layout/AddPlayerButton';
 
 const Players = (props) => {
   const description = ['id', 'Nombre', 'Puntos', ' Jugador'];
@@ -32,6 +33,7 @@ const Players = (props) => {
       {Object.keys(props.players.player).length > 0 ?
         setButtons() :
         null}
+      <AddPlayerButton />
     </>
   );
 };

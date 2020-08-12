@@ -16,16 +16,19 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
-import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face } from '@material-ui/icons';
-import Button from '@material-ui/core/Button';
+import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face, Home } from '@material-ui/icons';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../../components/Layout/Profile';
 import { useStyles, ProfileControllerContent, BannerFont } from './Layout.styles';
 import Tournaments from '../../components/Layout/Tournaments';
 import { logout } from '../../actions/auth';
-import AddUserButton from '../../components/Layout/AddPlayerButton';
 
 const options = [
   {
+    option: 'Inicio',
+    url: '/',
+    icon: <Home />,
+  }, {
     option: 'Nuevo torneo',
     url: '/registertournament',
     icon: <Create />,
@@ -102,7 +105,10 @@ const Layout = (props) => {
             </ListItem>
           </Link>
         ))}
-        <Button color='primary' onClick={hanldeCloseSesion}>Cerrar sesion</Button>
+        <ListItem button>
+          <ListItemText primary='Cerrar sesion' onClick={hanldeCloseSesion} />
+          <ListItemIcon><ExitToAppIcon /></ListItemIcon>
+        </ListItem>
       </List>
     </div>
   );
@@ -122,10 +128,8 @@ const Layout = (props) => {
             <MenuIcon />
           </IconButton>
           <Typography variant='h6' className={classes.aling}>
-            <BannerFont>Game Center</BannerFont>
+            <BannerFont>GAME CENTER</BannerFont>
           </Typography>
-
-          <AddUserButton />
 
         </Toolbar>
       </AppBar>

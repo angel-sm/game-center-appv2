@@ -44,14 +44,14 @@ const setResponse = (html, preloadedState, manifest) => {
 };
 
 const renderApp = async (req, res) => {
-  const { USER, USERM, PENDINGSTEP, TOKEN, CENTERID } = req.cookies;
-  initialState(USER, USERM, PENDINGSTEP, CENTERID).then((state) => {
+  const { USER, USERM, PENDINGSTEP, TOKEN, CENTERID, PENDINGID } = req.cookies;
+  initialState(USER, USERM, PENDINGSTEP, CENTERID, PENDINGID).then((state) => {
     const store = createStore(reducer, state);
     const preloadedState = store.getState();
     const html = renderToString(
       <Provider store={store}>
         <StaticRouter location={req.url} context={{}}>
-          {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24 && TOKEN))}
+          {renderRoutes(serverRoutes(USER && USERM && USER !== undefined && USERM !== undefined && USER.length === 24 && TOKEN !== undefined))}
         </StaticRouter>
       </Provider>,
     );

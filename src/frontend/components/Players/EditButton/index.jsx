@@ -70,7 +70,7 @@ const EditButton = (props) => {
             Cancel
           </Button>
           <Button onClick={handleUpdate} color='primary'>
-            actializar
+            actualizar
           </Button>
         </DialogActions>
       </Dialog>

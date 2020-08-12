@@ -11,8 +11,14 @@ import NewTournament from '../containers/NewTournament';
 import TournamentView from '../containers/TournamentView';
 import Players from '../containers/Players';
 import SearchTournaments from '../containers/SearchTournaments';
+import Home from '../containers/Home';
 
 const loggedRoutes = [
+  {
+    path: '/',
+    exact: true,
+    component: Home,
+  },
   {
     path: '/registertournament',
     exact: true,
@@ -44,7 +50,7 @@ const logged = (isLogged) => {
     <Layout>
       <Switch>
         {
-          loggedRoutes.map((r) => <Route key={r.path} exact path={r.path} component={r.component} />)
+          loggedRoutes.map((r) => <Route key={r.component} exact path={r.path} component={r.component} />)
         }
       </Switch>
     </Layout>

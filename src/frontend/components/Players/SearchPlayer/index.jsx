@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { FormControl, Button } from '@material-ui/core';
 import { getAllPlayersRequest, searchPlayerRequest } from '../../../actions/players';
 import useInputHandler from '../../../hooks/useInputHandler';
+import ErrorBar from '../../shared/ErrorBar';
 
 const SearchPlayer = (props) => {
 
@@ -25,12 +26,19 @@ const SearchPlayer = (props) => {
   };
 
   return (
-    <form onSubmit={handleSearch}>
-      <FormControl>
-        <TextField id='standard-basic' label='Nickname del jugador' {...hanlderInput} name='player' />
-      </FormControl>
-      <Button variant='contained' color='primary' disableElevation type='submit'>buscar jugador</Button>
-    </form>
+    <>
+      {
+        props.status.error !== '' ? (
+          <ErrorBar error={props.status.error} />
+        ) : null
+      }
+      <form onSubmit={handleSearch}>
+        <FormControl>
+          <TextField id='standard-basic' label='Nickname del jugador' {...hanlderInput} name='player' />
+        </FormControl>
+        <Button variant='contained' color='primary' disableElevation type='submit'>buscar jugador</Button>
+      </form>
+    </>
   );
 };
 

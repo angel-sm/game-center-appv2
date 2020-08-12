@@ -15,11 +15,10 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import GroupAddIcon from '@material-ui/icons/GroupAdd';
+import { FormControl, Button } from '@material-ui/core';
 import { getAllPlayersRequest } from '../../../actions/players';
 import { registerCompetitorsRequest } from '../../../actions/competitors';
+import { cancelRegisterTournamentRequest } from '../../../actions/tournaments';
 import { nextStep } from '../../../actions/pending';
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -121,6 +120,13 @@ const PlayerList = (props) => {
     props.nextStep(2);
   };
 
+  const handleCancel = () => {
+    props.cancelRegisterTournamentRequest(props.pending.tournamentId);
+    document.cookie = 'PENDINGSTEP=0';
+    document.cookie = 'PENDINGID=';
+    window.location.href = '/registertournament';
+  };
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -136,14 +142,9 @@ const PlayerList = (props) => {
             </Typography>
           ) : (
             <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-              Jugadores
+              Selecciona los jugadores a inscribir
             </Typography>
           )}
-          <Tooltip title='agregar'>
-            <IconButton aria-label='agregar' onClick={handleAdd}>
-              <GroupAddIcon />
-            </IconButton>
-          </Tooltip>
         </Toolbar>
         <TableContainer>
           <Table
@@ -198,6 +199,22 @@ const PlayerList = (props) => {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
+      <FormControl className={classes.chaild}>
+        {selected.length > 0 ? (
+          <Button type='submit' variant='contained' color='primary' onClick={handleAdd}>
+            Registrar jugadores que participaran
+          </Button>
+        ) : (
+          <Button type='submit' variant='contained' color='primary' onClick={handleAdd} disabled>
+            Registrar jugadores que participaran
+          </Button>
+        )}
+      </FormControl>
+      <FormControl className={classes.chaild}>
+        <Button type='submit' variant='contained' color='secondary' onClick={handleCancel}>
+          Cancelar
+        </Button>
+      </FormControl>
     </div>
   );
 };
@@ -206,6 +223,7 @@ const dispatchStateToProps = {
   getAllPlayersRequest,
   registerCompetitorsRequest,
   nextStep,
+  cancelRegisterTournamentRequest,
 };
 
 const mapStateToPros = (state) => state;

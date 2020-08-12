@@ -35,6 +35,19 @@ const centerTournamentRoutes = (app) => {
       console.log(error);
     }
   });
+
+  router.delete('/tournament/:id', async (req, res, next) => {
+    const { id } = req.params;
+    try {
+      const { data } = await Axios({
+        url: `${process.env.API_URL}/api/center-tournaments/${id}`,
+        method: 'DELETE',
+      });
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
 };
 
 module.exports = centerTournamentRoutes;

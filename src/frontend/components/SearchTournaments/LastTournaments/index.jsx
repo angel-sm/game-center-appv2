@@ -13,6 +13,7 @@ import Paper from '@material-ui/core/Paper';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import { Link } from 'react-router-dom';
 import { Toolbar, Typography } from '@material-ui/core';
+import moment from 'moment';
 
 const useStyles = makeStyles({
   table: {
@@ -51,8 +52,8 @@ const LastTournaments = (props) => {
                 <TableCell align='right'>
                   {row.cost}
                 </TableCell>
-                <TableCell align='right'>{row.start}</TableCell>
-                <TableCell align='right'>{row.end != null ? row.end : 'activo'}</TableCell>
+                <TableCell align='right'>{moment(row.start).utc(true).format('YYYY-MM-DD')}</TableCell>
+                <TableCell align='right'>{row.end != null ? moment(row.end).utc(true).format('YYYY-MM-DD') : 'activo'}</TableCell>
                 <TableCell align='right'>{row.game}</TableCell>
                 <TableCell align='right'>{row.description}</TableCell>
                 <TableCell align='right'>{row.organizer}</TableCell>

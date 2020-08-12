@@ -9,6 +9,7 @@ const CloseButton = (props) => {
 
   const hanldeClose = () => {
     props.closeTournamentRequest(props.tournamentId, { end: moment(new Date()).utc(true).format('YYYY-MM-DD') });
+    window.location.href = `/tournaments/${props.tournamentId}`;
   };
 
   const isPaid = () => {

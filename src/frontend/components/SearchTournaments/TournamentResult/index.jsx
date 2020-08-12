@@ -50,8 +50,8 @@ const TournamentResult = ({ tournament }) => {
                   <TableCell align='right'>
                     {t.cost}
                   </TableCell>
-                  <TableCell align='right'>{t.start}</TableCell>
-                  <TableCell align='right'>{t.end != null ? t.end : 'activo'}</TableCell>
+                  <TableCell align='right'>{moment(t.start).utc(true).format('YYYY-MM-DD')}</TableCell>
+                  <TableCell align='right'>{t.end != null ? moment(t.start).utc(true).format('YYYY-MM-DD') : 'activo'}</TableCell>
                   <TableCell align='right'>{t.game}</TableCell>
                   <TableCell align='right'>{t.description}</TableCell>
                   <TableCell align='right'>{t.organizer}</TableCell>

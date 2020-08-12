@@ -110,7 +110,7 @@ const Paids = (props) => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.tournaments.length - page * rowsPerPage);
 
-  const headCells = ['Nombre', 'Nickname', 'Puntos'];
+  const headCells = ['Nombre', 'Nickname', 'Puntos', 'Posición'];
 
   return (
     <div className={classes.root}>
@@ -163,6 +163,9 @@ const Paids = (props) => {
                       </TableCell>
                       <TableCell component='th' id={labelId} scope='row' padding='default'>
                         {row.points}
+                      </TableCell>
+                      <TableCell component='th' id={labelId} scope='row' padding='default'>
+                        {index + 1}
                       </TableCell>
                     </TableRow>
                   );

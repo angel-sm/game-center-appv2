@@ -108,3 +108,17 @@ export const closeTournamentRequest = (id, data) => (dispatch) => {
       console.log(error);
     });
 };
+
+export const cancelRegisterTournamentRequest = (id) => (dispatch) => {
+  console.log(id);
+  Axios({
+    url: `/client/center-tournaments/tournament/${id}`,
+    method: 'DELETE',
+  })
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};

@@ -14,6 +14,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appBar: {
+    textAlign: 'center',
     [theme.breakpoints.up('sm')]: {
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
@@ -35,10 +36,11 @@ const useStyles = makeStyles((theme) => ({
   },
   aling: {
     flexGrow: 1,
+    fontFamily: 'Press Start 2P',
   },
 }));
 
-const BannerFont = styled.h1`
+const BannerFont = styled.span`
   font-family: 'Press Start 2P', cursive;
   font-size: 1em;
 `;
