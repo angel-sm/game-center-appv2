@@ -25,7 +25,6 @@ const SearchTournament = (props) => {
     event.preventDefault();
 
     props.searchTournamentRequest(hanlderInput.form);
-    return true;
   };
 
   return (

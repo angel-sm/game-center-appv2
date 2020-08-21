@@ -8,6 +8,7 @@ import styled from 'styled-components';
 const useStyles = makeStyles({
   root: {
     minWidth: 275,
+    margin: '.5em 0',
   },
   bullet: {
     display: 'inline-block',

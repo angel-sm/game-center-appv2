@@ -122,30 +122,42 @@ const Debtors = (props) => {
     window.location.href = `/tournaments/${props.tournamentId}`;
   };
 
+  const debtorsList = props.tournaments.competitors.filter((c) => c.paid === 'debtor');
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Toolbar className={clsx(toolbar.root, {
-          [toolbar.highlight]: selected.length > 0,
-        })}
-        >
-          {selected.length > 0 ? (
-            <Typography className={classes.title} color='inherit' variant='subtitle1' component='div'>
-              {selected.length}
-              {' '}
-              jugador seleccionado para realizar su pago
-            </Typography>
+        {
+          debtorsList.length === 0 ? (
+            <Toolbar>
+              <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
+                No hay jugadores pendientes de pago
+              </Typography>
+            </Toolbar>
           ) : (
-            <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-              Jugadores pendientes de pago
-            </Typography>
-          )}
-          <Tooltip title='Efectuar pago'>
-            <IconButton aria-label='Efectuar pago' onClick={handleAdd}>
-              <PaymentIcon />
-            </IconButton>
-          </Tooltip>
-        </Toolbar>
+            <Toolbar className={clsx(toolbar.root, {
+              [toolbar.highlight]: selected.length > 0,
+            })}
+            >
+              {selected.length > 0 ? (
+                <Typography className={classes.title} color='inherit' variant='subtitle1' component='div'>
+                  {selected.length}
+                  {' '}
+                  jugador seleccionado para realizar su pago
+                </Typography>
+              ) : (
+                <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
+                  Jugadores pendientes de pago
+                </Typography>
+              )}
+              <Tooltip title='Efectuar pago'>
+                <IconButton aria-label='Efectuar pago' onClick={handleAdd}>
+                  <PaymentIcon />
+                </IconButton>
+              </Tooltip>
+            </Toolbar>
+          )
+        }
         <TableContainer>
           <Table
             className={classes.table}
@@ -153,34 +165,35 @@ const Debtors = (props) => {
             aria-label='enhanced table'
           >
             <TableBody>
-              {props.tournaments.competitors.filter((c) => c.paid === 'debtor')
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+              {
+                debtorsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row)}
-                      role='checkbox'
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell padding='checkbox'>
-                        <Checkbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
-                      </TableCell>
-                      <TableCell component='th' id={labelId} scope='row' padding='none'>
-                        {row.nickname}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row)}
+                        role='checkbox'
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name}
+                        selected={isItemSelected}
+                      >
+                        <TableCell padding='checkbox'>
+                          <Checkbox
+                            checked={isItemSelected}
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        </TableCell>
+                        <TableCell component='th' id={labelId} scope='row' padding='none'>
+                          {row.nickname}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+              }
               {emptyRows > 0 && (
                 <TableRow style={{ height: 33 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -189,15 +202,17 @@ const Debtors = (props) => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component='div'
-          count={props.tournaments.tournaments.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {debtorsList.length === 0 ? null : (
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component='div'
+            count={props.tournaments.tournaments.length}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+          />
+        )}
       </Paper>
     </div>
   );

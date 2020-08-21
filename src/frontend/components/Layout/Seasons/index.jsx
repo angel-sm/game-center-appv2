@@ -9,7 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { getTournamentsRequest } from '../../../actions/tournaments';
+import { getSeasonsRequest } from '../../../actions/seasons';
 import useStyles from './DropMenu.styles';
 
 const LinkContainer = styled.div`
@@ -30,11 +30,11 @@ const SetLink = styled(Link)`
   }
 `;
 
-const Tournaments = (props) => {
+const Seasons = (props) => {
   const classes = useStyles();
 
   useEffect(() => {
-    props.getTournamentsRequest(props.center, 'tournaments');
+    props.getSeasonsRequest(props.center, 'seasons');
   }, []);
 
   return (
@@ -42,15 +42,15 @@ const Tournaments = (props) => {
       <ExpansionPanelSummary
         expandIcon={<ExpandMoreIcon />}
       >
-        <h3>Tourneos</h3>
+        <h3>Temporadas</h3>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <LinkContainer>
           {
-            props.tournaments.tournaments.map((t) => {
+            props.seasons.seasons.map((t) => {
               return (
-                <SetLink to={`/tournaments/${t.id}`} key={t.id}>
-                  {t.tournament}
+                <SetLink to={`/seasons/${t.id}`} key={t.id}>
+                  {t.season}
                 </SetLink>
               );
             })
@@ -64,7 +64,7 @@ const Tournaments = (props) => {
 const mapSatateToProps = (state) => state;
 
 const dispatchStateToProps = {
-  getTournamentsRequest,
+  getSeasonsRequest,
 };
 
-export default connect(mapSatateToProps, dispatchStateToProps)(Tournaments);
+export default connect(mapSatateToProps, dispatchStateToProps)(Seasons);

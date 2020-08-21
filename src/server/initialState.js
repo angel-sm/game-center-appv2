@@ -12,8 +12,15 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
         tournaments: [],
         competitors: [],
         prizes: [],
-        newPaid: false,
         searchResult: [],
+        tournamentId: PENDINGID,
+      },
+      seasons: {
+        seasons: [],
+        season: {},
+      },
+      games: {
+        games: [],
       },
       center: {
         id: CENTERID,
@@ -23,7 +30,6 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
         player: {},
       },
       pending: {
-        tournamentId: PENDINGID,
         step: parseInt(PENDINGSTEP),
       },
       auth: {
@@ -40,12 +46,20 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
   } catch (error) {
     console.log(error);
     state = {
+      games: {
+        games: [],
+      },
+      seasons: {
+        seasons: [],
+        season: {},
+      },
       tournaments: {
         tournament: {},
         tournaments: [],
         competitors: [],
         prizes: [],
         searchResult: [],
+        tournamentId: PENDINGID,
       },
       center: {
         id: CENTERID,
@@ -55,7 +69,6 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
         player: {},
       },
       pending: {
-        tournamentId: PENDINGID,
         step: parseInt(PENDINGSTEP),
       },
       auth: {

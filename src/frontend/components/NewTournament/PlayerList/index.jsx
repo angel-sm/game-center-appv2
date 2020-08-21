@@ -121,10 +121,10 @@ const PlayerList = (props) => {
   };
 
   const handleCancel = () => {
-    props.cancelRegisterTournamentRequest(props.pending.tournamentId);
+    console.log(props);
+    props.cancelRegisterTournamentRequest(props.tournaments.tournamentId);
     document.cookie = 'PENDINGSTEP=0';
     document.cookie = 'PENDINGID=';
-    window.location.href = '/registertournament';
   };
 
   return (

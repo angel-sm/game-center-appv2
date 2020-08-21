@@ -6,7 +6,7 @@ import SearchPlayer from '../../components/Players/SearchPlayer';
 import SimpleCard from '../../components/Players/Card';
 import EditButton from '../../components/Players/EditButton';
 import DeleteButton from '../../components/Players/DeleteButton';
-import AddPlayerButton from '../../components/Layout/AddPlayerButton';
+import AddPlayerButton from '../../components/Players/AddPlayerButton';
 
 const Players = (props) => {
   const description = ['id', 'Nombre', 'Puntos', ' Jugador'];

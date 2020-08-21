@@ -1,12 +1,17 @@
 /* eslint-disable import/named */
-import { STEP_PENDING } from '../types';
+import { GET_SEASONS, GET_SEASON } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case STEP_PENDING:
+    case GET_SEASONS:
       return {
         ...state,
-        step: action.payload,
+        seasons: action.payload,
+      };
+    case GET_SEASON:
+      return {
+        ...state,
+        season: action.payload,
       };
     default:
       return {

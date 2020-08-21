@@ -15,6 +15,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import { IconButton } from '@material-ui/core';
+import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
+import ExposurePlus2Icon from '@material-ui/icons/ExposurePlus2';
 import { getCompetitorsRequest } from '../../../actions/competitors';
 
 const useToolbarStyles = makeStyles((theme) => ({
@@ -112,17 +115,43 @@ const Paids = (props) => {
 
   const headCells = ['Nombre', 'Nickname', 'Puntos', 'Posición'];
 
+  const paidsList = props.tournaments.competitors.filter((c) => c.paid === 'paid');
+
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Toolbar className={clsx(toolbar.root, {
-          [toolbar.highlight]: selected.length > 0,
-        })}
-        >
-          <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-            Pagos
-          </Typography>
-        </Toolbar>
+        {
+          paidsList.length === 0 ? (
+            <Toolbar>
+              <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
+                Ningun jugador ha realizado su pago
+              </Typography>
+            </Toolbar>
+          ) : (
+            <Toolbar className={clsx(toolbar.root, {
+              [toolbar.highlight]: selected.length > 0,
+            })}
+            >
+              <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
+                Tabla de posiciones, selecciona un jugador para agregar puntos
+              </Typography>
+              {
+                selected.length > 0 ? (
+                  <div>
+                    <IconButton aria-label='Agregar un punto'>
+                      <ExposurePlus1Icon />
+                      <h6> punto</h6>
+                    </IconButton>
+                    <IconButton aria-label='Agregar dos punto'>
+                      <ExposurePlus2Icon />
+                      <h6> puntos</h6>
+                    </IconButton>
+                  </div>
+                ) : null
+              }
+            </Toolbar>
+          )
+        }
         <TableContainer>
           <Table
             className={classes.table}
@@ -139,37 +168,38 @@ const Paids = (props) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {props.tournaments.competitors.filter((c) => c.paid === 'paid')
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                .map((row, index) => {
-                  const isItemSelected = isSelected(row);
-                  const labelId = `enhanced-table-checkbox-${index}`;
+              {
+                paidsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                  .map((row, index) => {
+                    const isItemSelected = isSelected(row);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                  return (
-                    <TableRow
-                      hover
-                      onClick={(event) => handleClick(event, row)}
-                      role='checkbox'
-                      aria-checked={isItemSelected}
-                      tabIndex={-1}
-                      key={row.name}
-                      selected={isItemSelected}
-                    >
-                      <TableCell component='th' id={labelId} scope='row' padding='default'>
-                        {row.name}
-                      </TableCell>
-                      <TableCell component='th' id={labelId} scope='row' padding='default'>
-                        {row.nickname}
-                      </TableCell>
-                      <TableCell component='th' id={labelId} scope='row' padding='default'>
-                        {row.points}
-                      </TableCell>
-                      <TableCell component='th' id={labelId} scope='row' padding='default'>
-                        {index + 1}
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, row)}
+                        role='checkbox'
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={row.name}
+                        selected={isItemSelected}
+                      >
+                        <TableCell component='th' id={labelId} scope='row' padding='default'>
+                          {row.name}
+                        </TableCell>
+                        <TableCell component='th' id={labelId} scope='row' padding='default'>
+                          {row.nickname}
+                        </TableCell>
+                        <TableCell component='th' id={labelId} scope='row' padding='default'>
+                          {row.points}
+                        </TableCell>
+                        <TableCell component='th' id={labelId} scope='row' padding='default'>
+                          {index + 1}
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+              }
               {emptyRows > 0 && (
                 <TableRow style={{ height: 33 * emptyRows }}>
                   <TableCell colSpan={6} />
@@ -178,15 +208,19 @@ const Paids = (props) => {
             </TableBody>
           </Table>
         </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component='div'
-          count={props.tournaments.tournaments.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-        />
+        {
+          paidsList.length === 0 ? null : (
+            <TablePagination
+              rowsPerPageOptions={[5, 10, 25]}
+              component='div'
+              count={props.tournaments.tournaments.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onChangePage={handleChangePage}
+              onChangeRowsPerPage={handleChangeRowsPerPage}
+            />
+          )
+        }
       </Paper>
     </div>
   );

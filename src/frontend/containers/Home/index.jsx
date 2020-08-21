@@ -33,7 +33,7 @@ const images = [
     color: '#3f51b5',
     title: 'Config pt',
     width: '30%',
-    url: '/store-points-config',
+    url: '/config-points',
   }, {
     color: '#3f51b5',
     title: 'Reportes',

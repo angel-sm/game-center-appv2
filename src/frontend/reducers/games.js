@@ -1,12 +1,12 @@
 /* eslint-disable import/named */
-import { STEP_PENDING } from '../types';
+import { GET_ALL_GAMES } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case STEP_PENDING:
+    case GET_ALL_GAMES:
       return {
         ...state,
-        step: action.payload,
+        games: action.payload,
       };
     default:
       return {

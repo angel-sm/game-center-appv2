@@ -3,6 +3,7 @@
 import Axios from 'axios';
 import { NEW_TOURNAMENT, GET_TOURNAMENTS, GET_TOURNAMENT, SEARCH_RESULT } from '../types';
 import { nextStep } from './pending';
+import { relationSeasonTournament } from './seasons';
 
 export const newTournament = (payload) => ({
   type: NEW_TOURNAMENT,
@@ -37,17 +38,34 @@ export const relationCenterTournament = (id) => (dispatch) => {
     });
 };
 
-export const newtournamentRequest = (data) => (dispatch) => {
+export const relationTournamentGame = (game, tournament) => (dispatch) => {
+  Axios({
+    url: '/client/tournaments-game',
+    method: 'POST',
+    data: {
+      tournament,
+      game,
+    },
+  })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const newtournamentRequest = (data, game, season) => (dispatch) => {
+  console.log(game, season);
   Axios({
     url: '/client/tournaments',
     method: 'POST',
     data,
   })
     .then(({ data }) => {
-      dispatch(newTournament(data.id));
       dispatch(nextStep(1));
-      document.cookie = `PENDINGID=${data.id}`;
       dispatch(relationCenterTournament(data.id));
+      dispatch(relationTournamentGame(game, data.id));
+      dispatch(relationSeasonTournament(season, data.id));
+      dispatch(newTournament(data.id));
+      document.cookie = `PENDINGID=${data.id}`;
     })
     .catch((error) => {
       console.log(error);
@@ -82,7 +100,7 @@ export const searchTournamentRequest = (data) => (dispatch) => {
     });
 };
 
-export const getRequest = (data, search) => (dispatch) => {
+export const getTournamentsRequest = (data, search) => (dispatch) => {
   Axios({
     url: `/client/center-${search}/center/${data.id}`,
     method: 'GET',
@@ -115,8 +133,8 @@ export const cancelRegisterTournamentRequest = (id) => (dispatch) => {
     url: `/client/center-tournaments/tournament/${id}`,
     method: 'DELETE',
   })
-    .then(({ data }) => {
-      console.log(data);
+    .then(() => {
+      window.location.href = '/registertournament';
     })
     .catch((error) => {
       console.log(error);

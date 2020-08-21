@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import { Link } from 'react-router-dom';
 import { Toolbar, Typography } from '@material-ui/core';
+import moment from 'moment';
 
 const useStyles = makeStyles({
   table: {
@@ -39,24 +40,31 @@ const TournamentResult = ({ tournament }) => {
               <TableCell align='right'>Juego</TableCell>
               <TableCell align='right'>Descripcion</TableCell>
               <TableCell align='right'>Organizador</TableCell>
+              <TableCell align='right'>Temporada</TableCell>
               <TableCell align='right'>Ver mas</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {tournament.map((t) => {
+            {tournament.map((row) => {
               return (
-                <TableRow key={t.id}>
-                  <TableCell component='th' scope='row'>{t.tournament}</TableCell>
+                <TableRow key={row.id}>
+                  <TableCell component='th' scope='row'>{row.tournament}</TableCell>
                   <TableCell align='right'>
-                    {t.cost}
+                    {row.cost}
                   </TableCell>
-                  <TableCell align='right'>{moment(t.start).utc(true).format('YYYY-MM-DD')}</TableCell>
-                  <TableCell align='right'>{t.end != null ? moment(t.start).utc(true).format('YYYY-MM-DD') : 'activo'}</TableCell>
-                  <TableCell align='right'>{t.game}</TableCell>
-                  <TableCell align='right'>{t.description}</TableCell>
-                  <TableCell align='right'>{t.organizer}</TableCell>
+                  <TableCell align='right'>{moment(row.start).utc(true).format('YYYY-MM-DD')}</TableCell>
+                  <TableCell align='right'>{row.end != null ? moment(row.end).utc(true).format('YYYY-MM-DD') : 'activo'}</TableCell>
+                  <TableCell align='right'>{row.game}</TableCell>
+                  <TableCell align='right'>{row.description}</TableCell>
+                  <TableCell align='right'>{row.organizer}</TableCell>
                   <TableCell align='right'>
-                    <Link to={`/tournaments/${t.id}`}><EmojiEventsIcon /></Link>
+                    {
+                      row.season != null ?
+                        <Link to={row.season}>{row.seasonName}</Link> : row.seasonName
+                    }
+                  </TableCell>
+                  <TableCell align='right'>
+                    <Link to={`/tournaments/${row.id}`}><EmojiEventsIcon /></Link>
                   </TableCell>
                 </TableRow>
               );

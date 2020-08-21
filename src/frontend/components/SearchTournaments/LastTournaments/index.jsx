@@ -42,6 +42,7 @@ const LastTournaments = (props) => {
               <TableCell align='right'>Juego</TableCell>
               <TableCell align='right'>Descripcion</TableCell>
               <TableCell align='right'>Organizador</TableCell>
+              <TableCell align='right'>Temporada</TableCell>
               <TableCell align='right'>Ver mas</TableCell>
             </TableRow>
           </TableHead>
@@ -57,6 +58,12 @@ const LastTournaments = (props) => {
                 <TableCell align='right'>{row.game}</TableCell>
                 <TableCell align='right'>{row.description}</TableCell>
                 <TableCell align='right'>{row.organizer}</TableCell>
+                <TableCell align='right'>
+                  {
+                    row.season != null ?
+                      <Link to={row.season}>{row.seasonName}</Link> : row.seasonName
+                  }
+                </TableCell>
                 <TableCell align='right'>
                   <Link to={`/tournaments/${row.id}`}><EmojiEventsIcon /></Link>
                 </TableCell>

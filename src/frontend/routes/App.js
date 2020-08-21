@@ -12,6 +12,7 @@ import TournamentView from '../containers/TournamentView';
 import Players from '../containers/Players';
 import SearchTournaments from '../containers/SearchTournaments';
 import Home from '../containers/Home';
+import ConfigPts from '../containers/ConfigPts';
 
 const loggedRoutes = [
   {
@@ -38,6 +39,11 @@ const loggedRoutes = [
     path: '/search-tournaments',
     exact: true,
     component: SearchTournaments,
+  },
+  {
+    path: '/config-points',
+    exact: true,
+    component: ConfigPts,
   },
   {
     exact: true,

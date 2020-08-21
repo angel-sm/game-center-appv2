@@ -6,7 +6,7 @@ import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-//import Divider from '@material-ui/core/Divider';
+import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -22,6 +22,7 @@ import Profile from '../../components/Layout/Profile';
 import { useStyles, ProfileControllerContent, BannerFont } from './Layout.styles';
 import Tournaments from '../../components/Layout/Tournaments';
 import { logout } from '../../actions/auth';
+import Seasons from '../../components/Layout/Seasons';
 
 const options = [
   {
@@ -50,7 +51,7 @@ const options = [
     icon: <AttachMoney />,
   }, {
     option: 'Config pt',
-    url: '/store-points-config',
+    url: '/config-points',
     icon: <Settings />,
   }, {
     option: 'Reportes',
@@ -89,9 +90,9 @@ const Layout = (props) => {
         />
       </ProfileControllerContent>
       <Tournaments />
-      {/*<Divider />
-      <DropMenu section='Temporadas' center={props.center.id} search='seasons' />
-      <Divider />*/}
+      <Divider />
+      <Seasons />
+      <Divider />
       <List>
         {options.map((option) => (
           <Link

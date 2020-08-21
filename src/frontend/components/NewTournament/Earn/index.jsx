@@ -51,6 +51,7 @@ const Earn = (props) => {
       props.addPrizeRequest(pl);
     });
     props.nextStep(0);
+    window.location.href = '/registertournament';
   };
 
   //Eliminar un lugar
@@ -79,10 +80,9 @@ const Earn = (props) => {
   };
 
   const handleCancel = () => {
-    props.cancelRegisterTournamentRequest(props.pending.tournamentId);
+    props.cancelRegisterTournamentRequest(props.tournaments.tournamentId);
     document.cookie = 'PENDINGSTEP=0';
     document.cookie = 'PENDINGID=';
-    window.location.href = '/registertournament';
   };
 
   return (
