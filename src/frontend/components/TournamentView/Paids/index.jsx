@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -15,10 +16,10 @@ import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { IconButton } from '@material-ui/core';
+import { IconButton, Button } from '@material-ui/core';
 import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
 import ExposurePlus2Icon from '@material-ui/icons/ExposurePlus2';
-import { getCompetitorsRequest } from '../../../actions/competitors';
+import { getCompetitorsRequest, setPointsCompetitorRequest, nextRoundRequest } from '../../../actions/competitors';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -71,7 +72,7 @@ const Paids = (props) => {
   const classes = useStyles();
   const toolbar = useToolbarStyles();
 
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState({});
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -81,23 +82,7 @@ const Paids = (props) => {
   }, [props.tournamentId]);
 
   const handleClick = (event, name) => {
-    const selectedIndex = selected.indexOf(name);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1),
-      );
-    }
-
-    setSelected(newSelected);
+    setSelected(name);
   };
 
   const handleChangePage = (event, newPage) => {
@@ -109,13 +94,30 @@ const Paids = (props) => {
     setPage(0);
   };
 
-  const isSelected = (name) => selected.indexOf(name) !== -1;
-
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.tournaments.length - page * rowsPerPage);
 
   const headCells = ['Nombre', 'Nickname', 'Puntos', 'Posición'];
 
   const paidsList = props.tournaments.competitors.filter((c) => c.paid === 'paid');
+
+  const handleOnePoints = () => {
+    const agree = confirm(`${selected.nickname} gano 1 punto esta ronda?`);
+    agree ? props.setPointsCompetitorRequest(selected.cprId, selected.points + 1) : null;
+    window.location.href = `/tournaments/${props.tournamentId}`;
+  };
+
+  const handleTwoPoints = () => {
+    const agree = confirm(`${selected.nickname} gano 2 punto esta ronda?`);
+    agree ? props.setPointsCompetitorRequest(selected.cprId, selected.points + 2) : null;
+    window.location.href = `/tournaments/${props.tournamentId}`;
+  };
+
+  const hanldeNextRound = () => {
+    props.tournaments.competitors.map((player) => {
+      props.nextRoundRequest(player.cprId);
+    });
+    window.location.href = `/tournaments/${props.tournamentId}`;
+  };
 
   return (
     <div className={classes.root}>
@@ -136,18 +138,24 @@ const Paids = (props) => {
                 Tabla de posiciones, selecciona un jugador para agregar puntos
               </Typography>
               {
-                selected.length > 0 ? (
+                Object.keys(selected).length > 0 && selected.setPoints === 0 ? (
                   <div>
-                    <IconButton aria-label='Agregar un punto'>
+                    <IconButton aria-label='Agregar un punto' onClick={handleOnePoints}>
                       <ExposurePlus1Icon />
                       <h6> punto</h6>
                     </IconButton>
-                    <IconButton aria-label='Agregar dos punto'>
+                    <IconButton aria-label='Agregar dos punto' onClick={handleTwoPoints}>
                       <ExposurePlus2Icon />
                       <h6> puntos</h6>
                     </IconButton>
                   </div>
-                ) : null
+                ) : (
+                  Object.keys(selected).length > 0 ? (
+                    <Typography className={classes.title} variant='body2'>
+                      {`puntos de ${selected.nickname} ya asignados`}
+                    </Typography>
+                  ) : null
+                )
               }
             </Toolbar>
           )
@@ -171,7 +179,6 @@ const Paids = (props) => {
               {
                 paidsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
-                    const isItemSelected = isSelected(row);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
@@ -179,10 +186,9 @@ const Paids = (props) => {
                         hover
                         onClick={(event) => handleClick(event, row)}
                         role='checkbox'
-                        aria-checked={isItemSelected}
                         tabIndex={-1}
                         key={row.name}
-                        selected={isItemSelected}
+                        selected={selected.name === row.name}
                       >
                         <TableCell component='th' id={labelId} scope='row' padding='default'>
                           {row.name}
@@ -222,12 +228,17 @@ const Paids = (props) => {
           )
         }
       </Paper>
+      <Button variant='contained' color='primary' onClick={hanldeNextRound}>
+        Terminar esta ronda y pasar a la siguiente
+      </Button>
     </div>
   );
 };
 
 const dispatchStateToProps = {
   getCompetitorsRequest,
+  setPointsCompetitorRequest,
+  nextRoundRequest,
 };
 
 const mapStateToPros = (state) => state;

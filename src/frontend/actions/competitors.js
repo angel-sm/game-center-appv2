@@ -49,3 +49,24 @@ export const paidCompetitorRequest = (id) => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
+export const setPointsCompetitorRequest = (id, points) => (dispatch) => {
+  axios({
+    url: `/client/competitors/set-points/${id}/points/${points}`,
+    method: 'PUT',
+  })
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
+};
+
+export const nextRoundRequest = (id) => (dispatch) => {
+  axios({
+    url: `/client/competitors/set-points/${id}/reset`,
+    method: 'PUT',
+  })
+    .then(({ data }) => {
+      console.log(data);
+    })
+    .catch((error) => console.log(error));
+};
