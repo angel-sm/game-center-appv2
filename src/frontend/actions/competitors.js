@@ -13,7 +13,6 @@ export const setPaid = (payload) => ({
 });
 
 export const registerCompetitorsRequest = (data) => (dispatch) => {
-  console.log(data);
   axios({
     url: '/client/competitors',
     method: 'POST',
@@ -21,9 +20,6 @@ export const registerCompetitorsRequest = (data) => (dispatch) => {
       id: data,
     },
   })
-    .then((data) => {
-      console.log(data.data);
-    })
     .catch((error) => console.log(error));
 };
 
@@ -43,9 +39,6 @@ export const paidCompetitorRequest = (id) => (dispatch) => {
     url: `/client/competitors/paid/${id}`,
     method: 'PUT',
   })
-    .then(({ data }) => {
-      console.log(data);
-    })
     .catch((error) => console.log(error));
 };
 
@@ -54,9 +47,6 @@ export const setPointsCompetitorRequest = (id, points) => (dispatch) => {
     url: `/client/competitors/set-points/${id}/points/${points}`,
     method: 'PUT',
   })
-    .then(({ data }) => {
-      console.log(data);
-    })
     .catch((error) => console.log(error));
 };
 
@@ -65,8 +55,5 @@ export const nextRoundRequest = (id) => (dispatch) => {
     url: `/client/competitors/set-points/${id}/reset`,
     method: 'PUT',
   })
-    .then(({ data }) => {
-      console.log(data);
-    })
     .catch((error) => console.log(error));
 };

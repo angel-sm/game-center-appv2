@@ -1,15 +1,19 @@
+/* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { closeTournamentRequest } from '../../../actions/tournaments';
+import { relationPlayerPrizeRequest } from '../../../actions/prizes';
 
 const CloseButton = (props) => {
-
   const hanldeClose = () => {
-    props.closeTournamentRequest(props.tournamentId, { end: moment(new Date()).utc(true).format('YYYY-MM-DD') });
-    window.location.href = `/tournaments/${props.tournamentId}`;
+    props.tournaments.prizes.map((prize, i) => {
+      props.relationPlayerPrizeRequest({ player: props.tournaments.competitors[i].player, prize: prize.id });
+    });
+    props.closeTournamentRequest(props.tournamentId, { end: moment(new Date()).utc(true).format('YYYY-MM-DD'), isActive: 1 });
+    window.location.href = '/';
   };
 
   const isPaid = () => {
@@ -36,6 +40,7 @@ const mapStateToProps = (state) => state;
 
 const dispatchStateToProps = {
   closeTournamentRequest,
+  relationPlayerPrizeRequest,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(CloseButton);

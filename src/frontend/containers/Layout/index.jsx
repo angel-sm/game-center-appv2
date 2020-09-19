@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AppBar from '@material-ui/core/AppBar';
@@ -20,9 +20,9 @@ import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face, Ho
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../../components/Layout/Profile';
 import { useStyles, ProfileControllerContent, BannerFont } from './Layout.styles';
-import Tournaments from '../../components/Layout/Tournaments';
 import { logout } from '../../actions/auth';
 import Seasons from '../../components/Layout/Seasons';
+import { getTournamentsRequest } from '../../actions/tournaments';
 
 const options = [
   {
@@ -61,10 +61,13 @@ const options = [
 ];
 
 const Layout = (props) => {
-
   const classes = useStyles();
   const theme = useTheme();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+
+  useEffect(() => {
+    props.getTournamentsRequest(props.center, 'tournaments');
+  }, []);
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
@@ -89,8 +92,6 @@ const Layout = (props) => {
           url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'
         />
       </ProfileControllerContent>
-      <Tournaments />
-      <Divider />
       <Seasons />
       <Divider />
       <List>
@@ -175,6 +176,7 @@ const Layout = (props) => {
 const mapStateToProps = (state) => state;
 
 const dispatchStateToProps = {
+  getTournamentsRequest,
   logout,
 };
 

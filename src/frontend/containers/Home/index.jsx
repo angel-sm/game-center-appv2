@@ -1,155 +1,102 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import { connect } from 'react-redux';
+import Debtors from '../../components/TournamentView/Debtors';
+import TournamentInfo from '../../components/TournamentView/TournamentInfo';
+import Paids from '../../components/TournamentView/Paids';
+import CloseButton from '../../components/TournamentView/CloseButton';
 
-const images = [
-  {
-    color: '#3f51b5',
-    title: 'Nuevo torneo',
-    width: '30%',
-    url: '/registertournament',
-  }, {
-    color: '#3f51b5',
-    title: 'Buscar torneo',
-    width: '30%',
-    url: '/search-tournaments',
-  }, {
-    color: '#3f51b5',
-    title: 'Credito',
-    width: '30%',
-    url: '/credit',
-  }, {
-    color: '#3f51b5',
-    title: 'Jugadores',
-    width: '30%',
-    url: '/players',
-  }, {
-    color: '#3f51b5',
-    title: 'Puntos tienda',
-    width: '30%',
-    url: '/store-points',
-  }, {
-    color: '#3f51b5',
-    title: 'Config pt',
-    width: '30%',
-    url: '/config-points',
-  }, {
-    color: '#3f51b5',
-    title: 'Reportes',
-    width: '30%',
-    url: '/reports',
-  },
-];
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    minWidth: 300,
-    width: '100%',
-  },
-  image: {
-    position: 'relative',
-    height: 200,
-    margin: '.5em',
-    [theme.breakpoints.down('xs')]: {
-      width: '100% !important', // Overrides inline-style
-      height: 100,
-    },
-    '&:hover, &$focusVisible': {
-      zIndex: 1,
-      '& $imageBackdrop': {
-        opacity: 0.2,
-      },
-      '& $imageMarked': {
-        opacity: 1,
-      },
-    },
-  },
-  focusVisible: {},
-  imageButton: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: theme.palette.common.white,
-  },
-  imageSrc: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center 40%',
-  },
-  imageBackdrop: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: theme.palette.common.black,
-    opacity: 0,
-    transition: theme.transitions.create('opacity'),
-  },
-  imageTitle: {
-    position: 'relative',
-    padding: `${theme.spacing(2)}px ${theme.spacing(4)}px ${theme.spacing(1) + 6}px`,
-  },
-  imageMarked: {
-    opacity: 0,
-    height: 3,
-    width: 15,
-    backgroundColor: theme.palette.common.white,
-    position: 'absolute',
-    bottom: -2,
-    left: 'calc(50% - 9px)',
-    transition: theme.transitions.create('opacity'),
-  },
-}));
-
-export default function Home() {
-  const classes = useStyles();
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
 
   return (
-    <div className={classes.root}>
-      {images.map((image) => (
-        <ButtonBase
-          focusRipple
-          key={image.title}
-          className={classes.image}
-          focusVisibleClassName={classes.focusVisible}
-          style={{
-            width: image.width,
-          }}
-          href={image.url}
-        >
-          <span
-            className={classes.imageSrc}
-            style={{
-              background: `${image.color}`,
-            }}
-          />
-          <span className={classes.imageBackdrop} />
-          <span className={classes.imageButton}>
-            <Typography
-              component='span'
-              variant='subtitle1'
-              color='inherit'
-              className={classes.imageTitle}
-            >
-              {image.title}
-              <span className={classes.imageMarked} />
-            </Typography>
-          </span>
-        </ButtonBase>
-      ))}
+    <div
+      role='tabpanel'
+      hidden={value !== index}
+      id={`scrollable-auto-tabpanel-${index}`}
+      aria-labelledby={`scrollable-auto-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box p={3}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
     </div>
   );
 }
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.any.isRequired,
+  value: PropTypes.any.isRequired,
+};
+
+function a11yProps(index) {
+  return {
+    id: `scrollable-auto-tab-${index}`,
+    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+  };
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+  },
+}));
+
+const Home = (props) => {
+  const classes = useStyles();
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  return (
+    <div className={classes.root}>
+      <AppBar position='static'>
+        <Tabs
+          value={value}
+          onChange={handleChange}
+          scrollButtons='auto'
+          aria-label='scrollable auto tabs example'
+        >
+          {
+            props.tournaments.tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
+              <Tab label={tournament.tournament} {...a11yProps(i)} key={tournament.id} />
+            ))
+          }
+        </Tabs>
+      </AppBar>
+      {
+        props.tournaments.tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
+          <TabPanel value={value} index={i} key={tournament.id}>
+            <>
+              <TournamentInfo tournamentId={tournament.id} />
+              <Debtors tournamentId={tournament.id} />
+              <Paids tournamentId={tournament.id} />
+              <CloseButton tournamentId={tournament.id} />
+            </>
+          </TabPanel>
+        ))
+      }
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => state;
+
+export default connect(mapStateToProps, null)(Home);
+

@@ -26,7 +26,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AddUserButton = (props) => {
+const AddPlayerButton = (props) => {
+  const { redirect } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -47,7 +48,7 @@ const AddUserButton = (props) => {
     event.preventDefault();
     props.registerPlayerRequest(handleInput.form);
     handleClose();
-    window.location.href = '/players';
+    window.location.href = redirect;
   };
 
   return (
@@ -84,4 +85,4 @@ const mapDispatchToProps = {
   registerPlayerRequest,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddUserButton);
+export default connect(mapStateToProps, mapDispatchToProps)(AddPlayerButton);

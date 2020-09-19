@@ -78,17 +78,3 @@ export const getSeasonRequest = (id) => (dispatch) => {
       console.log(error);
     });
 };
-
-export const relationSeasonTournament = (season, tournament) => (dispatch) => {
-  axios({
-    url: '/client/season-tournaments',
-    method: 'POST',
-    data: {
-      season,
-      tournament,
-    },
-  })
-    .catch((error) => {
-      console.log(error);
-    });
-};

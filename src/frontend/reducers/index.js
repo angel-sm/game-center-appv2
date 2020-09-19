@@ -3,7 +3,6 @@ import auth from './auth';
 import status from './status';
 import pending from './pending';
 import players from './players';
-import prizes from './prizes';
 import center from './center';
 import tournaments from './tournaments';
 import games from './games';
@@ -14,7 +13,6 @@ export default combineReducers({
   status,
   pending,
   players,
-  prizes,
   center,
   tournaments,
   games,

@@ -20,7 +20,7 @@ import { cancelRegisterTournamentRequest } from '../../../actions/tournaments';
 import useStyles from './styles';
 import ErrorBar from '../../shared/ErrorBar';
 
-let numPlace = 1;
+let numPlace = 2;
 
 const Earn = (props) => {
 
@@ -28,7 +28,7 @@ const Earn = (props) => {
   const handleValue = useInputValueHandle({});
 
   const [places, setPlace] = useState([{
-    place: 0,
+    place: 1,
   }]);
 
   const handlerSubmit = (event) => {

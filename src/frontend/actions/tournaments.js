@@ -3,7 +3,6 @@
 import Axios from 'axios';
 import { NEW_TOURNAMENT, GET_TOURNAMENTS, GET_TOURNAMENT, SEARCH_RESULT } from '../types';
 import { nextStep } from './pending';
-import { relationSeasonTournament } from './seasons';
 
 export const newTournament = (payload) => ({
   type: NEW_TOURNAMENT,
@@ -52,8 +51,8 @@ export const relationTournamentGame = (game, tournament) => (dispatch) => {
     });
 };
 
-export const newtournamentRequest = (data, game, season) => (dispatch) => {
-  console.log(game, season);
+export const newtournamentRequest = (data, game) => (dispatch) => {
+  console.log(game);
   Axios({
     url: '/client/tournaments',
     method: 'POST',
@@ -63,7 +62,6 @@ export const newtournamentRequest = (data, game, season) => (dispatch) => {
       dispatch(nextStep(1));
       dispatch(relationCenterTournament(data.id));
       dispatch(relationTournamentGame(game, data.id));
-      dispatch(relationSeasonTournament(season, data.id));
       dispatch(newTournament(data.id));
       document.cookie = `PENDINGID=${data.id}`;
     })
@@ -92,7 +90,6 @@ export const searchTournamentRequest = (data) => (dispatch) => {
     method: 'GET',
   })
     .then(({ data }) => {
-      console.log(data);
       dispatch(searchResult(data.tournament));
     })
     .catch((error) => {
@@ -119,9 +116,6 @@ export const closeTournamentRequest = (id, data) => (dispatch) => {
     method: 'PUT',
     data,
   })
-    .then(({ data }) => {
-      console.log(data);
-    })
     .catch((error) => {
       console.log(error);
     });

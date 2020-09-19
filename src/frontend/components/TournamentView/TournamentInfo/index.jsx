@@ -3,11 +3,13 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { getTournamentRequest } from '../../../actions/tournaments';
+import { getPrizesRequest } from '../../../actions/prizes';
 import SimpleCard from '../Card';
 
 const TournamentInfo = (props) => {
   useEffect(() => {
     props.getTournamentRequest(props.tournamentId);
+    props.getPrizesRequest(props.tournamentId);
   }, [props.tournamentId]);
 
   const resetDate = (date) => {
@@ -26,8 +28,20 @@ const TournamentInfo = (props) => {
         data={tournament.tournament}
       />
       <SimpleCard
-        title='Costo'
-        data={tournament.cost}
+        title='Credito total del torneo'
+        data={`$ ${tournament.totalCredit}`}
+      />
+      <SimpleCard
+        title='Ganancia por jugador inscrito'
+        data={`$ ${tournament.earn}`}
+      />
+      <SimpleCard
+        title='Costo total del torneo'
+        data={`$ ${tournament.cost}`}
+      />
+      <SimpleCard
+        title='Costo por jugador inscrito'
+        data={`$ ${tournament.creditPerPlayer}`}
       />
       <SimpleCard
         title='Fecha de inicio'
@@ -36,10 +50,6 @@ const TournamentInfo = (props) => {
       <SimpleCard
         title='Fecha de cierre'
         data={tournament.end !== null ? resetDate(tournament.start) : 'Activo'}
-      />
-      <SimpleCard
-        title='Credito'
-        data={tournament.credit}
       />
       <SimpleCard
         title='Juego'
@@ -55,7 +65,7 @@ const TournamentInfo = (props) => {
       />
       <SimpleCard
         title='Temporada'
-        data={tournament.seasonName}
+        data={tournament.seasonName !== null ? tournament.seasonName : 'Sin temporada'}
       />
     </>
   );
@@ -65,6 +75,7 @@ const mapStateToProps = (state) => state;
 
 const dispatchStateToProps = {
   getTournamentRequest,
+  getPrizesRequest,
 };
 
 export default connect(mapStateToProps, dispatchStateToProps)(TournamentInfo);

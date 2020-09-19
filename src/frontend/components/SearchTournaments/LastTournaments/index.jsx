@@ -10,8 +10,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 //import IconButton from '@material-ui/core/IconButton';
-import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
 import { Link } from 'react-router-dom';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Toolbar, Typography } from '@material-ui/core';
 import moment from 'moment';
 
@@ -28,7 +28,7 @@ const LastTournaments = (props) => {
     <Paper>
       <Toolbar>
         <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-          Ultimos torneos
+          Ultimos torneos cerrados
         </Typography>
       </Toolbar>
       <TableContainer component={Paper}>
@@ -42,12 +42,12 @@ const LastTournaments = (props) => {
               <TableCell align='right'>Juego</TableCell>
               <TableCell align='right'>Descripcion</TableCell>
               <TableCell align='right'>Organizador</TableCell>
-              <TableCell align='right'>Temporada</TableCell>
-              <TableCell align='right'>Ver mas</TableCell>
+              <TableCell align='right'>Ver Temporada</TableCell>
+              <TableCell align='right'>Ver Torneo</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.tournaments.tournaments.slice(0, 5).map((row) => (
+            {props.tournaments.tournaments.filter((tournament) => (tournament.isActive !== 0 ? tournament : null)).slice(0, 5).map((row) => (
               <TableRow key={row.id}>
                 <TableCell component='th' scope='row'>{row.tournament}</TableCell>
                 <TableCell align='right'>
@@ -61,11 +61,11 @@ const LastTournaments = (props) => {
                 <TableCell align='right'>
                   {
                     row.season != null ?
-                      <Link to={row.season}>{row.seasonName}</Link> : row.seasonName
+                      <Link to={row.season}>{row.seasonName}</Link> : 'Sin temporada'
                   }
                 </TableCell>
                 <TableCell align='right'>
-                  <Link to={`/tournaments/${row.id}`}><EmojiEventsIcon /></Link>
+                  <Link to={`/tournaments/${row.id}`}><VisibilityIcon /></Link>
                 </TableCell>
               </TableRow>
             ))}

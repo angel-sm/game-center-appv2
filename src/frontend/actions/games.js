@@ -8,7 +8,6 @@ export const getAllGames = (payload) => ({
 });
 
 export const registerGameRequest = (data) => (dispatch) => {
-  console.log(data);
   axios({
     url: '/client/games',
     method: 'POST',

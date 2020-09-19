@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 //import IconButton from '@material-ui/core/IconButton';
-import EmojiEventsIcon from '@material-ui/icons/EmojiEvents';
+import VisibilityIcon from '@material-ui/icons/Visibility';
 import { Link } from 'react-router-dom';
 import { Toolbar, Typography } from '@material-ui/core';
 import moment from 'moment';
@@ -40,8 +40,8 @@ const TournamentResult = ({ tournament }) => {
               <TableCell align='right'>Juego</TableCell>
               <TableCell align='right'>Descripcion</TableCell>
               <TableCell align='right'>Organizador</TableCell>
-              <TableCell align='right'>Temporada</TableCell>
-              <TableCell align='right'>Ver mas</TableCell>
+              <TableCell align='right'>Ver Temporada</TableCell>
+              <TableCell align='right'>Ver Torneo</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -64,7 +64,7 @@ const TournamentResult = ({ tournament }) => {
                     }
                   </TableCell>
                   <TableCell align='right'>
-                    <Link to={`/tournaments/${row.id}`}><EmojiEventsIcon /></Link>
+                    <Link to={`/tournaments/${row.id}`}><VisibilityIcon /></Link>
                   </TableCell>
                 </TableRow>
               );
