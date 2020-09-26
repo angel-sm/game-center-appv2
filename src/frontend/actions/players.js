@@ -25,7 +25,6 @@ export const getAllPlayersRequest = () => (dispatch) => {
 };
 
 export const searchPlayerRequest = (nickname) => (dispatch) => {
-  console.log(nickname);
   axios({
     url: `/client/players/player/${nickname}`,
     method: 'GET',
@@ -45,9 +44,6 @@ export const registerPlayerRequest = (data) => (dispatch) => {
     method: 'POST',
     data,
   })
-    .then(({ data }) => {
-      console.log(data);
-    })
     .catch((error) => console.log(error));
 };
 
@@ -68,8 +64,5 @@ export const deletePlayerRequest = (id) => (dispatch) => {
     url: `/client/players/player/${id}`,
     method: 'DELETE',
   })
-    .then(({ data }) => {
-      console.log(data);
-    })
     .catch((error) => console.log(error));
 };

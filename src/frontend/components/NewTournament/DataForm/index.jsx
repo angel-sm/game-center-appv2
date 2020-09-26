@@ -25,7 +25,9 @@ const DataForm = (props) => {
   const classes = useStyles();
   const handleValue = useInputValueHandle({
     organizer: '',
-    cost: '',
+    cost: 0,
+    earn: 0,
+    creditPerPlayer: 0,
     description: '',
     tournament: '',
   });
@@ -64,11 +66,22 @@ const DataForm = (props) => {
 
   const handlerSubmit = (event) => {
     event.preventDefault();
-
     if (check) {
-      props.newtournamentRequest({ ...handleValue.form, start: resetDate(start) }, props.seasons.season.gameId, props.seasons.season.id);
+      props.newtournamentRequest({
+        ...handleValue.form,
+        start: resetDate(start),
+        season: props.seasons.season.id,
+        seasonName: props.seasons.season.season,
+        cost: parseInt(handleValue.form.earn) + parseInt(handleValue.form.creditPerPlayer),
+      }, props.seasons.season.gameId);
     } else {
-      props.newtournamentRequest({ ...handleValue.form, start: resetDate(start) }, game, null);
+      props.newtournamentRequest({
+        ...handleValue.form,
+        start: resetDate(start),
+        season: null,
+        seasonName: null,
+        cost: parseInt(handleValue.form.earn) + parseInt(handleValue.form.creditPerPlayer),
+      }, game);
     }
   };
 
@@ -122,13 +135,33 @@ const DataForm = (props) => {
         </MuiPickersUtilsProvider>
       </FormControl>
       <FormControl className={classes.chaild}>
-        <InputLabel htmlFor='standard-adornment-amount'>Costo del torneo</InputLabel>
+        <InputLabel htmlFor='standard-adornment-amount'>Ganancia del torneo</InputLabel>
         <Input
           {...handleValue}
-          name='cost'
+          name='earn'
           id='standard-adornment-amount'
-          value={handleValue.form.cost}
-          placeholder='utiliza cantidades cerradas eje. 150'
+          value={handleValue.form.earn}
+          startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+        />
+      </FormControl>
+      <FormControl className={classes.chaild}>
+        <InputLabel htmlFor='standard-adornment-amount'>Costo por jugador</InputLabel>
+        <Input
+          {...handleValue}
+          name='creditPerPlayer'
+          id='standard-adornment-amount'
+          value={handleValue.form.creditPerPlayer}
+          startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+        />
+      </FormControl>
+      <FormControl className={classes.chaild}>
+        <InputLabel htmlFor='standard-adornment-amount'>Costo de la inscripcion</InputLabel>
+        <Input
+          {...handleValue}
+          name='creditPerPlayer'
+          id='standard-adornment-amount'
+          disabled
+          value={parseInt(handleValue.form.earn) + parseInt(handleValue.form.creditPerPlayer)}
           startAdornment={<InputAdornment position='start'>$</InputAdornment>}
         />
       </FormControl>

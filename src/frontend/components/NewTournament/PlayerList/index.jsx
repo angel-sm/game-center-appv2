@@ -20,6 +20,7 @@ import { getAllPlayersRequest } from '../../../actions/players';
 import { registerCompetitorsRequest } from '../../../actions/competitors';
 import { cancelRegisterTournamentRequest } from '../../../actions/tournaments';
 import { nextStep } from '../../../actions/pending';
+import AddPlayerButton from '../../Players/AddPlayerButton';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -121,7 +122,6 @@ const PlayerList = (props) => {
   };
 
   const handleCancel = () => {
-    console.log(props);
     props.cancelRegisterTournamentRequest(props.tournaments.tournamentId);
     document.cookie = 'PENDINGSTEP=0';
     document.cookie = 'PENDINGID=';
@@ -129,6 +129,7 @@ const PlayerList = (props) => {
 
   return (
     <div className={classes.root}>
+      <AddPlayerButton redirect='/registertournament' />
       <Paper className={classes.paper}>
         <Toolbar className={clsx(toolbar.root, {
           [toolbar.highlight]: selected.length > 0,

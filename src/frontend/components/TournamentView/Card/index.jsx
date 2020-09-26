@@ -2,7 +2,6 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import styled from 'styled-components';
 
 const useStyles = makeStyles({
@@ -36,9 +35,7 @@ const SimpleCard = ({ title, data }) => {
   return (
     <DescribeCard className={classes.root}>
       <CardContent>
-        <Typography className={classes.title} color='textSecondary' gutterBottom>
-          {`${title} - ${data}`}
-        </Typography>
+        {`${title} - ${data}`}
       </CardContent>
     </DescribeCard>
   );

@@ -16,10 +16,9 @@ import TableRow from '@material-ui/core/TableRow';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import { IconButton, Button } from '@material-ui/core';
-import ExposurePlus1Icon from '@material-ui/icons/ExposurePlus1';
-import ExposurePlus2Icon from '@material-ui/icons/ExposurePlus2';
-import { getCompetitorsRequest, setPointsCompetitorRequest, nextRoundRequest } from '../../../actions/competitors';
+import { Button } from '@material-ui/core';
+import { getCompetitorsRequest, nextRoundRequest } from '../../../actions/competitors';
+import AddPoints from '../AddPoints';
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -96,27 +95,16 @@ const Paids = (props) => {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.tournaments.tournaments.length - page * rowsPerPage);
 
-  const headCells = ['Nombre', 'Nickname', 'Puntos', 'Posición'];
+  const headCells = ['Nombre', 'Nickname', 'Puntos', 'Posición', ''];
 
   const paidsList = props.tournaments.competitors.filter((c) => c.paid === 'paid');
-
-  const handleOnePoints = () => {
-    const agree = confirm(`${selected.nickname} gano 1 punto esta ronda?`);
-    agree ? props.setPointsCompetitorRequest(selected.cprId, selected.points + 1) : null;
-    window.location.href = `/tournaments/${props.tournamentId}`;
-  };
-
-  const handleTwoPoints = () => {
-    const agree = confirm(`${selected.nickname} gano 2 punto esta ronda?`);
-    agree ? props.setPointsCompetitorRequest(selected.cprId, selected.points + 2) : null;
-    window.location.href = `/tournaments/${props.tournamentId}`;
-  };
+  const debtorsList = props.tournaments.competitors.filter((c) => c.paid === 'debtor');
 
   const hanldeNextRound = () => {
     props.tournaments.competitors.map((player) => {
       props.nextRoundRequest(player.cprId);
     });
-    window.location.href = `/tournaments/${props.tournamentId}`;
+    window.location.href = '/';
   };
 
   return (
@@ -135,28 +123,8 @@ const Paids = (props) => {
             })}
             >
               <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-                Tabla de posiciones, selecciona un jugador para agregar puntos
+                Tabla de posiciones
               </Typography>
-              {
-                Object.keys(selected).length > 0 && selected.setPoints === 0 ? (
-                  <div>
-                    <IconButton aria-label='Agregar un punto' onClick={handleOnePoints}>
-                      <ExposurePlus1Icon />
-                      <h6> punto</h6>
-                    </IconButton>
-                    <IconButton aria-label='Agregar dos punto' onClick={handleTwoPoints}>
-                      <ExposurePlus2Icon />
-                      <h6> puntos</h6>
-                    </IconButton>
-                  </div>
-                ) : (
-                  Object.keys(selected).length > 0 ? (
-                    <Typography className={classes.title} variant='body2'>
-                      {`puntos de ${selected.nickname} ya asignados`}
-                    </Typography>
-                  ) : null
-                )
-              }
             </Toolbar>
           )
         }
@@ -202,6 +170,14 @@ const Paids = (props) => {
                         <TableCell component='th' id={labelId} scope='row' padding='default'>
                           {index + 1}
                         </TableCell>
+                        <TableCell component='th' id={labelId} scope='row' padding='none'>
+                          {
+                            debtorsList.length === 0 ? props.tournaments.tournament.end === null ? selected.name === row.name ?
+                              selected.setPoints === 0 ? (
+                                <AddPoints playerId={selected.cprId} player={selected.nickname} />
+                              ) : 'Puntos ya asignados' : null : null : null
+                          }
+                        </TableCell>
                       </TableRow>
                     );
                   })
@@ -228,16 +204,19 @@ const Paids = (props) => {
           )
         }
       </Paper>
-      <Button variant='contained' color='primary' onClick={hanldeNextRound}>
-        Terminar esta ronda y pasar a la siguiente
-      </Button>
+      {
+        debtorsList.length === 0 ? props.tournaments.tournament.end === null ? (
+          <Button variant='contained' color='primary' onClick={hanldeNextRound}>
+            Terminar esta ronda y pasar a la siguiente
+          </Button>
+        ) : null : null
+      }
     </div>
   );
 };
 
 const dispatchStateToProps = {
   getCompetitorsRequest,
-  setPointsCompetitorRequest,
   nextRoundRequest,
 };
 

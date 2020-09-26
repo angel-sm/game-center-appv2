@@ -119,7 +119,7 @@ const Debtors = (props) => {
     selected.map((player) => {
       props.paidCompetitorRequest(player.cprId);
     });
-    window.location.href = `/tournaments/${props.tournamentId}`;
+    window.location.href = '/';
   };
 
   const debtorsList = props.tournaments.competitors.filter((c) => c.paid === 'debtor');

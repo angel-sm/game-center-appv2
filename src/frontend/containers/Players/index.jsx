@@ -1,22 +1,22 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
 import SearchPlayer from '../../components/Players/SearchPlayer';
 import SimpleCard from '../../components/Players/Card';
 import EditButton from '../../components/Players/EditButton';
 import DeleteButton from '../../components/Players/DeleteButton';
 import AddPlayerButton from '../../components/Players/AddPlayerButton';
+import CreditButton from '../../components/Players/CreditButton';
 
 const Players = (props) => {
   const description = ['id', 'Nombre', 'Puntos', ' Jugador'];
 
-  const setButtons = () => {
+  const setButtons = (credit, nickname) => {
     return (
       <>
         <EditButton player={props.players.player} />
         <DeleteButton playerId={props.players.player.id} />
-        <Button color='primary' disableElevation type='submit' href={`/credit/player/${props.players.player.id}`}>Usar credito</Button>
+        {credit > 0 ? <CreditButton disabled={false} player={nickname} maxOfCredit={credit} /> : <CreditButton disabled={true} player={nickname} />}
       </>
     );
   };
@@ -31,9 +31,9 @@ const Players = (props) => {
           );
         }) : null}
       {Object.keys(props.players.player).length > 0 ?
-        setButtons() :
+        setButtons(props.players.player.credit, props.players.player.nickname) :
         null}
-      <AddPlayerButton />
+      <AddPlayerButton redirect='/players' />
     </>
   );
 };
