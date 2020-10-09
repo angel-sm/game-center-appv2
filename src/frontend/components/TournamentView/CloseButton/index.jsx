@@ -28,8 +28,26 @@ const CloseButton = (props) => {
     <>
       {
         props.tournaments.tournament.end === null ? (
-          isPaid() ? <Button variant='contained' color='primary' disableElevation onClick={hanldeClose}>Cerrar torneo</Button> :
-            (<Button variant='contained' color='primary' disableElevation disabled>Cerrar torneo</Button>)
+          isPaid() ? (
+            <Button
+              variant='contained'
+              color='primary'
+              disableElevation
+              onClick={hanldeClose}
+            >
+              Cerrar torneo
+            </Button>
+          ) :
+            (
+              <Button
+                variant='contained'
+                color='primary'
+                disableElevation
+                disabled
+              >
+                Cerrar torneo
+              </Button>
+            )
         ) : null
       }
     </>

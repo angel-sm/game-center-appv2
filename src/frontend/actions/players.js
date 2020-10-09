@@ -1,10 +1,15 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
-import { GET_ALL_PLAYERS, SEARCH_PLAYER } from '../types';
+import { GET_ALL_PLAYERS, SEARCH_PLAYER, GET_PLAYER_PRIZES } from '../types';
 import { setErrorRequest } from './status';
 
 export const getAllPlayers = (payload) => ({
   type: GET_ALL_PLAYERS,
+  payload,
+});
+
+export const getPlayerPrizes = (payload) => ({
+  type: GET_PLAYER_PRIZES,
   payload,
 });
 
@@ -66,3 +71,4 @@ export const deletePlayerRequest = (id) => (dispatch) => {
   })
     .catch((error) => console.log(error));
 };
+

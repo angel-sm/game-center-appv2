@@ -1,71 +1,24 @@
-/* eslint-disable no-restricted-globals */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-extraneous-dependencies */
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableHead from '@material-ui/core/TableHead';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import { Button } from '@material-ui/core';
-import { getCompetitorsRequest, nextRoundRequest } from '../../../actions/competitors';
-import AddPoints from '../AddPoints';
-
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  highlight:
-    theme.palette.type === 'light' ?
-      {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      } :
-      {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: 750,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}));
+import {
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Toolbar,
+  Typography,
+  Paper,
+} from '@material-ui/core';
+import { getCompetitorsRequest } from '../../../actions/competitors';
+import AddPoints from './components/AddPoints';
+import { useToolbarStyles, useStyles } from './styles';
 
 const Paids = (props) => {
   const classes = useStyles();
@@ -99,13 +52,6 @@ const Paids = (props) => {
 
   const paidsList = props.tournaments.competitors.filter((c) => c.paid === 'paid');
   const debtorsList = props.tournaments.competitors.filter((c) => c.paid === 'debtor');
-
-  const hanldeNextRound = () => {
-    props.tournaments.competitors.map((player) => {
-      props.nextRoundRequest(player.cprId);
-    });
-    window.location.href = '/';
-  };
 
   return (
     <div className={classes.root}>
@@ -145,7 +91,9 @@ const Paids = (props) => {
             </TableHead>
             <TableBody>
               {
-                paidsList.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                paidsList
+                  .sort()
+                  .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((row, index) => {
                     const labelId = `enhanced-table-checkbox-${index}`;
 
@@ -168,14 +116,18 @@ const Paids = (props) => {
                           {row.points}
                         </TableCell>
                         <TableCell component='th' id={labelId} scope='row' padding='default'>
-                          {index + 1}
+                          {row.place}
                         </TableCell>
                         <TableCell component='th' id={labelId} scope='row' padding='none'>
                           {
-                            debtorsList.length === 0 ? props.tournaments.tournament.end === null ? selected.name === row.name ?
-                              selected.setPoints === 0 ? (
-                                <AddPoints playerId={selected.cprId} player={selected.nickname} />
-                              ) : 'Puntos ya asignados' : null : null : null
+                            debtorsList.length === 0 ? props.tournaments.tournament.end === null ? selected.name === row.name ? (
+                              <AddPoints
+                                playerId={selected.cprId}
+                                player={selected.nickname}
+                                isSelected={false}
+                              />
+                            ) :
+                              <AddPoints isSelected={true} /> : null : null
                           }
                         </TableCell>
                       </TableRow>
@@ -204,20 +156,12 @@ const Paids = (props) => {
           )
         }
       </Paper>
-      {
-        debtorsList.length === 0 ? props.tournaments.tournament.end === null ? (
-          <Button variant='contained' color='primary' onClick={hanldeNextRound}>
-            Terminar esta ronda y pasar a la siguiente
-          </Button>
-        ) : null : null
-      }
     </div>
   );
 };
 
 const dispatchStateToProps = {
   getCompetitorsRequest,
-  nextRoundRequest,
 };
 
 const mapStateToPros = (state) => state;

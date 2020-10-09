@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { getTournamentRequest } from '../../../actions/tournaments';
 import { getPrizesRequest } from '../../../actions/prizes';
-import SimpleCard from '../Card';
+import SimpleCard from '../../shared/CardInfo';
 
 const TournamentInfo = (props) => {
   useEffect(() => {

@@ -18,9 +18,6 @@ const SearchPlayer = (props) => {
 
   const handleSearch = (event) => {
     event.preventDefault();
-
-    console.log(hanlderInput.form.player);
-
     props.searchPlayerRequest(hanlderInput.form.player);
     return true;
   };

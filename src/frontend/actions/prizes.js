@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { GET_PRIZE } from '../types';
 import { setErrorRequest } from './status';
+import { getPlayerPrizes } from './players';
+import { getTournamentInfoPrizes } from './tournaments';
 
 export const getPrizes = (payload) => ({
   type: GET_PRIZE,
@@ -42,6 +44,17 @@ export const getPrizesRequest = (id) => (dispatch) => {
     })
     .then((data) => {
       dispatch(setErrorRequest(''));
+    })
+    .catch((error) => console.log(error));
+};
+
+export const getPrizesByRequest = (searchBy, id) => (dispatch) => {
+  axios({
+    url: `/client/prizes/${searchBy}/${id}`,
+    method: 'GET',
+  })
+    .then(({ data }) => {
+      searchBy === 'player' ? dispatch(getPlayerPrizes(data.prizes)) : dispatch(getTournamentInfoPrizes(data.prizes));
     })
     .catch((error) => console.log(error));
 };

@@ -1,8 +1,13 @@
 /* eslint-disable import/named */
-import { GET_TOURNAMENTS, GET_TOURNAMENT, GET_COMPETITORS, SEARCH_RESULT, NEW_TOURNAMENT, GET_PRIZE } from '../types';
+import { GET_TOURNAMENTS, GET_TOURNAMENT, GET_COMPETITORS, SEARCH_RESULT, NEW_TOURNAMENT, GET_PRIZE, GET_TOURNAMENT_INFO_PRIZES } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case GET_TOURNAMENT_INFO_PRIZES:
+      return {
+        ...state,
+        prizesInfo: action.payload,
+      };
     case GET_PRIZE:
       return {
         ...state,

@@ -52,15 +52,15 @@ const playersRoutes = (app) => {
     }
   });
 
-  router.put('/set-points/:id/points/:points', async (req, res, next) => {
-    const { id, points } = req.params;
+  router.put('/set-points-place/:id/points/:points/place/:place', async (req, res, next) => {
+    const { id, points, place } = req.params;
     try {
       const { data } = await Axios({
-        url: `${process.env.API_URL}/api/competitors/set-points/${id}`,
+        url: `${process.env.API_URL}/api/competitors/set-points-place/${id}`,
         method: 'PUT',
         data: {
           points,
-          setPoints: 1,
+          place,
         },
       });
       res.status(201).json(data);
@@ -69,21 +69,6 @@ const playersRoutes = (app) => {
     }
   });
 
-  router.put('/set-points/:id/reset', async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/competitors/set-points/reset/${id}`,
-        method: 'PUT',
-        data: {
-          setPoints: 0,
-        },
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
 };
 
 module.exports = playersRoutes;

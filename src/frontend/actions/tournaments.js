@@ -1,11 +1,16 @@
 /* eslint-disable import/named */
 /* eslint-disable no-restricted-globals */
 import Axios from 'axios';
-import { NEW_TOURNAMENT, GET_TOURNAMENTS, GET_TOURNAMENT, SEARCH_RESULT } from '../types';
+import { NEW_TOURNAMENT, GET_TOURNAMENTS, GET_TOURNAMENT, SEARCH_RESULT, GET_TOURNAMENT_INFO_PRIZES } from '../types';
 import { nextStep } from './pending';
 
 export const newTournament = (payload) => ({
   type: NEW_TOURNAMENT,
+  payload,
+});
+
+export const getTournamentInfoPrizes = (payload) => ({
+  type: GET_TOURNAMENT_INFO_PRIZES,
   payload,
 });
 

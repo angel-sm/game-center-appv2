@@ -14,6 +14,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
         prizes: [],
         searchResult: [],
         tournamentId: PENDINGID,
+        prizesInfo: [],
       },
       seasons: {
         seasons: [],
@@ -28,6 +29,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
       players: {
         players: [],
         player: {},
+        playerPrizes: [],
       },
       pending: {
         step: parseInt(PENDINGSTEP),

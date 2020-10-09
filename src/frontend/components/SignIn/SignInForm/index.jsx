@@ -1,10 +1,19 @@
 /* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import { connect } from 'react-redux';
-import { FormControl, InputLabel, TextField, InputAdornment, OutlinedInput, Button } from '@material-ui/core';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { VisibilityOff, Visibility } from '@material-ui/icons';
-import IconButton from '@material-ui/core/IconButton';
+import { FormControl,
+  InputLabel,
+  TextField,
+  InputAdornment,
+  OutlinedInput,
+  Button,
+  CircularProgress,
+  IconButton,
+} from '@material-ui/core';
+import {
+  VisibilityOff,
+  Visibility,
+} from '@material-ui/icons';
 import { signInSolve } from '../../../actions/auth';
 
 import ErrorBar from '../../shared/ErrorBar';

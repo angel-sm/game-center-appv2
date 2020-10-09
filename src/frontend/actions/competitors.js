@@ -42,17 +42,9 @@ export const paidCompetitorRequest = (id) => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export const setPointsCompetitorRequest = (id, points) => (dispatch) => {
+export const setPointsCompetitorRequest = (id, points, place) => (dispatch) => {
   axios({
-    url: `/client/competitors/set-points/${id}/points/${points}`,
-    method: 'PUT',
-  })
-    .catch((error) => console.log(error));
-};
-
-export const nextRoundRequest = (id) => (dispatch) => {
-  axios({
-    url: `/client/competitors/set-points/${id}/reset`,
+    url: `/client/competitors/set-points-place/${id}/points/${points}/place/${place}`,
     method: 'PUT',
   })
     .catch((error) => console.log(error));

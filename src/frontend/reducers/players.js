@@ -1,5 +1,5 @@
 /* eslint-disable import/named */
-import { GET_ALL_PLAYERS, SEARCH_PLAYER } from '../types';
+import { GET_ALL_PLAYERS, SEARCH_PLAYER, GET_PLAYER_PRIZES } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -7,6 +7,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         players: action.payload,
+      };
+    case GET_PLAYER_PRIZES:
+      return {
+        ...state,
+        playerPrizes: action.payload,
       };
     case SEARCH_PLAYER:
       return {

@@ -3,16 +3,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
 import { connect } from 'react-redux';
-import Debtors from '../../components/TournamentView/Debtors';
+import { makeStyles } from '@material-ui/core/styles';
+import {
+  AppBar,
+  Tabs,
+  Tab,
+  Typography,
+  Box,
+} from '@material-ui/core';
+import Debtors from '../../components/TournamentView/DebtorsTable';
 import TournamentInfo from '../../components/TournamentView/TournamentInfo';
-import Paids from '../../components/TournamentView/Paids';
+import Paids from '../../components/TournamentView/PaidsTable';
 import CloseButton from '../../components/TournamentView/CloseButton';
 
 function TabPanel(props) {
@@ -50,8 +52,6 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
-    width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
 }));
@@ -99,4 +99,3 @@ const Home = (props) => {
 const mapStateToProps = (state) => state;
 
 export default connect(mapStateToProps, null)(Home);
-

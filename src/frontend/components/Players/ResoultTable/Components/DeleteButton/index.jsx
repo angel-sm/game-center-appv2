@@ -1,7 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
-import { deletePlayerRequest } from '../../../actions/players';
+import {
+  IconButton,
+} from '@material-ui/core';
+import DeleteIcon from '@material-ui/icons/Delete';
+import { deletePlayerRequest } from '../../../../../actions/players';
 
 const DeleteButton = (props) => {
   const handleDelete = () => {
@@ -9,9 +12,9 @@ const DeleteButton = (props) => {
     window.location.href = '/players';
   };
   return (
-    <Button color='secondary' disableElevation onClick={handleDelete}>
-      Eliminar jugador
-    </Button>
+    <IconButton aria-label='delete' color='secondary'>
+      <DeleteIcon onClick={handleDelete} />
+    </IconButton>
   );
 };
 

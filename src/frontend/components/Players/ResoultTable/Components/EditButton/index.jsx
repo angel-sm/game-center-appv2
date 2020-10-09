@@ -3,14 +3,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import { TextField, IconButton } from '@material-ui/core';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
-import useInputHandler from '../../../hooks/useInputHandler';
-import { updatePlayerRequest } from '../../../actions/players';
+import EditIcon from '@material-ui/icons/Edit';
+import useInputHandler from '../../../../../hooks/useInputHandler';
+import { updatePlayerRequest } from '../../../../../actions/players';
 
 const EditButton = (props) => {
   const { name, nickname, id } = props.player;
@@ -40,9 +41,9 @@ const EditButton = (props) => {
 
   return (
     <div>
-      <Button variant='outlined' color='primary' onClick={handleClickOpen}>
-        Editar jugador
-      </Button>
+      <IconButton aria-label='delete' color='primary' onClick={handleClickOpen}>
+        <EditIcon />
+      </IconButton>
       <Dialog open={open} onClose={handleClose} aria-labelledby='form-dialog-title'>
         <DialogTitle id='form-dialog-title'>Editar jugador</DialogTitle>
         <DialogContent>

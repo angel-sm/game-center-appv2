@@ -19,6 +19,19 @@ const prizesRoutes = (app) => {
     }
   });
 
+  router.get('/:searchBy/:id', async (req, res, next) => {
+    const { id, searchBy } = req.params;
+    try {
+      const { data } = await Axios({
+        url: `${process.env.API_URL}/api/player-prizes?${searchBy}=${id}`,
+        method: 'GET',
+      });
+      res.status(201).json(data);
+    } catch (error) {
+      console.log(error);
+    }
+  });
+
   router.post('/', async (req, res, next) => {
     const { body: prize } = req;
     try {
