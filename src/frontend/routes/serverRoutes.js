@@ -6,6 +6,7 @@ import Players from '../containers/Players';
 import SearchTournaments from '../containers/SearchTournaments';
 import Home from '../containers/Home';
 import ConfigPts from '../containers/ConfigPts';
+import CreditStore from '../containers/CreditStore';
 
 const routes = (isLogged) => {
   return [
@@ -18,6 +19,11 @@ const routes = (isLogged) => {
       path: '/registertournament',
       exact: true,
       component: NewTournament,
+    },
+    {
+      path: '/credit',
+      exact: true,
+      component: CreditStore,
     },
     {
       path: '/tournaments/:id',

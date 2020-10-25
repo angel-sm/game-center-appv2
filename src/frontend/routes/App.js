@@ -13,12 +13,18 @@ import Players from '../containers/Players';
 import SearchTournaments from '../containers/SearchTournaments';
 import Home from '../containers/Home';
 import ConfigPts from '../containers/ConfigPts';
+import CreditStore from '../containers/CreditStore';
 
 const loggedRoutes = [
   {
     path: '/',
     exact: true,
     component: Home,
+  },
+  {
+    path: '/credit',
+    exact: true,
+    component: CreditStore,
   },
   {
     path: '/registertournament',

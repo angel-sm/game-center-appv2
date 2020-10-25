@@ -7,6 +7,7 @@ import center from './center';
 import tournaments from './tournaments';
 import games from './games';
 import seasons from './seasons';
+import sales from './sales';
 
 export default combineReducers({
   auth,
@@ -17,4 +18,5 @@ export default combineReducers({
   tournaments,
   games,
   seasons,
+  sales,
 });

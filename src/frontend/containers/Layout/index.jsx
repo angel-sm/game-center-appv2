@@ -2,24 +2,37 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
+import {
+  AppBar,
+  CssBaseline,
+  Drawer,
+  Hidden,
+  Divider,
+  IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+} from '@material-ui/core';
+
+import {
+  Create,
+  Search,
+  CreditCard,
+  AttachMoney,
+  Settings,
+  Assessment,
+  Face,
+  Home,
+} from '@material-ui/icons';
+
 import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import { useTheme } from '@material-ui/core/styles';
-import { Create, Search, CreditCard, AttachMoney, Settings, Assessment, Face, Home } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../../components/Layout/Profile';
-import { useStyles, ProfileControllerContent, BannerFont } from './Layout.styles';
+import { useStyles, ProfileControllerContent, BannerFont } from './styles';
 import { logout } from '../../actions/auth';
 import Seasons from '../../components/Layout/Seasons';
 import { getTournamentsRequest } from '../../actions/tournaments';

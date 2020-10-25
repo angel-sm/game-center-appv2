@@ -12,10 +12,13 @@ import {
   Paper,
   Toolbar,
   Typography,
+  IconButton,
 } from '@material-ui/core';
-import VisibilityIcon from '@material-ui/icons/Visibility';
+import AssignmentIcon from '@material-ui/icons/Assignment';
 import moment from 'moment';
 import { useStyles } from './styles';
+
+const tableCells = ['Torneo', 'Costo', 'Fecha inicio', 'Fecha cierre', 'Juego', 'Descripcion', 'Organizador', 'Temporada', 'Detalles'];
 
 const LastTournaments = (props) => {
   const classes = useStyles();
@@ -31,37 +34,35 @@ const LastTournaments = (props) => {
         <Table className={classes.table} aria-label='simple table'>
           <TableHead>
             <TableRow>
-              <TableCell>Torneo</TableCell>
-              <TableCell align='right'>Costo</TableCell>
-              <TableCell align='right'>Fecha inicio</TableCell>
-              <TableCell align='right'>Fecha cierre</TableCell>
-              <TableCell align='right'>Juego</TableCell>
-              <TableCell align='right'>Descripcion</TableCell>
-              <TableCell align='right'>Organizador</TableCell>
-              <TableCell align='right'>Ver Temporada</TableCell>
-              <TableCell align='right'>Ver Torneo</TableCell>
+              {
+                tableCells.map((cell) => <TableCell>{cell}</TableCell>)
+              }
             </TableRow>
           </TableHead>
           <TableBody>
             {props.tournaments.tournaments.filter((tournament) => (tournament.isActive !== 0 ? tournament : null)).slice(0, 5).map((row) => (
               <TableRow key={row.id}>
                 <TableCell component='th' scope='row'>{row.tournament}</TableCell>
-                <TableCell align='right'>
+                <TableCell>
                   {row.cost}
                 </TableCell>
-                <TableCell align='right'>{moment(row.start).utc(true).format('YYYY-MM-DD')}</TableCell>
-                <TableCell align='right'>{row.end != null ? moment(row.end).utc(true).format('YYYY-MM-DD') : 'activo'}</TableCell>
-                <TableCell align='right'>{row.game}</TableCell>
-                <TableCell align='right'>{row.description}</TableCell>
-                <TableCell align='right'>{row.organizer}</TableCell>
-                <TableCell align='right'>
+                <TableCell>{moment(row.start).utc(true).format('YYYY-MM-DD')}</TableCell>
+                <TableCell>{row.end != null ? moment(row.end).utc(true).format('YYYY-MM-DD') : 'activo'}</TableCell>
+                <TableCell>{row.game}</TableCell>
+                <TableCell>{row.description}</TableCell>
+                <TableCell>{row.organizer}</TableCell>
+                <TableCell>
                   {
                     row.season != null ?
                       <Link to={row.season}>{row.seasonName}</Link> : 'Sin temporada'
                   }
                 </TableCell>
-                <TableCell align='right'>
-                  <Link to={`/tournaments/${row.id}`}><VisibilityIcon /></Link>
+                <TableCell>
+                  <Link to={`/tournaments/${row.id}`}>
+                    <IconButton aria-label='detalles del torneo' color='primary'>
+                      <AssignmentIcon />
+                    </IconButton>
+                  </Link>
                 </TableCell>
               </TableRow>
             ))}

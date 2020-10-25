@@ -1,10 +1,15 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
-import { GET_ALL_PLAYERS, SEARCH_PLAYER, GET_PLAYER_PRIZES } from '../types';
+import { GET_ALL_PLAYERS, SEARCH_PLAYER, GET_PLAYER_PRIZES, RESET_PLAYER } from '../types';
 import { setErrorRequest } from './status';
 
 export const getAllPlayers = (payload) => ({
   type: GET_ALL_PLAYERS,
+  payload,
+});
+
+export const resetPlayer = (payload) => ({
+  type: RESET_PLAYER,
   payload,
 });
 
@@ -36,7 +41,6 @@ export const searchPlayerRequest = (nickname) => (dispatch) => {
   })
     .then(({ data }) => {
       const [player] = data.player;
-      console.log(player);
       player !== undefined ? dispatch(searchPlayer(player)) :
         dispatch(setErrorRequest('No existe ningun jugador con ese nombre'));
     })

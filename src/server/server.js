@@ -21,6 +21,8 @@ import seasonsRoutes from './routes/seasons';
 import gamesRoutes from './routes/games';
 import seasonGameRoutes from './routes/seasonGame';
 import tournamentsGameRoutes from './routes/tournamentsGame';
+import sales from './routes/sales';
+import playerSaleRoutes from './routes/playerSales';
 
 dotenv.config();
 
@@ -64,6 +66,8 @@ gamesRoutes(app);
 seasonGameRoutes(app);
 centerSeasonsRoutes(app);
 tournamentsGameRoutes(app);
+sales(app);
+playerSaleRoutes(app);
 
 app.get('*', renderApp);
 

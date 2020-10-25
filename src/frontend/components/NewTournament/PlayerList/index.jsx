@@ -4,70 +4,25 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import clsx from 'clsx';
-import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TablePagination from '@material-ui/core/TablePagination';
-import TableRow from '@material-ui/core/TableRow';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import { FormControl, Button } from '@material-ui/core';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TablePagination,
+  TableRow,
+  Toolbar,
+  Typography,
+  Paper,
+  Checkbox,
+  FormControl,
+  Button,
+} from '@material-ui/core';
 import { getAllPlayersRequest } from '../../../actions/players';
 import { registerCompetitorsRequest } from '../../../actions/competitors';
 import { cancelRegisterTournamentRequest } from '../../../actions/tournaments';
 import { nextStep } from '../../../actions/pending';
-import AddPlayerButton from '../../Players/AddPlayerButton';
-
-const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  highlight:
-    theme.palette.type === 'light' ?
-      {
-        color: theme.palette.secondary.main,
-        backgroundColor: lighten(theme.palette.secondary.light, 0.85),
-      } :
-      {
-        color: theme.palette.text.primary,
-        backgroundColor: theme.palette.secondary.dark,
-      },
-  title: {
-    flex: '1 1 100%',
-  },
-}));
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
-  table: {
-    minWidth: 750,
-  },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}));
+import { useStyles, useToolbarStyles } from './styles';
 
 const PlayerList = (props) => {
   const classes = useStyles();
@@ -129,7 +84,6 @@ const PlayerList = (props) => {
 
   return (
     <div className={classes.root}>
-      <AddPlayerButton redirect='/registertournament' />
       <Paper className={classes.paper}>
         <Toolbar className={clsx(toolbar.root, {
           [toolbar.highlight]: selected.length > 0,

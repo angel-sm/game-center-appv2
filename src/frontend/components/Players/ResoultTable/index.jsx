@@ -21,7 +21,7 @@ const ResoultTable = (props) => {
   const { playerResoult } = props;
   const classes = useStyles();
 
-  const playerKeys = ['Nombre', 'Credito', 'Nickname', 'Tienda', 'Editar', 'Eliminar'];
+  const playerKeys = ['Nombre', 'Credito', 'Nickname', 'Apellido', 'Email', 'Se unio', 'Tienda', 'Editar', 'Eliminar'];
 
   return (
     <Paper>

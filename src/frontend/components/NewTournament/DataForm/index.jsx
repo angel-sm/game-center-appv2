@@ -1,19 +1,27 @@
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable import/no-unresolved */
-/* eslint-disable radix */
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable radix */
 import 'date-fns';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import DateFnsUtils from '@date-io/date-fns';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import { FormControl, Button, TextField, Select, MenuItem, Checkbox, FormControlLabel, Divider } from '@material-ui/core';
-import InputAdornment from '@material-ui/core/InputAdornment';
+import {
+  Input,
+  FormControl,
+  Button,
+  TextField,
+  Select,
+  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  Divider,
+  InputLabel,
+  InputAdornment,
+} from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
 import { newtournamentRequest } from '../../../actions/tournaments';
 import useInputValueHandle from '../../../hooks/useInputHandler';
@@ -135,7 +143,7 @@ const DataForm = (props) => {
         </MuiPickersUtilsProvider>
       </FormControl>
       <FormControl className={classes.chaild}>
-        <InputLabel htmlFor='standard-adornment-amount'>Ganancia del torneo</InputLabel>
+        <InputLabel htmlFor='standard-adornment-amount'>Costo</InputLabel>
         <Input
           {...handleValue}
           name='earn'
@@ -145,23 +153,12 @@ const DataForm = (props) => {
         />
       </FormControl>
       <FormControl className={classes.chaild}>
-        <InputLabel htmlFor='standard-adornment-amount'>Costo por jugador</InputLabel>
+        <InputLabel htmlFor='standard-adornment-amount'>Credito</InputLabel>
         <Input
           {...handleValue}
           name='creditPerPlayer'
           id='standard-adornment-amount'
           value={handleValue.form.creditPerPlayer}
-          startAdornment={<InputAdornment position='start'>$</InputAdornment>}
-        />
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <InputLabel htmlFor='standard-adornment-amount'>Costo de la inscripcion</InputLabel>
-        <Input
-          {...handleValue}
-          name='creditPerPlayer'
-          id='standard-adornment-amount'
-          disabled
-          value={parseInt(handleValue.form.earn) + parseInt(handleValue.form.creditPerPlayer)}
           startAdornment={<InputAdornment position='start'>$</InputAdornment>}
         />
       </FormControl>

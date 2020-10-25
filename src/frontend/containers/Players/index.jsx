@@ -1,24 +1,33 @@
 /* eslint-disable react/destructuring-assignment */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import SearchPlayer from '../../components/Players/SearchPlayer';
-import AddPlayerButton from '../../components/Players/AddPlayerButton';
+import AddPlayer from '../../components/Players/AddPlayer';
 import ResoultTable from '../../components/Players/ResoultTable';
 import TournamentsDescription from '../../components/Players/TournamentsDescription';
+import { resetPlayer } from '../../actions/players';
 
 const Players = (props) => {
+
+  useEffect(() => {
+    props.resetPlayer({});
+  }, [props.match.url]);
 
   return (
     <>
       <SearchPlayer />
       {Object.keys(props.players.player).length > 0 ? <ResoultTable playerResoult={props.players.player} /> : null}
       {Object.keys(props.players.player).length > 0 ? <TournamentsDescription playerResoult={props.players.player} /> : null}
-      <AddPlayerButton redirect='/players' />
+      <AddPlayer redirect='/players' />
     </>
   );
 };
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, null)(Players);
+const dispatchSateteToProps = {
+  resetPlayer,
+};
+
+export default connect(mapStateToProps, dispatchSateteToProps)(Players);
 

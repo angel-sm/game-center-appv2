@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -12,7 +13,6 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { Link } from 'react-router-dom';
 import { useStyles } from './styles';
 import { getPrizesByRequest } from '../../../actions/prizes';
 
@@ -24,7 +24,6 @@ const TournamentDescription = (props) => {
     props.getPrizesByRequest('player', playerResoult.id);
   }, [playerResoult]);
 
-  console.log(props);
   const playerKeys = ['Torneo', 'Credito total del torneo torneo', 'Puntos del jugador', 'Lugar', 'Porsentaje premio', 'Credito ganado'];
 
   return (

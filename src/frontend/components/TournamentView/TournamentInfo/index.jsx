@@ -32,7 +32,7 @@ const TournamentInfo = (props) => {
         data={`$ ${tournament.totalCredit}`}
       />
       <SimpleCard
-        title='Ganancia por jugador inscrito'
+        title='Costo'
         data={`$ ${tournament.earn}`}
       />
       <SimpleCard
@@ -40,7 +40,7 @@ const TournamentInfo = (props) => {
         data={`$ ${tournament.cost}`}
       />
       <SimpleCard
-        title='Costo por jugador inscrito'
+        title='Credito'
         data={`$ ${tournament.creditPerPlayer}`}
       />
       <SimpleCard
