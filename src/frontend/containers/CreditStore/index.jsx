@@ -6,11 +6,14 @@ import Credit from '../../components/CreditStore/Credit';
 const CreditStore = (props) => {
 
   const getParameters = (str = '') => {
-    const queryValues = str.replace('?', '').replace(/&/g, ',').replace(/=/g, ',').split(',');
+    const queryValues = str
+      .replace('?', '')
+      .replace(/&/g, ',')
+      .replace(/=/g, ',')
+      .split(',');
     return {
       player: queryValues[1],
-      credits: queryValues[3],
-      from: queryValues[5],
+      from: queryValues[3],
     };
   };
 

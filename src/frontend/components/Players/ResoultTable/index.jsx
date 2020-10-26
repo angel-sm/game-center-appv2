@@ -52,7 +52,7 @@ const ResoultTable = (props) => {
                 })
               }
               <TableCell component='th' scope='row'>
-                {playerResoult.credit > 0 ? <CreditButton disabled={false} player={playerResoult.nickname} maxofcredit={playerResoult.credit} /> : <CreditButton disabled={true} player={playerResoult.nickname} />}
+                <CreditButton player={playerResoult.nickname} maxofcredit={playerResoult.credit} />
               </TableCell>
               <TableCell component='th' scope='row'><EditButton player={playerResoult} /></TableCell>
               <TableCell component='th' scope='row'><DeleteButton playerId={playerResoult.id} /></TableCell>

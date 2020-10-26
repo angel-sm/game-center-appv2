@@ -9,6 +9,7 @@ import { connect } from 'react-redux';
 import SearchPlayer from '../../Players/SearchPlayer';
 import TableResult from '../TableResult';
 import ProductList from '../ProductsList';
+import { searchPlayerRequest } from '../../../actions/players';
 
 const Credit = (props) => {
   const { from } = props.playerData;
@@ -16,7 +17,11 @@ const Credit = (props) => {
   const [player, setPlayer] = useState(checked ? props.players.player : {});
 
   const handlePlayerSelected = (e) => setPlayer(e);
-  console.log(player);
+
+  const handleRefreshPlayerSearch = () => {
+    props.searchPlayerRequest(player.nickname);
+  };
+
   return (
     <div>
       <FormControlLabel
@@ -37,11 +42,15 @@ const Credit = (props) => {
         ) : null
       }
       {/* List of products to change*/}
-      <ProductList player={player || {}} />
+      <ProductList player={player || {}} handleRefreshPlayerSearch={handleRefreshPlayerSearch} />
     </div>
   );
 };
 
 const mapStateToProps = (state) => state;
 
-export default connect(mapStateToProps, null)(Credit);
+const dispatchStateToProps = {
+  searchPlayerRequest,
+};
+
+export default connect(mapStateToProps, dispatchStateToProps)(Credit);

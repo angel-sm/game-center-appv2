@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 import axios from 'axios';
 import { REGISTER_SALE } from '../types';
+import { updatePlayerRequest } from './players';
 
 export const registerSale = (payload) => ({
   type: REGISTER_SALE,
@@ -13,7 +14,6 @@ export const registerPlayerSale = (payload) => ({
 });
 
 export const registerPlayerSalesRequest = (data) => (dispatch) => {
-  console.log('entro');
   axios({
     url: '/client/player-sale',
     method: 'POST',
@@ -32,7 +32,8 @@ export const registerSaleRequest = (data, player, productList) => (dispatch) => 
     data,
   })
     .then(({ data }) => {
-      dispatch(registerPlayerSalesRequest({ sale: data.id, player }));
+      dispatch(registerPlayerSalesRequest({ sale: data.id, player: player.player }));
+      dispatch(updatePlayerRequest(player.player, { credit: player.creditOfPlayer }));
       dispatch(registerSale(data.id));
     })
     .catch((error) => console.log(error));

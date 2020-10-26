@@ -20,7 +20,7 @@ import TableProducts from '../TableProducts';
 import { useStyles } from './styles';
 
 const ProductList = (props) => {
-  const { player } = props;
+  const { player, handleRefreshPlayerSearch } = props;
   const classes = useStyles();
   const [list, setList] = useState([]);
   const [isDeleted, setIsDeleted] = useState(false);
@@ -148,7 +148,7 @@ const ProductList = (props) => {
         )
       }
       {/* Table of products added to change */}
-      <TableProducts listOfProducts={list} player={player} handleCleanList={handleCleanList} />
+      <TableProducts listOfProducts={list} player={player} handleCleanList={handleCleanList} handleRefreshPlayerSearch={handleRefreshPlayerSearch} />
     </>
   );
 };

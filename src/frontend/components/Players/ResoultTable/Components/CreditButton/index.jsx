@@ -8,11 +8,11 @@ import {
 import StorefrontIcon from '@material-ui/icons/Storefront';
 
 export default function CreditButton(props) {
-  const { player, maxofcredit } = props;
+  const { player } = props;
   return (
     <div>
       <IconButton color='primary' aria-label='ir a ventas' {...props}>
-        <Link to={`/credit?player=${player}&credit=${maxofcredit}&from=${true}`}>
+        <Link to={`/credit?player=${player}&from=${true}`}>
           <StorefrontIcon />
         </Link>
       </IconButton>

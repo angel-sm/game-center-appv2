@@ -35,6 +35,7 @@ export const getAllPlayersRequest = () => (dispatch) => {
 };
 
 export const searchPlayerRequest = (nickname) => (dispatch) => {
+  console.log(nickname);
   axios({
     url: `/client/players/player/${nickname}`,
     method: 'GET',
@@ -63,7 +64,7 @@ export const updatePlayerRequest = (id, data) => (dispatch) => {
     data,
   })
     .then(({ data }) => {
-      dispatch(searchPlayerRequest(id));
+      console.log(data);
     })
     .catch((error) => console.log(error));
 };

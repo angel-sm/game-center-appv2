@@ -19,10 +19,20 @@ const tableCells = ['Clave', 'Producto', 'Costo', 'Cantidad'];
 const total = (items) => items.map(({ price, amount }) => price * amount).reduce((sum, i) => sum + i, 0);
 
 export default function TableProducts(props) {
-  const { listOfProducts, player, handleCleanList } = props;
+  const { listOfProducts, player, handleCleanList, handleRefreshPlayerSearch } = props;
   const getTotal = total(listOfProducts);
-  const remainingCredit = getTotal > player.credit ? 0 : player.credit - getTotal;
-  const moneyAmount = getTotal > player.credit ? ((player.credit - getTotal) * -1) : 0;
+  let creditOfPlayer;
+  let remainingMoney;
+
+  if (player.id !== undefined) {
+    // Player
+    creditOfPlayer = getTotal > player.credit ? 0 : player.credit - getTotal;
+    remainingMoney = getTotal > player.credit ? ((player.credit - getTotal) * -1) : 0;
+  } else {
+    // Player
+    creditOfPlayer = 0;
+    remainingMoney = getTotal;
+  }
 
   const classes = useStyles();
 
@@ -68,14 +78,14 @@ export default function TableProducts(props) {
             <TableRow>
               <TableCell rowSpan={1} />
               <TableCell colSpan={3}><strong>Creditos restantes del jugador</strong></TableCell>
-              <TableCell>{`$ ${remainingCredit || 0}`}</TableCell>
+              <TableCell>{`$ ${creditOfPlayer || 0}`}</TableCell>
             </TableRow>
             {
-              getTotal > player.credit ? (
+              getTotal > player.credit || player.id === undefined ? (
                 <TableRow>
                   <TableCell rowSpan={1} />
                   <TableCell colSpan={3}><strong>Total restante a pagar en efectivo</strong></TableCell>
-                  <TableCell>{`$ ${moneyAmount}`}</TableCell>
+                  <TableCell>{`$ ${remainingMoney}`}</TableCell>
                 </TableRow>
               ) : null
             }
@@ -85,10 +95,11 @@ export default function TableProducts(props) {
       <ChangeButton
         player={player}
         totalSale={getTotal}
-        remainingCredit={remainingCredit}
-        moneyAmount={moneyAmount}
+        creditOfPlayer={creditOfPlayer || 0}
+        remainingMoney={remainingMoney}
         products={listOfProducts}
         handleCleanTable={handleCleanTable}
+        handleRefreshPlayerSearch={handleRefreshPlayerSearch}
       />
     </Paper>
   );
