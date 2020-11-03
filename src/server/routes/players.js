@@ -18,11 +18,12 @@ const playersRoutes = (app) => {
     }
   });
 
-  router.get('/player/:nickname', async (req, res, next) => {
-    const { nickname } = req.params;
+  router.get('/player/:type/:player', async (req, res, next) => {
+    const { player, type } = req.params;
+    console.log(type);
     try {
       const { data } = await Axios({
-        url: `${process.env.API_URL}/api/players/player?nickname=${nickname}`,
+        url: `${process.env.API_URL}/api/players/player?${type}=${player}`,
         method: 'GET',
       });
       res.status(201).json(data);

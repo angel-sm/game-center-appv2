@@ -12,7 +12,7 @@ const CloseButton = (props) => {
     props.tournaments.prizes.map((prize, i) => {
       props.relationPlayerPrizeRequest({ player: props.tournaments.competitors[i].player, prize: prize.id });
     });
-    props.closeTournamentRequest(props.tournamentId, { end: moment(new Date()).utc(true).format('YYYY-MM-DD'), isActive: 1 });
+    props.closeTournamentRequest(props.tournamentId, { end: moment(new Date()).utc(true).format('YYYY-MM-DD') });
     window.location.href = '/';
   };
 

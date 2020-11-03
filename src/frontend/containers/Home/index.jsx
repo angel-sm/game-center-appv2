@@ -16,6 +16,7 @@ import Debtors from '../../components/TournamentView/DebtorsTable';
 import TournamentInfo from '../../components/TournamentView/TournamentInfo';
 import Paids from '../../components/TournamentView/PaidsTable';
 import CloseButton from '../../components/TournamentView/CloseButton';
+import { ClearButton } from '../../components/TournamentView/ClearButton';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -88,6 +89,9 @@ const Home = (props) => {
               <Debtors tournamentId={tournament.id} />
               <Paids tournamentId={tournament.id} />
               <CloseButton tournamentId={tournament.id} />
+              {
+                tournament.end !== null ? <ClearButton tournamentId={tournament.id} /> : null
+              }
             </>
           </TabPanel>
         ))

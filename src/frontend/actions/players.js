@@ -34,16 +34,15 @@ export const getAllPlayersRequest = () => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
-export const searchPlayerRequest = (nickname) => (dispatch) => {
-  console.log(nickname);
+export const searchPlayerRequest = (player, type) => (dispatch) => {
   axios({
-    url: `/client/players/player/${nickname}`,
+    url: `/client/players/player/${type}/${player}`,
     method: 'GET',
   })
     .then(({ data }) => {
       const [player] = data.player;
       player !== undefined ? dispatch(searchPlayer(player)) :
-        dispatch(setErrorRequest('No existe ningun jugador con ese nombre'));
+        dispatch(setErrorRequest('No se encontro ningun jugador'));
     })
     .catch((error) => console.log(error));
 };
