@@ -2,9 +2,19 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import styled from 'styled-components';
 import { getTournamentRequest } from '../../../actions/tournaments';
 import { getPrizesRequest } from '../../../actions/prizes';
 import SimpleCard from '../../shared/CardInfo';
+
+const CardsComtainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+`;
 
 const TournamentInfo = (props) => {
   useEffect(() => {
@@ -18,7 +28,7 @@ const TournamentInfo = (props) => {
 
   const { tournament } = props.tournaments;
   return (
-    <>
+    <CardsComtainer>
       <SimpleCard
         title='ID'
         data={tournament.id}
@@ -67,7 +77,7 @@ const TournamentInfo = (props) => {
         title='Temporada'
         data={tournament.seasonName !== null ? tournament.seasonName : 'Sin temporada'}
       />
-    </>
+    </CardsComtainer>
   );
 };
 

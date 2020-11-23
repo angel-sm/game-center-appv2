@@ -5,4 +5,11 @@ export const useStyles = makeStyles({
   table: {
     minWidth: 700,
   },
+  paper: {
+    width: '90%',
+    margin: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+  },
 });

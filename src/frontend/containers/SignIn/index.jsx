@@ -5,15 +5,20 @@ import {
   FormContainer,
   SingInContainer,
   Title,
+  Image,
+  SingInControl,
 } from './styles';
 
 const SignIn = () => {
   return (
     <SingInContainer>
-      <FormContainer>
-        <Title>Inicia sesion</Title>
-        <SignInForm />
-      </FormContainer>
+      <SingInControl>
+        <Image src='https://res.cloudinary.com/saponestore/image/upload/v1605900695/game-center/undraw_video_game_night_8h8m_vceuwj.svg' />
+        <FormContainer>
+          <Title>Inicia sesion</Title>
+          <SignInForm />
+        </FormContainer>
+      </SingInControl>
     </SingInContainer>
   );
 };

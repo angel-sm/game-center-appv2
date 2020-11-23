@@ -23,6 +23,8 @@ const tableCells = ['Torneo', 'Costo', 'Fecha inicio', 'Fecha cierre', 'Juego', 
 const LastTournaments = (props) => {
   const classes = useStyles();
 
+  const { tournaments } = props.tournaments;
+
   return (
     <Paper>
       <Toolbar>
@@ -35,12 +37,12 @@ const LastTournaments = (props) => {
           <TableHead>
             <TableRow>
               {
-                tableCells.map((cell) => <TableCell>{cell}</TableCell>)
+                tableCells.map((cell) => <TableCell key={cell}>{cell}</TableCell>)
               }
             </TableRow>
           </TableHead>
           <TableBody>
-            {props.tournaments.tournaments.filter((tournament) => (tournament.isActive !== 0 ? tournament : null)).slice(0, 5).map((row) => (
+            {tournaments.filter((tournament) => (tournament.isActive !== 0 ? tournament : null)).slice(0, 5).map((row, index) => (
               <TableRow key={row.id}>
                 <TableCell component='th' scope='row'>{row.tournament}</TableCell>
                 <TableCell>

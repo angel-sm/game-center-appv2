@@ -29,7 +29,7 @@ const ResoultTable = (props) => {
 
   return (
     <>
-      <Paper>
+      <Paper className={classes.paper}>
         <Toolbar>
           <Typography variant='h6' id='tableTitle' component='div'>
             Resultado de la busqueda

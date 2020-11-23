@@ -33,7 +33,7 @@ const TournamentResult = ({ tournament }) => {
           <TableHead>
             <TableRow>
               {
-                tableCells.map((cell) => <TableCell>{cell}</TableCell>)
+                tableCells.map((cell) => <TableCell key={cell}>{cell}</TableCell>)
               }
             </TableRow>
           </TableHead>
@@ -53,7 +53,7 @@ const TournamentResult = ({ tournament }) => {
                   <TableCell>
                     {
                       row.season != null ?
-                        <Link to={row.season}>{row.seasonName}</Link> : row.seasonName
+                        <Link to={row.season}>{row.seasonName}</Link> : 'Sin temporada'
                     }
                   </TableCell>
                   <TableCell>

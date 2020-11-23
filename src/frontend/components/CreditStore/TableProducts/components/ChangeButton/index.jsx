@@ -3,22 +3,9 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
 import { connect } from 'react-redux';
-import {
-  Button,
-} from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 import { registerSaleRequest, registerPlayerSalesRequest } from '../../../../../actions/sales';
 import { searchPlayerRequest } from '../../../../../actions/players';
-
-const ColorButton = withStyles((theme) => ({
-  root: {
-    color: '#fff',
-    backgroundColor: '#00c853',
-    '&:hover': {
-      backgroundColor: '#00e676',
-    },
-  },
-}))(Button);
+import { ColorButton } from './style';
 
 const mapStateToProps = (state) => state;
 

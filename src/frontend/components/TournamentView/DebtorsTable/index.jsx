@@ -20,7 +20,7 @@ import {
 } from '@material-ui/core';
 import PaymentIcon from '@material-ui/icons/Payment';
 import { getCompetitorsRequest, paidCompetitorRequest, setPaid } from '../../../actions/competitors';
-import { useStyles, useToolbarStyles } from './styles';
+import { useStyles, useToolbarStyles, TableControl } from './styles';
 
 const Debtors = (props) => {
 
@@ -29,7 +29,7 @@ const Debtors = (props) => {
 
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
     setSelected([]);
@@ -62,7 +62,7 @@ const Debtors = (props) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 5));
     setPage(0);
   };
 
@@ -81,7 +81,7 @@ const Debtors = (props) => {
 
   return (
     debtorsList.length === 0 ? null : (
-      <div className={classes.root}>
+      <TableControl>
         <Paper className={classes.paper}>
           <Toolbar className={clsx(toolbar.root, {
             [toolbar.highlight]: selected.length > 0,
@@ -160,7 +160,7 @@ const Debtors = (props) => {
             />
           )}
         </Paper>
-      </div>
+      </TableControl>
     )
   );
 };

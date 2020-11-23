@@ -5,13 +5,16 @@
 import React, { useState, useEffect } from 'react';
 import TextField from '@material-ui/core/TextField';
 import { connect } from 'react-redux';
-import { FormControl, Button } from '@material-ui/core';
+import { FormControl, Button, Paper, Toolbar, Typography } from '@material-ui/core';
 import { getAllPlayersRequest, searchPlayerRequest } from '../../../actions/players';
 import useInputHandler from '../../../hooks/useInputHandler';
 import { TypeSearch } from './components/TypeSearch';
 import { setErrorRequest } from '../../../actions/status';
+import { Form, Space, useStyles } from './styles';
 
 const SearchPlayer = (props) => {
+
+  const classes = useStyles();
 
   const hanlderInput = useInputHandler({
     player: '',
@@ -25,8 +28,8 @@ const SearchPlayer = (props) => {
 
   const [type, setType] = useState('name');
 
-  const handleChange = (event) => {
-    setType(event.target.value);
+  const handleChange = (type) => {
+    setType(type);
     hanlderInput.form.player = '';
   };
 
@@ -37,14 +40,22 @@ const SearchPlayer = (props) => {
   };
 
   return (
-    <>
-      <TypeSearch handleChange={handleChange} value={type} />
-      <form onSubmit={handleSearch}>
+    <Paper className={classes.root}>
+      <Toolbar>
+        <Typography variant='h6' id='tableTitle' component='div'>
+          Buscar jugador
+        </Typography>
+      </Toolbar>
+      <Form onSubmit={handleSearch}>
+        <Space>Buscar por: </Space>
+        <TypeSearch handleChange={handleChange} value={type} />
+        <Space> - </Space>
         <FormControl>
           {props.status.error !== '' ? (
             <TextField error helperText={`${props.status.error}`} value={hanlderInput.form.player} />
           ) : <TextField id='standard-basic' {...hanlderInput} name='player' value={hanlderInput.form.player} />}
         </FormControl>
+        <Space />
         {
           hanlderInput.form.player !== '' ? (
             <Button
@@ -64,8 +75,8 @@ const SearchPlayer = (props) => {
             </Button>
           )
         }
-      </form>
-    </>
+      </Form>
+    </Paper>
   );
 };
 

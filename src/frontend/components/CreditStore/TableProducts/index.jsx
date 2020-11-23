@@ -7,47 +7,39 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Toolbar,
-  Typography,
 } from '@material-ui/core';
 import { useStyles } from './styles';
 
 import { ChangeButton } from './components/ChangeButton';
+import { Title } from '../../shared/Title';
 
 const tableCells = ['Clave', 'Producto', 'Costo', 'Cantidad'];
 
 const total = (items) => items.map(({ price, amount }) => price * amount).reduce((sum, i) => sum + i, 0);
 
 export default function TableProducts(props) {
+  const classes = useStyles();
   const { listOfProducts, player, handleCleanList, handleRefreshPlayerSearch } = props;
   const getTotal = total(listOfProducts);
   let creditOfPlayer;
   let remainingMoney;
 
   if (player.id !== undefined) {
-    // Player
     creditOfPlayer = getTotal > player.credit ? 0 : player.credit - getTotal;
     remainingMoney = getTotal > player.credit ? ((player.credit - getTotal) * -1) : 0;
   } else {
-    // Player
     creditOfPlayer = 0;
     remainingMoney = getTotal;
   }
-
-  const classes = useStyles();
 
   const handleCleanTable = () => {
     handleCleanList();
   };
 
   return (
-    <Paper>
-      <Toolbar>
-        <Typography variant='h6' id='tableTitle' component='div'>
-          Lista de productos a cangear
-        </Typography>
-      </Toolbar>
+    <Paper className={classes.paper}>
       <TableContainer component={Paper}>
+        <Title title='Lista de productos a cangear' />
         <Table className={classes.table} aria-label='spanning table'>
           <TableHead>
             <TableRow>

@@ -3,12 +3,11 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles({
   root: {
-    margin: '1em 0',
+    margin: '1em auto',
     padding: '1em',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    width: '90%',
   },
   formChild: {
     margin: '.5em 0',

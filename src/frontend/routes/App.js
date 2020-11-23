@@ -18,17 +18,14 @@ import CreditStore from '../containers/CreditStore';
 const loggedRoutes = [
   {
     path: '/',
-    exact: true,
     component: Home,
   },
   {
     path: '/credit',
-    exact: true,
     component: CreditStore,
   },
   {
     path: '/registertournament',
-    exact: true,
     component: NewTournament,
   },
   {
@@ -38,21 +35,17 @@ const loggedRoutes = [
   },
   {
     path: '/players',
-    exact: true,
     component: Players,
   },
   {
     path: '/search-tournaments',
-    exact: true,
     component: SearchTournaments,
   },
   {
     path: '/config-points',
-    exact: true,
     component: ConfigPts,
   },
   {
-    exact: true,
     component: NotFound,
   },
 ];

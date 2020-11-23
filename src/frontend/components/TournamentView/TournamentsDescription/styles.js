@@ -5,4 +5,7 @@ export const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  paper: {
+    width: '100%',
+  },
 });

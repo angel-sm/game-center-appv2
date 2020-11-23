@@ -1,4 +1,5 @@
 import { lighten, makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
 export const useToolbarStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +25,6 @@ export const useToolbarStyles = makeStyles((theme) => ({
 }));
 
 export const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
@@ -46,3 +44,8 @@ export const useStyles = makeStyles((theme) => ({
     width: 1,
   },
 }));
+
+export const TableControl = styled.div`
+  width: 100%;
+  margin: '1em';
+`;

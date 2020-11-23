@@ -34,7 +34,6 @@ const centerSeasonsRoutes = (app) => {
 
   router.post('/', async (req, res, next) => {
     const { body: season } = req;
-    console.log(season);
     try {
       const { data } = await Axios({
         url: `${process.env.API_URL}/api/center-seasons`,

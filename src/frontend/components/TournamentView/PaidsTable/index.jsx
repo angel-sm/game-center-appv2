@@ -18,7 +18,7 @@ import {
 } from '@material-ui/core';
 import { getCompetitorsRequest } from '../../../actions/competitors';
 import AddPoints from './components/AddPoints';
-import { useToolbarStyles, useStyles } from './styles';
+import { useToolbarStyles, useStyles, TableControl } from './styles';
 
 const Paids = (props) => {
   const classes = useStyles();
@@ -54,7 +54,7 @@ const Paids = (props) => {
   const debtorsList = props.tournaments.competitors.filter((c) => c.paid === 'debtor');
 
   return (
-    <div className={classes.root}>
+    <TableControl>
       <Paper className={classes.paper}>
         {
           paidsList.length === 0 ? (
@@ -156,7 +156,7 @@ const Paids = (props) => {
           )
         }
       </Paper>
-    </div>
+    </TableControl>
   );
 };
 

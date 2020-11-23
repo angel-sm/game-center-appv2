@@ -15,22 +15,24 @@ import {
   Typography,
   Paper,
   Checkbox,
-  FormControl,
   Button,
 } from '@material-ui/core';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import { getAllPlayersRequest } from '../../../actions/players';
 import { registerCompetitorsRequest } from '../../../actions/competitors';
 import { cancelRegisterTournamentRequest } from '../../../actions/tournaments';
 import { nextStep } from '../../../actions/pending';
-import { useStyles, useToolbarStyles } from './styles';
+import { useStyles, useToolbarStyles, ButtonContainer } from './styles';
 
 const PlayerList = (props) => {
   const classes = useStyles();
   const toolbar = useToolbarStyles();
 
+  const { players } = props.players;
+
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     props.getAllPlayersRequest();
@@ -67,7 +69,7 @@ const PlayerList = (props) => {
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
 
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, props.players.players.length - page * rowsPerPage);
+  const emptyRows = rowsPerPage - Math.min(rowsPerPage, players.length - page * rowsPerPage);
 
   const handleAdd = () => {
     selected.map((player) => {
@@ -83,7 +85,7 @@ const PlayerList = (props) => {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <Paper className={classes.paper}>
         <Toolbar className={clsx(toolbar.root, {
           [toolbar.highlight]: selected.length > 0,
@@ -91,13 +93,11 @@ const PlayerList = (props) => {
         >
           {selected.length > 0 ? (
             <Typography className={classes.title} color='inherit' variant='subtitle1' component='div'>
-              {selected.length}
-              {' '}
-              jugadores a inscribir
+              {`${selected.length} jugadores seleccionados para inscribir`}
             </Typography>
           ) : (
             <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-              Selecciona los jugadores a inscribir
+              {`Selecciona los jugadores a inscribir (${players.length})`}
             </Typography>
           )}
         </Toolbar>
@@ -108,7 +108,7 @@ const PlayerList = (props) => {
             aria-label='enhanced table'
           >
             <TableBody>
-              {props.players.players
+              {players
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
                   const isItemSelected = isSelected(row);
@@ -145,7 +145,7 @@ const PlayerList = (props) => {
           </Table>
         </TableContainer>
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 15, 25]}
           component='div'
           count={props.players.players.length}
           rowsPerPage={rowsPerPage}
@@ -154,22 +154,20 @@ const PlayerList = (props) => {
           onChangeRowsPerPage={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControl className={classes.chaild}>
+      <ButtonContainer>
+        <Button type='submit' variant='outlined' color='secondary' onClick={handleCancel} className={classes.space}>
+          Cancelar
+        </Button>
         {selected.length > 0 ? (
-          <Button type='submit' variant='contained' color='primary' onClick={handleAdd}>
+          <Button type='submit' variant='contained' color='primary' onClick={handleAdd} disableElevation endIcon={<NavigateNextIcon />}>
             Registrar jugadores que participaran
           </Button>
         ) : (
-          <Button type='submit' variant='contained' color='primary' onClick={handleAdd} disabled>
+          <Button type='submit' variant='contained' color='primary' onClick={handleAdd} disabled disableElevation>
             Registrar jugadores que participaran
           </Button>
         )}
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <Button type='submit' variant='contained' color='secondary' onClick={handleCancel}>
-          Cancelar
-        </Button>
-      </FormControl>
+      </ButtonContainer>
     </div>
   );
 };

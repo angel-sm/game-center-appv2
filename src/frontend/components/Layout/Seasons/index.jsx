@@ -1,37 +1,24 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/destructuring-assignment */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import {
+  ExpansionPanel,
+  ExpansionPanelSummary,
+  ExpansionPanelDetails,
+} from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { getSeasonsRequest } from '../../../actions/seasons';
-import useStyles from './DropMenu.styles';
-
-const LinkContainer = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-`;
-
-const SetLink = styled(Link)`
-  text-decoration: none;
-  width: 100%;
-  padding: .5em 0;
-  color: #000;
-  
-  &:hover{
-    background: rgba(0,0,0,.2);
-    color: #fff
-  }
-`;
+import {
+  LinkContainer,
+  Season,
+  useStyles,
+} from './styles';
 
 const Seasons = (props) => {
   const classes = useStyles();
+
+  const { seasons } = props.seasons;
 
   useEffect(() => {
     props.getSeasonsRequest(props.center, 'seasons');
@@ -47,13 +34,7 @@ const Seasons = (props) => {
       <ExpansionPanelDetails>
         <LinkContainer>
           {
-            props.seasons.seasons.map((t) => {
-              return (
-                <SetLink to={`/seasons/${t.id}`} key={t.id}>
-                  {t.season}
-                </SetLink>
-              );
-            })
+            seasons.map((season) => <Season key={season.id}>{season.season}</Season>)
           }
         </LinkContainer>
       </ExpansionPanelDetails>

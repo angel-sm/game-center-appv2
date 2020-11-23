@@ -9,12 +9,11 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Toolbar,
-  Typography,
 } from '@material-ui/core';
 import { useStyles } from './styles';
 import { getPrizesByRequest } from '../../../actions/prizes';
 import { getTournamentInfoPrizes } from '../../../actions/tournaments';
+import { Title } from '../../shared/Title';
 
 const TournamentDescription = (props) => {
   const { tournamentId } = props;
@@ -25,15 +24,11 @@ const TournamentDescription = (props) => {
     props.getPrizesByRequest('id', tournamentId);
   }, [tournamentId]);
 
-  const playerKeys = ['Nombre', 'Nickname', 'Lugar', 'Puntos del jugador', 'Porsentaje ganado', 'Credito ganado'];
+  const playerKeys = ['Nombre', 'Nickname', 'Lugar', 'Puntos del jugador', 'Porcentaje ganado', 'Credito ganado'];
 
   return (
     <Paper>
-      <Toolbar>
-        <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
-          Tabla estadisticas finales
-        </Typography>
-      </Toolbar>
+      <Title title='Tabla estadisticas finales' />
       <TableContainer component={Paper}>
         <Table className={classes.table} aria-label='simple table'>
           <TableHead>

@@ -49,7 +49,6 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
       },
     };
   } catch (error) {
-    console.log(error);
     state = {
       games: {
         games: [],

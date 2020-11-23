@@ -1,13 +1,7 @@
 import { lighten, makeStyles } from '@material-ui/core/styles';
+import styled from 'styled-components';
 
 export const useToolbarStyles = makeStyles((theme) => ({
-  root: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
   highlight:
         theme.palette.type === 'light' ?
           {
@@ -45,4 +39,14 @@ export const useStyles = makeStyles((theme) => ({
     top: 20,
     width: 1,
   },
+  space: {
+    margin: '0 1em',
+  },
 }));
+
+export const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+`;

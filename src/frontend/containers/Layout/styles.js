@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const drawerWidth = 200;
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
   },
@@ -40,12 +40,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BannerFont = styled.span`
+export const BannerFont = styled.span`
   font-family: 'Press Start 2P', cursive;
   font-size: 1em;
 `;
 
-const ProfileControllerContent = styled.div`
+export const ProfileControllerContent = styled.div`
   max-height: 40%;
   width: 100%;
   display: flex;
@@ -53,4 +53,7 @@ const ProfileControllerContent = styled.div`
   align-items:center;
 `;
 
-export { ProfileControllerContent, useStyles, BannerFont };
+export const ContentContainer = styled.div`
+  width: 90%;
+  margin: auto;
+`;

@@ -32,7 +32,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import { useTheme } from '@material-ui/core/styles';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Profile from '../../components/Layout/Profile';
-import { useStyles, ProfileControllerContent, BannerFont } from './styles';
+import { useStyles, ProfileControllerContent, BannerFont, ContentContainer } from './styles';
 import { logout } from '../../actions/auth';
 import Seasons from '../../components/Layout/Seasons';
 import { getTournamentsRequest } from '../../actions/tournaments';
@@ -102,7 +102,7 @@ const Layout = (props) => {
     <div>
       <ProfileControllerContent>
         <Profile
-          url='https://i2-prod.mirror.co.uk/incoming/article14334083.ece/ALTERNATES/s615/3_Beautiful-girl-with-a-gentle-smile.jpg'
+          url='https://res.cloudinary.com/saponestore/image/upload/v1605900628/game-center/undraw_male_avatar_323b_xjg3qi.svg'
         />
       </ProfileControllerContent>
       <Seasons />
@@ -180,7 +180,9 @@ const Layout = (props) => {
       </nav>
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        {props.children}
+        <ContentContainer>
+          {props.children}
+        </ContentContainer>
       </main>
     </div>
   );

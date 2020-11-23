@@ -1,11 +1,9 @@
 import React from 'react';
-import Bar from './styles';
+import Alert from '@material-ui/lab/Alert';
 
 const ErrorBar = ({ error }) => {
   return (
-    <Bar error={error}>
-      {error}
-    </Bar>
+    <Alert severity='error'>{error}</Alert>
   );
 };
 

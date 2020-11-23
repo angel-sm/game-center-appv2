@@ -17,10 +17,10 @@ import TournamentInfo from '../../components/TournamentView/TournamentInfo';
 import Paids from '../../components/TournamentView/PaidsTable';
 import CloseButton from '../../components/TournamentView/CloseButton';
 import { ClearButton } from '../../components/TournamentView/ClearButton';
+import TournamentsDescription from '../../components/TournamentView/TournamentsDescription';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-
   return (
     <div
       role='tabpanel'
@@ -60,6 +60,7 @@ const useStyles = makeStyles((theme) => ({
 const Home = (props) => {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
+  const { tournaments } = props.tournaments;
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -67,31 +68,34 @@ const Home = (props) => {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar position='static' color='transparent'>
         <Tabs
+          indicatorColor='primary'
           value={value}
           onChange={handleChange}
           scrollButtons='auto'
-          aria-label='scrollable auto tabs example'
+          textColor='primary'
         >
           {
-            props.tournaments.tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
+            tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
               <Tab label={tournament.tournament} {...a11yProps(i)} key={tournament.id} />
             ))
           }
         </Tabs>
       </AppBar>
       {
-        props.tournaments.tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
+        tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
           <TabPanel value={value} index={i} key={tournament.id}>
             <>
-              <TournamentInfo tournamentId={tournament.id} />
-              <Debtors tournamentId={tournament.id} />
-              <Paids tournamentId={tournament.id} />
-              <CloseButton tournamentId={tournament.id} />
               {
                 tournament.end !== null ? <ClearButton tournamentId={tournament.id} /> : null
               }
+              <TournamentInfo tournamentId={tournament.id} />
+              <Debtors tournamentId={tournament.id} />
+              {
+                tournament.end !== null ? <TournamentsDescription tournamentId={tournament.id} /> : <Paids tournamentId={tournament.id} />
+              }
+              <CloseButton tournamentId={tournament.id} />
             </>
           </TabPanel>
         ))

@@ -28,7 +28,7 @@ const TournamentDescription = (props) => {
 
   return (
     props.players.playerPrizes.length > 0 ? (
-      <Paper>
+      <Paper className={classes.space}>
         <Toolbar>
           <Typography className={classes.title} variant='h6' id='tableTitle' component='div'>
             {`Ultimos torneos de ${playerResoult.nickname}`}

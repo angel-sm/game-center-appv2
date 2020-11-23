@@ -5,10 +5,12 @@ import {
   Button,
   Paper,
   TextField,
+  Toolbar,
+  Typography,
 } from '@material-ui/core';
 import useInputHandler from '../../../hooks/useInputHandler';
 import { registerPlayerRequest } from '../../../actions/players';
-import useStyles from './styles';
+import { useStyles, Form } from './styles';
 
 const AddPlayer = (props) => {
   const { redirect } = props;
@@ -29,15 +31,20 @@ const AddPlayer = (props) => {
 
   return (
     <Paper className={classes.root}>
-      <form>
-        <TextField label='Nombre' name='name' {...handleInput} />
-        <TextField label='Apellidos' name='lastName' {...handleInput} />
-        <TextField label='Email' name='email' {...handleInput} />
-        <TextField label='Nickname' name='nickname' {...handleInput} />
-        <Button onClick={handleSubmit} color='primary' variant='contained'>
+      <Toolbar>
+        <Typography variant='h6' id='tableTitle' component='div'>
+          Agregar un jugador nuevo
+        </Typography>
+      </Toolbar>
+      <Form>
+        <TextField className={classes.child} label='Nombre' name='name' {...handleInput} />
+        <TextField className={classes.child} label='Apellidos' name='lastName' {...handleInput} />
+        <TextField className={classes.child} label='Email' name='email' {...handleInput} />
+        <TextField className={classes.child} label='Nickname' name='nickname' {...handleInput} />
+        <Button className={classes.child} onClick={handleSubmit} color='primary' variant='contained'>
           Registrar jugador
         </Button>
-      </form>
+      </Form>
     </Paper>
   );
 };

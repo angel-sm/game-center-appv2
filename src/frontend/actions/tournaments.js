@@ -89,13 +89,26 @@ export const getTournamentRequest = (id) => (dispatch) => {
 };
 
 export const searchTournamentRequest = (data) => (dispatch) => {
-  const { tournament, game } = data;
+  const { by, info } = data;
   Axios({
-    url: `/client/tournaments/tournament/${tournament}/game/${game}`,
+    url: `/client/tournaments/tournament/${info}/by/${by}`,
     method: 'GET',
   })
     .then(({ data }) => {
-      dispatch(searchResult(data.tournament));
+      dispatch(searchResult(data.tournament) || []);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+export const searchTournamentsRequest = (data, search) => (dispatch) => {
+  Axios({
+    url: `/client/center-${search}/center/${data.id}`,
+    method: 'GET',
+  })
+    .then(({ data }) => {
+      dispatch(searchResult(data.tournaments) || []);
     })
     .catch((error) => {
       console.log(error);

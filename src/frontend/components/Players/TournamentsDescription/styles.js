@@ -5,4 +5,8 @@ export const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
+  space: {
+    width: '90%',
+    margin: '1em auto',
+  },
 });

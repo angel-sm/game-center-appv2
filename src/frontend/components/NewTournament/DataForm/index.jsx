@@ -16,18 +16,22 @@ import {
   Divider,
   InputLabel,
   InputAdornment,
+  Paper,
+  Toolbar,
+  Typography,
 } from '@material-ui/core';
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import DateFnsUtils from '@date-io/date-fns';
 import moment from 'moment';
 import { newtournamentRequest } from '../../../actions/tournaments';
 import useInputValueHandle from '../../../hooks/useInputHandler';
 import { getAllGamesRequest } from '../../../actions/games';
 import { getSeasonRequest } from '../../../actions/seasons';
-import useStyles from './styles';
+import { useStyles, FormContainer, ButtonContainer } from './styles';
 
 const DataForm = (props) => {
   const classes = useStyles();
@@ -94,108 +98,116 @@ const DataForm = (props) => {
   };
 
   return (
-
-    <form noValidate autoComplete='off' className={classes.root} onSubmit={handlerSubmit}>
-      <FormControlLabel
-        control={<Checkbox checked={check} onChange={hanldeCheck} name='checkedA' />}
-        label='Agregar el nuevo torneo a una temporada'
-      />
-      {
-        check ? (
-          <FormControl className={classes.chaild}>
-            <InputLabel id='demo-simple-select-label'>Agregar a la temporada: </InputLabel>
-            <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
-              value={season}
-              fullWidth
-              onChange={handleSeason}
-            >
-              {
-                props.seasons.seasons.map((s) => {
-                  return (
-                    <MenuItem value={s.id}>{s.season}</MenuItem>
-                  );
-                })
-              }
-            </Select>
-          </FormControl>
-        ) : null
-      }
-      <Divider />
-      <FormControl className={classes.chaild}>
-        <TextField id='standard-basic' label='Nombre del torneo' name='tournament' {...handleValue} />
-      </FormControl>
-      <FormControl variant='outlined' className={classes.chaild}>
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <KeyboardDatePicker
-            margin='normal'
-            name='start'
-            id='date-picker-dialog'
-            label='Fecha de inicio del torneo'
-            format='dd/MM/yyyy'
-            value={start}
-            onChange={handleDateChange}
-            KeyboardButtonProps={{
-              'aria-label': 'change date',
-            }}
+    <Paper>
+      <Toolbar>
+        <Typography variant='h6' id='tableTitle' component='div'>
+          Nuevo torneo
+        </Typography>
+      </Toolbar>
+      <FormContainer>
+        <form className={classes.root} onSubmit={handlerSubmit}>
+          <FormControlLabel
+            control={<Checkbox checked={check} onChange={hanldeCheck} name='checkedA' />}
+            label='Agregar el nuevo torneo a una temporada'
           />
-        </MuiPickersUtilsProvider>
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <InputLabel htmlFor='standard-adornment-amount'>Costo</InputLabel>
-        <Input
-          {...handleValue}
-          name='earn'
-          id='standard-adornment-amount'
-          value={handleValue.form.earn}
-          startAdornment={<InputAdornment position='start'>$</InputAdornment>}
-        />
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <InputLabel htmlFor='standard-adornment-amount'>Credito</InputLabel>
-        <Input
-          {...handleValue}
-          name='creditPerPlayer'
-          id='standard-adornment-amount'
-          value={handleValue.form.creditPerPlayer}
-          startAdornment={<InputAdornment position='start'>$</InputAdornment>}
-        />
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <TextField id='standard-basic' label='Nombre del organizador' name='organizer' {...handleValue} />
-      </FormControl>
-      {
-        check ? null : (
+          {
+            check ? (
+              <FormControl className={classes.chaild}>
+                <InputLabel id='demo-simple-select-label'>Agregar a la temporada: </InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  id='demo-simple-select'
+                  value={season}
+                  fullWidth
+                  onChange={handleSeason}
+                >
+                  {
+                    props.seasons.seasons.map((s) => {
+                      return (
+                        <MenuItem value={s.id}>{s.season}</MenuItem>
+                      );
+                    })
+                  }
+                </Select>
+              </FormControl>
+            ) : null
+          }
+          <Divider />
           <FormControl className={classes.chaild}>
-            <InputLabel id='demo-simple-select-label'>Juego </InputLabel>
-            <Select
-              labelId='demo-simple-select-label'
-              id='demo-simple-select'
-              value={game}
-              fullWidth
-              onChange={handleChange}
-            >
-              {
-                props.games.games.map((s) => {
-                  return (
-                    <MenuItem value={s.id}>{s.game}</MenuItem>
-                  );
-                })
-              }
-            </Select>
+            <TextField id='standard-basic' label='Nombre del torneo' name='tournament' {...handleValue} />
           </FormControl>
-        )
-      }
-      <FormControl className={classes.chaild}>
-        <TextField id='standard-basic' label='Descripcion' name='description' {...handleValue} />
-      </FormControl>
-      <FormControl className={classes.chaild}>
-        <Button type='submit' variant='contained' color='primary'>
-          Registrar datos del torneo
-        </Button>
-      </FormControl>
-    </form>
+          <FormControl variant='outlined' className={classes.chaild}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <KeyboardDatePicker
+                margin='normal'
+                name='start'
+                id='date-picker-dialog'
+                label='Fecha de inicio del torneo'
+                format='dd/MM/yyyy'
+                value={start}
+                onChange={handleDateChange}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
+            </MuiPickersUtilsProvider>
+          </FormControl>
+          <FormControl className={classes.chaild}>
+            <InputLabel htmlFor='standard-adornment-amount'>Costo</InputLabel>
+            <Input
+              {...handleValue}
+              name='earn'
+              id='standard-adornment-amount'
+              value={handleValue.form.earn}
+              startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+            />
+          </FormControl>
+          <FormControl className={classes.chaild}>
+            <InputLabel htmlFor='standard-adornment-amount'>Credito</InputLabel>
+            <Input
+              {...handleValue}
+              name='creditPerPlayer'
+              id='standard-adornment-amount'
+              value={handleValue.form.creditPerPlayer}
+              startAdornment={<InputAdornment position='start'>$</InputAdornment>}
+            />
+          </FormControl>
+          <FormControl className={classes.chaild}>
+            <TextField id='standard-basic' label='Nombre del organizador' name='organizer' {...handleValue} />
+          </FormControl>
+          {
+            check ? null : (
+              <FormControl className={classes.chaild}>
+                <InputLabel id='demo-simple-select-label'>Juego </InputLabel>
+                <Select
+                  labelId='demo-simple-select-label'
+                  id='demo-simple-select'
+                  value={game}
+                  fullWidth
+                  onChange={handleChange}
+                >
+                  {
+                    props.games.games.map((s) => {
+                      return (
+                        <MenuItem value={s.id}>{s.game}</MenuItem>
+                      );
+                    })
+                  }
+                </Select>
+              </FormControl>
+            )
+          }
+          <FormControl className={classes.chaild}>
+            <TextField id='standard-basic' label='Descripcion' name='description' {...handleValue} />
+          </FormControl>
+          <ButtonContainer>
+            <Button type='submit' variant='contained' color='primary' size='medium' disableElevation endIcon={<NavigateNextIcon />}>
+              Registrar datos del torneo
+            </Button>
+          </ButtonContainer>
+        </form>
+      </FormContainer>
+    </Paper>
   );
 };
 

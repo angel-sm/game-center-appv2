@@ -6,12 +6,11 @@ const tournamentRoutes = (app) => {
   const router = express.Router();
   app.use('/client/tournaments', router);
 
-  router.get('/tournament/:tournament/game/:game', async (req, res, next) => {
-    const { tournament, game } = req.params;
-    console.log(tournament, game);
+  router.get('/tournament/:info/by/:by', async (req, res, next) => {
+    const { info, by } = req.params;
     try {
       const { data } = await Axios({
-        url: `${process.env.API_URL}/api/tournaments/tournament?tournament=${tournament}&&game=${game}`,
+        url: `${process.env.API_URL}/api/tournaments/tournament?${by}=${info}`,
         method: 'GET',
       });
       res.status(201).json(data);
@@ -44,7 +43,6 @@ const tournamentRoutes = (app) => {
       res.status(201).json(data);
     } catch (error) {
       console.log(error);
-
     }
   });
 
