@@ -76,3 +76,6 @@ export const deletePlayerRequest = (id) => (dispatch) => {
     .catch((error) => console.log(error));
 };
 
+export const setTransferRequest = (playerFrom, playerTo) => (dispatch) => {
+  console.log(playerFrom, playerTo);
+};

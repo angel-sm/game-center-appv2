@@ -15,20 +15,20 @@ import { Title } from '../../shared/Title';
 
 const tableCells = ['Clave', 'Producto', 'Costo', 'Cantidad'];
 
-const total = (items) => items.map(({ price, amount }) => price * amount).reduce((sum, i) => sum + i, 0);
+const total = (items) => items.map(({ price, quantity }) => price * quantity).reduce((sum, i) => sum + i, 0);
 
 export default function TableProducts(props) {
   const classes = useStyles();
   const { listOfProducts, player, handleCleanList, handleRefreshPlayerSearch } = props;
   const getTotal = total(listOfProducts);
-  let creditOfPlayer;
+  let creditSale;
   let remainingMoney;
 
   if (player.id !== undefined) {
-    creditOfPlayer = getTotal > player.credit ? 0 : player.credit - getTotal;
+    creditSale = getTotal > player.credit ? player.credit : getTotal;
     remainingMoney = getTotal > player.credit ? ((player.credit - getTotal) * -1) : 0;
   } else {
-    creditOfPlayer = 0;
+    creditSale = 0;
     remainingMoney = getTotal;
   }
 
@@ -53,7 +53,7 @@ export default function TableProducts(props) {
                 <TableCell>{row.id}</TableCell>
                 <TableCell>{row.description}</TableCell>
                 <TableCell>{`$ ${row.price}`}</TableCell>
-                <TableCell>{`${row.amount}`}</TableCell>
+                <TableCell>{`${row.quantity}`}</TableCell>
                 <TableCell>{`$ ${row.subTotal}`}</TableCell>
               </TableRow>
             ))}
@@ -70,7 +70,7 @@ export default function TableProducts(props) {
             <TableRow>
               <TableCell rowSpan={1} />
               <TableCell colSpan={3}><strong>Creditos restantes del jugador</strong></TableCell>
-              <TableCell>{`$ ${creditOfPlayer || 0}`}</TableCell>
+              <TableCell>{`$ ${player.credit - getTotal < 0 ? 0 : player.credit - getTotal}`}</TableCell>
             </TableRow>
             {
               getTotal > player.credit || player.id === undefined ? (
@@ -87,7 +87,8 @@ export default function TableProducts(props) {
       <ChangeButton
         player={player}
         totalSale={getTotal}
-        creditOfPlayer={creditOfPlayer || 0}
+        newCreditPlayer={player.credit - getTotal < 0 ? 0 : player.credit - getTotal}
+        creditSale={creditSale}
         remainingMoney={remainingMoney}
         products={listOfProducts}
         handleCleanTable={handleCleanTable}

@@ -28,14 +28,14 @@ export const AddProduct = (props) => {
     if (!isInTable(productValues.form.id)) {
       addToList([...list, { ...productValues.form,
         price: parseInt(productValues.form.price) < 0 ? 0 : parseInt(productValues.form.price),
-        amount: parseInt(productValues.form.amount) < 1 ? 1 : parseInt(productValues.form.amount),
-        subTotal: parseInt(productValues.form.price) * parseInt(productValues.form.amount) }]);
+        quantity: parseInt(productValues.form.quantity) < 1 ? 1 : parseInt(productValues.form.quantity),
+        subTotal: parseInt(productValues.form.price) * parseInt(productValues.form.quantity) }]);
       productValues.form.id = '';
-      productValues.form.description = '';
+      productValues.form.product = '';
       productValues.form.price = 0;
-      productValues.form.amount = 1;
+      productValues.form.quantity = 1;
     } else {
-      setError(true);
+    // setError(true);
     }
   };
 
@@ -44,9 +44,9 @@ export const AddProduct = (props) => {
       <Title title='Agregar producto' />
       <>
         <TextField className={classes.space} label='Clave' {...productValues} name='id' value={productValues.form.id} />
-        <TextField className={classes.space} label='Descripcion' {...productValues} name='description' value={productValues.form.description} />
+        <TextField className={classes.space} label='product' {...productValues} name='product' value={productValues.form.product} />
         <TextField className={classes.space} label='Precio' type='number' {...productValues} name='price' value={productValues.form.price < 0 ? 0 : productValues.form.price} />
-        <TextField className={classes.space} label='Cantidad' type='number' {...productValues} name='amount' value={productValues.form.amount < 0 ? 1 : productValues.form.amount} />
+        <TextField className={classes.space} label='Cantidad' type='number' {...productValues} name='quantity' value={productValues.form.quantity < 0 ? 1 : productValues.form.quantity} />
         <Button className={classes.space} variant='contained' color='primary' onClick={handlerAdd}>Agregar</Button>
       </>
     </FormContainer>

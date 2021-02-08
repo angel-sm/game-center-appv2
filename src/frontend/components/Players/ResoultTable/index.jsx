@@ -13,9 +13,10 @@ import {
 } from '@material-ui/core';
 import { useStyles } from './styles';
 import EditButton from './Components/EditButton';
-import DeleteButton from './Components/DeleteButton';
+import HistoryButton from './Components/HistoryButton';
 import CreditButton from './Components/CreditButton';
 import TransferButton from './Components/TranferButton';
+import DeleteButton from './Components/DeleteButton';
 import { Title } from '../../shared/Title';
 
 const resetDate = (date) => {
@@ -26,7 +27,7 @@ const ResoultTable = (props) => {
   const { playerResoult } = props;
   const classes = useStyles();
 
-  const playerKeys = ['Nombre', 'Credito', 'Nickname', 'Apellido', 'Email', 'Se unio', 'Tienda', 'Transferir', 'Editar', 'Eliminar'];
+  const playerKeys = ['Nombre', 'Apellido', 'Email', 'Nickname', 'Credito', 'Se unio', 'Tienda', 'Transferir', 'Historial', 'Editar', 'Eliminar'];
 
   return (
     <Paper className={classes.space}>
@@ -58,8 +59,9 @@ const ResoultTable = (props) => {
                 <CreditButton player={playerResoult.nickname} maxofcredit={playerResoult.credit} />
               </TableCell>
               <TableCell component='th' scope='row'><TransferButton player={playerResoult} /></TableCell>
+              <TableCell component='th' scope='row'><HistoryButton playerId={playerResoult.id} player={playerResoult.name} /></TableCell>
               <TableCell component='th' scope='row'><EditButton player={playerResoult} /></TableCell>
-              <TableCell component='th' scope='row'><DeleteButton playerId={playerResoult.id} /></TableCell>
+              <TableCell component='th' scope='row'><DeleteButton player={playerResoult} /></TableCell>
             </TableRow>
           </TableBody>
         </Table>

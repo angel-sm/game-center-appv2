@@ -17,14 +17,21 @@ const dispatchStateToProps = {
 
 export const ChangeButton = connect(mapStateToProps, dispatchStateToProps)(
   (props) => {
-    const { player, totalSale, creditOfPlayer, remainingMoney, products, handleCleanTable, handleRefreshPlayerSearch } = props;
+    const { player, totalSale, newCreditPlayer, creditSale, remainingMoney, products, handleCleanTable, handleRefreshPlayerSearch } = props;
 
     const handlerSale = () => {
-      props.registerSaleRequest({
-        amountCredit: player.credit || 0,
-        amountMoney: remainingMoney,
-        total: totalSale,
-      }, { player: player.id, creditOfPlayer }, products);
+      props.registerSaleRequest(
+        {
+          amountCredit: creditSale,
+          amountMoney: remainingMoney,
+          total: totalSale,
+        },
+        {
+          player: player.id,
+          newCreditPlayer,
+        },
+        products,
+      );
       handleCleanTable();
       handleRefreshPlayerSearch();
     };

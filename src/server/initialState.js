@@ -9,6 +9,7 @@ const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
     state = {
       sales: {
         saleId: '',
+        historySales: [],
       },
       tournaments: {
         tournament: {},

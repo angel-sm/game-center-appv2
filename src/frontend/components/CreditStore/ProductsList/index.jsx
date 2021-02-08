@@ -18,9 +18,9 @@ const ProductList = (props) => {
 
   const productValues = setInputValue({
     id: '',
-    description: '',
+    product: '',
     price: 0,
-    amount: 1,
+    quantity: 1,
     subTotal: 0,
   });
 

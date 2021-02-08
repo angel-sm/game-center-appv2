@@ -23,6 +23,8 @@ import seasonGameRoutes from './routes/seasonGame';
 import tournamentsGameRoutes from './routes/tournamentsGame';
 import sales from './routes/sales';
 import playerSaleRoutes from './routes/playerSales';
+import historySaleRoutes from './routes/historySale';
+import productsRputes from './routes/products';
 
 dotenv.config();
 
@@ -67,6 +69,8 @@ seasonGameRoutes(app);
 centerSeasonsRoutes(app);
 tournamentsGameRoutes(app);
 sales(app);
+productsRputes(app);
+historySaleRoutes(app);
 playerSaleRoutes(app);
 
 app.get('*', renderApp);

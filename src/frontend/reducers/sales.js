@@ -1,5 +1,5 @@
 /* eslint-disable import/named */
-import { REGISTER_SALE } from '../types';
+import { REGISTER_SALE, GET_HISTORY_SALE } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -7,6 +7,12 @@ const reducer = (state, action) => {
       return {
         ...state,
         saleId: action.payload,
+      };
+    }
+    case GET_HISTORY_SALE: {
+      return {
+        ...state,
+        historySales: action.payload,
       };
     }
     default:
