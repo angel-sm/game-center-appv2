@@ -44,7 +44,7 @@ export const AddProduct = (props) => {
       <Title title='Agregar producto' />
       <>
         <TextField className={classes.space} label='Clave' {...productValues} name='id' value={productValues.form.id} />
-        <TextField className={classes.space} label='product' {...productValues} name='product' value={productValues.form.product} />
+        <TextField className={classes.space} label='producto' {...productValues} name='product' value={productValues.form.product} />
         <TextField className={classes.space} label='Precio' type='number' {...productValues} name='price' value={productValues.form.price < 0 ? 0 : productValues.form.price} />
         <TextField className={classes.space} label='Cantidad' type='number' {...productValues} name='quantity' value={productValues.form.quantity < 0 ? 1 : productValues.form.quantity} />
         <Button className={classes.space} variant='contained' color='primary' onClick={handlerAdd}>Agregar</Button>

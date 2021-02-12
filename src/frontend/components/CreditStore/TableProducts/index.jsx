@@ -39,7 +39,7 @@ export default function TableProducts(props) {
   return (
     <Paper className={classes.paper}>
       <TableContainer component={Paper}>
-        <Title title='Lista de productos a cangear' />
+        <Title title='Lista de productos a canjear' />
         <Table className={classes.table} aria-label='spanning table'>
           <TableHead>
             <TableRow>

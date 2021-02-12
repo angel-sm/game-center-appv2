@@ -51,7 +51,7 @@ const options = [
     url: '/search-tournaments',
     icon: <Search />,
   }, {
-    option: 'Credito',
+    option: 'Registro de movimientos',
     url: '/credit',
     icon: <CreditCard />,
   }, {
@@ -63,7 +63,7 @@ const options = [
     url: '/store-points',
     icon: <AttachMoney />,
   }, {
-    option: 'Config pt',
+    option: 'Temporadas',
     url: '/config-points',
     icon: <Settings />,
   }, {
