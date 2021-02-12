@@ -28,7 +28,12 @@ const ProductList = (props) => {
     id: '',
   });
 
-  const handleCleanList = () => setList([]);
+  const handleCleanList = () => {
+    setList([]);
+    setTimeout(() => {
+      window.location.href = '/credit';
+    }, 1000);
+  };
   const isCheckedToDelete = (value) => setIsChecked(value);
   const addToList = (list) => setList(list);
   const newList = (list) => setList(list);
