@@ -66,41 +66,49 @@ const Home = (props) => {
     setValue(newValue);
   };
 
+  const activeTournaments = tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null));
+
   return (
-    <div className={classes.root}>
-      <AppBar position='static' color='transparent'>
-        <Tabs
-          indicatorColor='primary'
-          value={value}
-          onChange={handleChange}
-          scrollButtons='auto'
-          textColor='primary'
-        >
-          {
-            tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
-              <Tab label={tournament.tournament} {...a11yProps(i)} key={tournament.id} />
-            ))
-          }
-        </Tabs>
-      </AppBar>
+    <>
       {
-        tournaments.filter((tournament) => (tournament.isActive === 0 ? tournament : null)).map((tournament, i) => (
-          <TabPanel value={value} index={i} key={tournament.id}>
-            <>
-              {
-                tournament.end !== null ? <ClearButton tournamentId={tournament.id} /> : null
-              }
-              <TournamentInfo tournamentId={tournament.id} />
-              <Debtors tournamentId={tournament.id} />
-              {
-                tournament.end !== null ? <TournamentsDescription tournamentId={tournament.id} /> : <Paids tournamentId={tournament.id} />
-              }
-              <CloseButton tournamentId={tournament.id} />
-            </>
-          </TabPanel>
-        ))
+        activeTournaments.length > 0 ? (
+          <div className={classes.root}>
+            <AppBar position='static' color='transparent'>
+              <Tabs
+                indicatorColor='primary'
+                value={value}
+                onChange={handleChange}
+                scrollButtons='auto'
+                textColor='primary'
+              >
+                {
+                  activeTournaments.map((tournament, i) => (
+                    <Tab label={tournament.tournament} {...a11yProps(i)} key={tournament.id} />
+                  ))
+                }
+              </Tabs>
+            </AppBar>
+            {
+              activeTournaments.map((tournament, i) => (
+                <TabPanel value={value} index={i} key={tournament.id}>
+                  <>
+                    {
+                      tournament.end !== null ? <ClearButton tournamentId={tournament.id} /> : null
+                    }
+                    <TournamentInfo tournamentId={tournament.id} />
+                    <Debtors tournamentId={tournament.id} />
+                    {
+                      tournament.end !== null ? <TournamentsDescription tournamentId={tournament.id} /> : <Paids tournamentId={tournament.id} />
+                    }
+                    <CloseButton tournamentId={tournament.id} />
+                  </>
+                </TabPanel>
+              ))
+            }
+          </div>
+        ) : <h1> No hay torneos disponibles</h1>
       }
-    </div>
+    </>
   );
 };
 
