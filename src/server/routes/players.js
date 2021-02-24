@@ -1,81 +1,37 @@
+/* eslint-disable no-new */
+/* eslint-disable no-async-promise-executor */
 /* eslint-disable consistent-return */
-const express = require('express');
+require('dotenv').config();
+const router = require('express').Router();
 const Axios = require('axios');
 
-const playersRoutes = (app) => {
-  const router = express.Router();
-  app.use('/client/players', router);
+class PlayersRoutes {
+  constructor() {
+    this.path = '/client/players';
+    this.url = process.env.API;
+    this.token = process.env.CLIENT_TOKEN;
+  }
 
-  router.get('/', async (req, res, next) => {
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/players`,
-        method: 'GET',
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  routes(app) {
+    app.use(this.path, router);
 
-  router.get('/player/:type/:player', async (req, res, next) => {
-    const { player, type } = req.params;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/players/player?${type}=${player}`,
-        method: 'GET',
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+    router.post('/', async (req, res) => {
+      const { body: player } = req;
+      try {
+        const { data } = await Axios({
+          url: `${this.url}/players/find`,
+          method: 'POST',
+          data: { ...player },
+        });
 
-  router.post('/', async (req, res, next) => {
-    const { body: player } = req;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/players`,
-        method: 'POST',
-        data: {
-          ...player,
-        },
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+        res.status(200).json(data);
+      } catch (error) {
+        res.status(404).json(error.response.data);
+      }
+    });
+  }
 
-  router.put('/player/:id', async (req, res, next) => {
-    const { body: player } = req;
-    const { id } = req.params;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/players/player/${id}`,
-        method: 'PUT',
-        data: {
-          ...player,
-        },
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+}
 
-  router.delete('/player/:id', async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/players/player/${id}`,
-        method: 'DELETE',
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
-};
+module.exports = PlayersRoutes;
 
-module.exports = playersRoutes;

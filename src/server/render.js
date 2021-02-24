@@ -6,7 +6,7 @@ import { createStore } from 'redux';
 import { renderRoutes } from 'react-router-config';
 import { StaticRouter } from 'react-router-dom';
 import serverRoutes from '../frontend/routes/serverRoutes';
-import reducer from '../frontend/reducers';
+import reducer from '../frontend/redux/reducers';
 
 import initialState from './initialState';
 

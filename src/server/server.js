@@ -10,21 +10,8 @@ import bodyParser from 'body-parser';
 import passport from 'passport';
 import getManifest from './getManifest';
 import auth from './routes/auth';
-import tournamentRoutes from './routes/tournaments';
-import playersRoutes from './routes/players';
-import competitorsRoutes from './routes/competitors';
-import prizesRoutes from './routes/prizes';
 import renderApp from './render';
-import centerTournamentRoutes from './routes/centerTournaments';
-import centerSeasonsRoutes from './routes/centerSeasons';
-import seasonsRoutes from './routes/seasons';
-import gamesRoutes from './routes/games';
-import seasonGameRoutes from './routes/seasonGame';
-import tournamentsGameRoutes from './routes/tournamentsGame';
-import sales from './routes/sales';
-import playerSaleRoutes from './routes/playerSales';
-import historySaleRoutes from './routes/historySale';
-import productsRputes from './routes/products';
+import Routes from './routes';
 
 dotenv.config();
 
@@ -57,21 +44,8 @@ if (ENV === 'development') {
   app.disable('x-powered-by');
 }
 
+new Routes().setPrincipalRoutes(app);
 auth(app);
-tournamentRoutes(app);
-playersRoutes(app);
-competitorsRoutes(app);
-prizesRoutes(app);
-centerTournamentRoutes(app);
-seasonsRoutes(app);
-gamesRoutes(app);
-seasonGameRoutes(app);
-centerSeasonsRoutes(app);
-tournamentsGameRoutes(app);
-sales(app);
-productsRputes(app);
-historySaleRoutes(app);
-playerSaleRoutes(app);
 
 app.get('*', renderApp);
 

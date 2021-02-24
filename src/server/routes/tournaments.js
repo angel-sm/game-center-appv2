@@ -1,66 +1,39 @@
 /* eslint-disable consistent-return */
-const express = require('express');
+require('dotenv').config();
+const router = require('express').Router();
 const Axios = require('axios');
 
-const tournamentRoutes = (app) => {
-  const router = express.Router();
-  app.use('/client/tournaments', router);
+class TournamentRoutes {
+  constructor() {
+    this.path = '/client/tournaments';
+    this.url = process.env.API;
+    this.token = process.env.CLIENT_TOKEN;
 
-  router.get('/tournament/:info/by/:by', async (req, res, next) => {
-    const { info, by } = req.params;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/tournaments/tournament?${by}=${info}`,
-        method: 'GET',
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  }
 
-  router.get('/:id', async (req, res, next) => {
-    const { id } = req.params;
-    try {
-      const { data } = await Axios({
-        url: `${process.env.API_URL}/api/tournaments/tournament/${id}`,
-        method: 'GET',
-      });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+  routes(app) {
+    app.use(this.path, router);
 
-  router.post('/', async (req, res, next) => {
-    const { body: tornament } = req;
-    try {
+    router.post('/', async (req, res) => {
+      const { body: tornament } = req;
       const { data } = await Axios({
-        url: `${process.env.API_URL}/api/tournaments`,
+        url: `${this.url}/tournaments`,
         method: 'POST',
-        data: tornament,
+        data: { ...tornament },
       });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
-    }
-  });
+      console.log(data);
+    });
 
-  router.put('/tournament/:id', async (req, res, next) => {
-    const { body: tournament } = req;
-    const { id } = req.params;
-    try {
+    router.get('/', async (req, res) => {
       const { data } = await Axios({
-        url: `${process.env.API_URL}/api/tournaments/tournament/${id}`,
-        method: 'PUT',
-        data: tournament,
+        url: `${this.url}/tournaments?center=1`,
+        method: 'GET',
       });
-      res.status(201).json(data);
-    } catch (error) {
-      console.log(error);
+      res.status(200).json(data);
+    });
+  }
 
-    }
-  });
-};
+}
 
-module.exports = tournamentRoutes;
+module.exports = TournamentRoutes;
+

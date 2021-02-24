@@ -3,88 +3,28 @@ const dotenv = require('dotenv');
 
 dotenv.config();
 
-const initiaState = async (USER, USERM, PENDINGSTEP, CENTERID, PENDINGID) => {
+const initiaState = async (USER, USERM) => {
   let state;
   try {
     state = {
-      sales: {
-        saleId: '',
-        historySales: [],
-      },
-      tournaments: {
-        tournament: {},
-        tournaments: [],
-        competitors: [],
-        prizes: [],
-        searchResult: [],
-        tournamentId: PENDINGID,
-        prizesInfo: [],
-      },
-      seasons: {
-        seasons: [],
-        season: {},
-      },
-      games: {
-        games: [],
-      },
-      center: {
-        id: CENTERID,
-      },
-      players: {
-        players: [],
-        player: {},
-        playerPrizes: [],
-      },
-      pending: {
-        step: parseInt(PENDINGSTEP),
-      },
+      tournaments: [],
+      players: [],
       auth: {
         user: {
           email: USERM,
           id: USER,
         },
-      },
-      status: {
-        error: '',
-        load: false,
       },
     };
   } catch (error) {
     state = {
-      games: {
-        games: [],
-      },
-      seasons: {
-        seasons: [],
-        season: {},
-      },
-      tournaments: {
-        tournament: {},
-        tournaments: [],
-        competitors: [],
-        prizes: [],
-        searchResult: [],
-        tournamentId: PENDINGID,
-      },
-      center: {
-        id: CENTERID,
-      },
-      players: {
-        players: [],
-        player: {},
-      },
-      pending: {
-        step: parseInt(PENDINGSTEP),
-      },
+      tournaments: [],
+      players: [],
       auth: {
         user: {
           email: USERM,
           id: USER,
         },
-      },
-      status: {
-        error: '',
-        load: false,
       },
     };
   }
