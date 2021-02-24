@@ -16,12 +16,11 @@ class TournamentRoutes {
 
     router.post('/', async (req, res) => {
       const { body: tornament } = req;
-      const { data } = await Axios({
+      await Axios({
         url: `${this.url}/tournaments`,
         method: 'POST',
         data: { ...tornament },
       });
-      console.log(data);
     });
 
     router.get('/', async (req, res) => {

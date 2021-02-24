@@ -5,7 +5,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { Backdrop, CircularProgress, makeStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
 import { rqGetTournaments } from '../../redux/actions/tournaments';
 import Dashboard from '../../components/Home/TournamentTabs';
@@ -29,7 +29,6 @@ const dispatchStateToProps = {
 const Home = (props) => {
   const classes = useStyles();
 
-  const [load, setLoad] = useState(true);
   const [findedTournaments, setFindedTournaments] = useState([]);
 
   useEffect(() => {
@@ -38,23 +37,15 @@ const Home = (props) => {
     }
   }, []);
 
-  console.log(props);
   useEffect(() => {
     if (props.tournaments) {
       setFindedTournaments(props.tournaments || []);
-      setLoad(false);
     }
   }, [props.tournaments]);
 
   return (
     <>
-      {
-        load ? (
-          <Backdrop className={classes.backdrop} open={load}>
-            <CircularProgress color='inherit' />
-          </Backdrop>
-        ) : <Dashboard tournaments={findedTournaments} />
-      }
+      <Dashboard tournaments={findedTournaments} />
     </>
   );
 };

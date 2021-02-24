@@ -2,7 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+//const TerserPlugin = require('terser-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 const ReactLazySsrPlugin = require('react-lazy-ssr/webpack');
 
@@ -26,13 +26,19 @@ module.exports = {
   resolve: {
     extensions: ['.js', '.jsx'],
   },
-  optimization: {
+  /*optimization: {
     minimize: true,
     minimizer: [new TerserPlugin()],
     splitChunks: {
       chunks: 'async',
       name: true,
       cacheGroups: {
+        commons: {
+          name: 'common',
+          chunks: 'initial',
+          minChunks: 2,
+          filename: '[name].jsx',
+        },
         vendors: {
           name: 'vendors',
           chunks: 'all',
@@ -47,7 +53,7 @@ module.exports = {
         },
       },
     },
-  },
+  },*/
   module: {
     rules: [
       {
