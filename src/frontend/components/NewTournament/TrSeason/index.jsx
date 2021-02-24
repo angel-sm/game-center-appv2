@@ -8,7 +8,6 @@ import {
   makeStyles,
   FormControl,
 } from '@material-ui/core';
-import { Content } from '../../shared/Content';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -20,7 +19,7 @@ export const TrSeason = () => {
   const classes = useStyles();
 
   return (
-    <Content>
+    <>
       <Grid item xs={12} sm={12} lg={8} variant='standard'>
         <Grid
           container
@@ -72,6 +71,6 @@ export const TrSeason = () => {
           </Grid>
         </Grid>
       </Grid>
-    </Content>
+    </>
   );
 };

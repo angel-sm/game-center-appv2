@@ -7,7 +7,13 @@ import { connect } from 'react-redux';
 
 import { DataGrid } from '@material-ui/data-grid';
 import { Avatar, Grid, Typography } from '@material-ui/core';
-import { Content } from '../../shared/Content';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  formControl: {
+    margin: theme.spacing(2),
+  },
+}));
 
 const columns = [
   { field: 'avatar',
@@ -30,6 +36,7 @@ const TrCompetitors = (props) => {
   const { handleEnrollPlayers } = props;
   const [rows, setRows] = React.useState([]);
   const [select, setSelect] = React.useState([]);
+  const classes = useStyles();
 
   useEffect(() => {
     setRows(props.players || []);
@@ -80,13 +87,11 @@ const TrCompetitors = (props) => {
         />
       </div>
 
-      <Content>
-        <Grid item xs={12} sm={12} lg={8} variant='standard'>
-          <Typography gutterBottom variant='h6' component='h4'>
-            Jugadores agregados al torneo
-          </Typography>
-        </Grid>
-      </Content>
+      <Grid item xs={12} sm={12} lg={8} variant='standard' className={classes.formControl}>
+        <Typography gutterBottom variant='h6' component='h4'>
+          Jugadores agregados al torneo
+        </Typography>
+      </Grid>
 
       <div style={{ height: 500, width: 800, margin: 'auto', boxShadow: '2px 2px 2px rgba(0,0,0,.1)' }}>
         <DataGrid

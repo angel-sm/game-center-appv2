@@ -20,7 +20,6 @@ import Alert from '@material-ui/lab/Alert';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import { makeStyles } from '@material-ui/core/styles';
-import { Content } from '../../shared/Content';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -95,7 +94,7 @@ export const TrGratifications = ({ handlerGratification, handlerError }) => {
   };
 
   return (
-    <Content>
+    <>
       {
         inp.map((p, i) => {
           return (
@@ -134,6 +133,6 @@ export const TrGratifications = ({ handlerGratification, handlerError }) => {
       {
         localError ? <Alert severity='error'>La suma de los premios debe ser maximo 100</Alert> : null
       }
-    </Content>
+    </>
   );
 };
