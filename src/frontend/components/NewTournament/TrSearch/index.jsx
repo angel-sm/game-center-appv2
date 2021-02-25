@@ -4,11 +4,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { TextField, FormControl, makeStyles, Button } from '@material-ui/core';
+import { TextField, FormControl, makeStyles, Button, Grid, Typography } from '@material-ui/core';
 import { rqGetPlayer } from '../../../redux/actions/players';
 import inputValueHandler from '../../../hooks/useInputHandler';
-
-import { Content } from '../../shared/Content';
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -36,14 +34,19 @@ const TrSearch = (props) => {
   };
 
   return (
-    <Content>
+    <>
+      <Grid item xs={12} sm={12} lg={8} variant='standard'>
+        <Typography gutterBottom variant='h6' component='h4'>
+          Seleccionar jugadores
+        </Typography>
+      </Grid>
       <FormControl className={classes.formControl}>
         <TextField id='search' name='search' label='Buscar por nombre, apellido, nickname o email' variant='outlined' {...value} className={classes.input} size='small' />
         <Button variant='contained' color='primary' onClick={handlerClick}>
           Buscar
         </Button>
       </FormControl>
-    </Content>
+    </>
   );
 };
 

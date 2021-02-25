@@ -8,7 +8,6 @@ import {
   Typography,
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Content } from '../../shared/Content';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -40,13 +39,16 @@ export const TrData = ({ inputValueHandler, handlerError }) => {
   }, [inputValueHandler.form]);
 
   return (
-    <Content>
+    <>
       <Grid item xs={12} sm={12} lg={8} variant='standard'>
         <Typography gutterBottom variant='h5' component='h2'>
           Agregar un nuevo torneo
         </Typography>
       </Grid>
       <Grid item xs={12} sm={12} lg={8} variant='standard'>
+
+        <TextField fullWidth className={classes.input} variant='outlined' id='organizer' name='organizer' label='Organizador' disabled value='Admin' />
+
         <TextField
           fullWidth
           className={classes.input}
@@ -116,8 +118,8 @@ export const TrData = ({ inputValueHandler, handlerError }) => {
             shrink: true,
           }}
         />
-        <TextField fullWidth className={classes.input} variant='outlined' id='organizer' name='organizer' label='Organizador' disabled value='Admin' />
       </Grid>
-    </Content>
+
+    </>
   );
 };

@@ -92,18 +92,18 @@ const NewTournament = (props) => {
 
   return (
     <>
-      <TrData inputValueHandler={inputValueHandler} handlerError={handlerError} />
-      <TrSeason inputValueHandler={inputValueHandler} />
       <Content>
-        <Grid item xs={12} sm={12} lg={8} variant='standard'>
-          <Typography gutterBottom variant='h6' component='h4'>
-            Buscar jugadores
-          </Typography>
-        </Grid>
+        <TrData inputValueHandler={inputValueHandler} handlerError={handlerError} />
+        <TrSeason inputValueHandler={inputValueHandler} />
       </Content>
-      <TrSearch />
-      <TrCompetitors handleEnrollPlayers={handleEnrollPlayers} />
-      <TrGratifications handlerGratification={handlerGratification} handlerError={handlerError} />
+
+      <Content>
+        <TrSearch />
+        <TrCompetitors handleEnrollPlayers={handleEnrollPlayers} />
+      </Content>
+      <Content>
+        <TrGratifications handlerGratification={handlerGratification} handlerError={handlerError} />
+      </Content>
       <Content>
         <FormControl className={classes.formControl}>
           <Button
