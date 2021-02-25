@@ -1,14 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable import/no-extraneous-dependencies */
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles, Grid, Typography, Tab, Tabs, Box, List } from '@material-ui/core';
 
 import { DataCard } from './components/DataCard';
 import TablePlayersEnrolled from './components/TablePlayersEnrolled';
+import { AddPointsButton } from './components/AddPointsButton';
+import { CloseTrButton } from './components/CloseTrButton';
+import { RemoveButton } from './components/RemoveButton';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+
   return (
     <div
       role='tabpanel'
@@ -57,12 +61,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function VerticalTabs(props) {
   const { tournaments } = props;
+  const [playerToEdit, setPlayerToEdit] = useState({});
+  const [change, setChange] = useState({});
+
+  const hanlderPlayer = (player) => {
+    setPlayerToEdit(player);
+  };
+
+  const handlerAddPaid = (paid, competitor, tournament) => { setChange({ paid, competitor, tournament }); };
 
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+
+    // Aqui cambiar reducer para cambiar de tab
   };
 
   return (
@@ -99,12 +113,36 @@ export default function VerticalTabs(props) {
                 >
                   <List className={classes.list}>
                     <DataCard tournament={tournament} />
-
                   </List>
                 </Grid>
               </Grid>
               <Grid item xs={12} sm={12} lg={8} variant='standard'>
-                <TablePlayersEnrolled players={tournament.competitors} />
+                <Grid
+                  container
+                  direction='row'
+                  justify='space-between'
+                  alignItems='center'
+                >
+                  <Grid item xs={12} sm={12} lg={12} variant='standard'>
+                    <TablePlayersEnrolled players={tournament.competitors} hanlderPlayer={hanlderPlayer} change={change} />
+                  </Grid>
+                  <Grid item xs={12} sm={12} lg={12} variant='standard'>
+                    <Grid
+                      container
+                      direction='row'
+                      justify='flex-start'
+                      alignItems='center'
+                    >
+                      <AddPointsButton competitor={playerToEdit} handlerAddPaid={handlerAddPaid} tournament={tournament.id} />
+                      <CloseTrButton />
+                      {
+                        tournament.end !== null ? <RemoveButton /> : null
+                      }
+                    </Grid>
+                  </Grid>
+
+                </Grid>
+
               </Grid>
 
             </Grid>

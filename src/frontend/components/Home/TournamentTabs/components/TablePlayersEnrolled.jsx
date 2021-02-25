@@ -2,11 +2,10 @@
 /* eslint-disable radix */
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/prefer-default-export */
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { DataGrid } from '@material-ui/data-grid';
-import { Avatar, Grid, Typography } from '@material-ui/core';
-import { Content } from '../../../shared/Content';
+import { Avatar } from '@material-ui/core';
 
 const columns = [
   { field: 'avatar',
@@ -21,11 +20,13 @@ const columns = [
   { field: 'points', headerName: 'Puntos', width: 100 },
   { field: 'paid', headerName: 'Pagado', width: 120 },
   { field: 'credit', headerName: 'Credito', type: 'number', width: 100 },
-  { field: '', headerName: 'Ganado', type: 'number', width: 120 },
+  { field: 'credit_won', headerName: 'Ganado', type: 'number', width: 120 },
 
 ];
 
-const TablePlayersEnrolled = ({ players }) => {
+const TablePlayersEnrolled = ({ players, hanlderPlayer, change }) => {
+
+  console.log(change);
 
   return (
     <>
@@ -34,7 +35,7 @@ const TablePlayersEnrolled = ({ players }) => {
           rows={players}
           columns={columns}
           pageSize={5}
-          onRowSelected={({ data }) => {}}
+          onRowSelected={({ data }) => hanlderPlayer(data)}
         />
       </div>
     </>

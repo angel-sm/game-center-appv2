@@ -45,6 +45,8 @@ const NewTournament = (props) => {
     cost_money: 0,
     start: null,
     center: 1,
+    game: 0,
+    season: null,
     description: '',
     gratifications: [],
     players_to_enroll: [],
@@ -90,11 +92,15 @@ const NewTournament = (props) => {
     }
   };
 
+  const handlerSeasonSelect = (value) => {
+    inputValueHandler.form['game'] = value;
+  };
+
   return (
     <>
       <Content>
         <TrData inputValueHandler={inputValueHandler} handlerError={handlerError} />
-        <TrSeason inputValueHandler={inputValueHandler} />
+        <TrSeason inputValueHandler={inputValueHandler} handlerSeasonSelect={handlerSeasonSelect} />
       </Content>
 
       <Content>

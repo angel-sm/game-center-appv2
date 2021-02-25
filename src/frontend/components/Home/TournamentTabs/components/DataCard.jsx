@@ -10,11 +10,12 @@ import GroupIcon from '@material-ui/icons/Group';
 import TodayIcon from '@material-ui/icons/Today';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AccountBalanceWalletIcon from '@material-ui/icons/AccountBalanceWallet';
+import SportsEsportsIcon from '@material-ui/icons/SportsEsports';
 
 export const DataCard = ({ tournament }) => {
-  const keys = ['id', 'name', 'cost_credit', 'cost_money', 'total_credit', 'total_money', 'players_enrolled', 'season'];
-  const name = ['ID', 'Nombre', 'Costo en credito', 'Costo en dinero', 'Total credito', 'Total dinero', 'Total jugadores inscritos', 'Temporada'];
-  const icons = [<VpnKeyIcon />, <AssignmentIcon />, <CreditCardIcon />, <AttachMoneyIcon />, <AccountBalanceWalletIcon />, <LocalAtmIcon />, <GroupIcon />, <TodayIcon />];
+  const keys = ['id', 'name', 'cost_credit', 'cost_money', 'total_credit', 'total_money', 'players_enrolled', 'season_name', 'game_name'];
+  const name = ['ID', 'Nombre', 'Costo en credito', 'Costo en dinero', 'Total credito', 'Total dinero', 'Total jugadores inscritos', 'Temporada', 'Juego'];
+  const icons = [<VpnKeyIcon />, <AssignmentIcon />, <CreditCardIcon />, <AttachMoneyIcon />, <AccountBalanceWalletIcon />, <LocalAtmIcon />, <GroupIcon />, <TodayIcon />, <SportsEsportsIcon />];
 
   return keys.map((key, index) => (
     <ListItem divider={true}>
