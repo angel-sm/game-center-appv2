@@ -1,0 +1,11 @@
+const SIGNIN = 'SIGNIN';
+const LOGOUT = 'LOGOUT';
+const GET_TOURNAMENTS = 'GET_TOURNAMENTS';
+const GET_PLAYER = 'GET_PLAYER';
+
+export {
+  GET_TOURNAMENTS,
+  GET_PLAYER,
+  SIGNIN,
+  LOGOUT,
+};
