@@ -54,6 +54,6 @@ export const ProfileControllerContent = styled.div`
 `;
 
 export const ContentContainer = styled.div`
-  width: 90%;
+  width: 100%;
   margin: auto;
 `;

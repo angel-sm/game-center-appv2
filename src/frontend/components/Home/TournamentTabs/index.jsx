@@ -2,11 +2,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
+import { makeStyles, Grid, Typography, Tab, Tabs, Box, List } from '@material-ui/core';
+
+import { DataCard } from './components/DataCard';
+import TablePlayersEnrolled from './components/TablePlayersEnrolled';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -49,6 +48,11 @@ const useStyles = makeStyles((theme) => ({
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
   },
+  list: {
+    width: '100%',
+    maxWidth: 1000,
+    backgroundColor: theme.palette.background.paper,
+  },
 }));
 
 export default function VerticalTabs(props) {
@@ -68,17 +72,42 @@ export default function VerticalTabs(props) {
         variant='scrollable'
         value={value}
         onChange={handleChange}
+        indicatorColor='primary'
+        textColor='primary'
         aria-label='Vertical tabs example'
         className={classes.tabs}
       >
         {
-          tournaments.map((tournament, index) => <Tab label={tournament.name} {...a11yProps(index)} />)
+          tournaments.map((tournament, index) => <Tab key={tournament.id} label={tournament.name} {...a11yProps(index)} />)
         }
       </Tabs>
       {
         tournaments.map((tournament, index) => (
-          <TabPanel value={value} index={index}>
-            {tournament.name}
+          <TabPanel value={value} index={index} key={tournament.id}>
+            <Grid
+              container
+              direction='row'
+              justify='space-between'
+              alignItems='flex-start'
+            >
+              <Grid item xs={12} sm={12} lg={3} variant='standard'>
+                <Grid
+                  container
+                  direction='column'
+                  justify='center'
+                  alignItems='center'
+                >
+                  <List className={classes.list}>
+                    <DataCard tournament={tournament} />
+
+                  </List>
+                </Grid>
+              </Grid>
+              <Grid item xs={12} sm={12} lg={8} variant='standard'>
+                <TablePlayersEnrolled players={tournament.competitors} />
+              </Grid>
+
+            </Grid>
           </TabPanel>
         ))
       }

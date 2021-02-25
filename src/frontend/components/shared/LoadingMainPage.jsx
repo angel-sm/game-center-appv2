@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const LoadPage = () => {
+export const LoadingMainPage = () => {
   const classes = useStyles();
 
   return (
