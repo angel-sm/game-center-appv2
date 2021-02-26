@@ -76,7 +76,7 @@ export const TrSeason = ({ inputValueHandler, handlerSeasonSelect }) => {
                 {...inputValueHandler}
               >
                 <MenuItem value={null}>
-                  <em>Ningunda</em>
+                  <em>Ninguna</em>
                 </MenuItem>
                 {
                   seasons.map((season) => <MenuItem key={season.id} value={season.id}>{season.name}</MenuItem>)

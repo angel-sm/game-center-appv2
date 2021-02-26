@@ -15,7 +15,7 @@ export const AddPointsButton = ({ competitor, handlerAddPaid, tournament }) => {
   return (
     <div>
       <Button variant='outlined' color='primary' onClick={() => setOpen(true)} disabled={competitor.id === undefined}>
-        {`${competitor.paid === 'debtor' ? 'Agregar pago' : 'Editar puntos y lugar'}`}
+        {`${competitor.paid === 'debtor' ? 'Realizar pago' : 'Editar puntos y lugar'}`}
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby='form-dialog-title' maxWidth='xs'>
         <DialogTitle id='form-dialog-title'>{`${competitor.paid === 'debtor' ? `Agregar pago de ${competitor.player_name}` : `Editar puntos y lugar a ${competitor.player_name}`}`}</DialogTitle>
