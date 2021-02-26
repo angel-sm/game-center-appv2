@@ -45,7 +45,7 @@ const NewTournament = (props) => {
     cost_money: 0,
     start: null,
     center: 1,
-    game: 0,
+    game: null,
     season: null,
     description: '',
     gratifications: [],
@@ -92,15 +92,11 @@ const NewTournament = (props) => {
     }
   };
 
-  const handlerSeasonSelect = (value) => {
-    inputValueHandler.form['game'] = value;
-  };
-
   return (
     <>
       <Content>
         <TrData inputValueHandler={inputValueHandler} handlerError={handlerError} />
-        <TrSeason inputValueHandler={inputValueHandler} handlerSeasonSelect={handlerSeasonSelect} />
+        <TrSeason inputValueHandler={inputValueHandler} />
       </Content>
 
       <Content>
@@ -115,7 +111,7 @@ const NewTournament = (props) => {
           <Button
             onClick={() => {
               console.log(inputValueHandler.form);
-              props.rqNewTournaments(inputValueHandler.form); props.rqGetTournaments(); history.push('/');
+              //props.rqNewTournaments(inputValueHandler.form); props.rqGetTournaments(); history.push('/');
             }}
             variant='contained'
             color='primary'

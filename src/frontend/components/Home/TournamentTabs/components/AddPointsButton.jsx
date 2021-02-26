@@ -15,13 +15,13 @@ export const AddPointsButton = ({ competitor, handlerAddPaid, tournament }) => {
   return (
     <div>
       <Button variant='outlined' color='primary' onClick={() => setOpen(true)} disabled={competitor.id === undefined}>
-        {`${competitor.paid === 'debtor' ? 'Agregar pago' : 'Editar puntos y lugar'}`}
+        {`${competitor.paid === 'No' ? 'Agregar pago' : 'Editar puntos y lugar'}`}
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)} aria-labelledby='form-dialog-title' maxWidth='xs'>
-        <DialogTitle id='form-dialog-title'>{`${competitor.paid === 'debtor' ? `Agregar pago de ${competitor.player_name}` : `Editar puntos y lugar a ${competitor.player_name}`}`}</DialogTitle>
+        <DialogTitle id='form-dialog-title'>{`${competitor.paid === 'No' ? `Agregar pago de ${competitor.player_name}` : `Editar puntos y lugar a ${competitor.player_name}`}`}</DialogTitle>
         <DialogContent>
           {
-            competitor.paid === 'debtor' ? (
+            competitor.paid === 'No' ? (
               <FormControl component='fieldset'>
                 <RadioGroup aria-label='paid' name='paid' value={value} onChange={handleChange}>
                   <FormControlLabel value='paid' control={<Radio />} label='Pagado' />
@@ -49,7 +49,7 @@ export const AddPointsButton = ({ competitor, handlerAddPaid, tournament }) => {
         </DialogContent>
         <DialogActions>
           {
-            competitor.paid !== 'debtor' ? (
+            competitor.paid !== 'No' ? (
               <>
                 <Button onClick={() => setOpen(false)} color='primary'>
                   Editar
