@@ -1,10 +1,17 @@
 /* eslint-disable import/prefer-default-export */
 import React from 'react';
-import { Button } from '@material-ui/core';
+import { Button, makeStyles } from '@material-ui/core';
 
-export const RemoveButton = () => {
+const useStyles = makeStyles((theme) => ({
+  margin: {
+    margin: theme.spacing(2),
+  },
+}));
+export const RemoveButton = (props) => {
+  const classes = useStyles();
+
   return (
-    <Button variant='contained' color='primary'>
+    <Button variant='contained' color='primary' className={classes.margin}>
       Archivar
     </Button>
   );

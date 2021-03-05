@@ -5,8 +5,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { makeStyles } from '@material-ui/core';
-
 import { rqGetTournaments } from '../../redux/actions/tournaments';
 import Dashboard from '../../components/Home/TournamentTabs';
 
@@ -16,18 +14,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-const useStyles = makeStyles((theme) => ({
-  backdrop: {
-    zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
-  },
-}));
-
 const dispatchStateToProps = {
   rqGetTournaments,
 };
+
 const Home = (props) => {
-  const classes = useStyles();
 
   const [findedTournaments, setFindedTournaments] = useState([]);
 

@@ -23,6 +23,33 @@ class TournamentRoutes {
       });
     });
 
+    router.post('/pay', async (req, res) => {
+      const { body: pay } = req;
+      await Axios({
+        url: `${this.url}/tournaments/pay`,
+        method: 'POST',
+        data: { ...pay },
+      });
+    });
+
+    router.post('/close', async (req, res) => {
+      const { body: description } = req;
+      await Axios({
+        url: `${this.url}/tournaments/close`,
+        method: 'POST',
+        data: { ...description },
+      });
+    });
+
+    router.post('/points-place', async (req, res) => {
+      const { body: description } = req;
+      await Axios({
+        url: `${this.url}/tournaments/points-place`,
+        method: 'POST',
+        data: { ...description },
+      });
+    });
+
     router.get('/', async (req, res) => {
       const { data } = await Axios({
         url: `${this.url}/tournaments?center=1`,
