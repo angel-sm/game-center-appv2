@@ -11,7 +11,6 @@ import {
   FormControl,
 } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   input: {
@@ -29,28 +28,27 @@ const games = [
 
 const seasons = [
   { id: 1, name: 'Temporada 1', game_id: 1 },
-  { id: 2, name: 'Temporada 2', game_id: 2 },
-  { id: 3, name: 'Temporada 3', game_id: 3 },
+  { id: 2, name: 'Temporada 2', game_id: 1 },
+  { id: 3, name: 'Temporada 3', game_id: 1 },
   { id: 4, name: 'Temporada 4', game_id: 4 },
   { id: 5, name: 'Temporada 5', game_id: 5 },
 ];
 
-export const TrSeason = ({ inputValueHandler, handlerSeasonSelect }) => {
+export const TrSeason = ({ inputValueHandler }) => {
   const classes = useStyles();
 
-  const [gameName, setGameName] = useState('');
+  const [seasonsAvailabe, setSeasonsAvailabe] = useState([]);
 
-  const getGameName = () => {
-    const [game] = games.filter((game) => (game.id === inputValueHandler.form.season ? game : null));
-    setGameName(game.name);
+  const getSeason = () => {
+    const seasonsFilters = seasons.filter((s) => (s.game_id === inputValueHandler.form.game ? s : null));
+    setSeasonsAvailabe(seasonsFilters);
   };
 
   useEffect(() => {
-    if (inputValueHandler.form.season !== null) {
-      getGameName();
-      handlerSeasonSelect(inputValueHandler.form.season);
+    if (inputValueHandler.form.game !== null) {
+      getSeason();
     }
-  }, [inputValueHandler.form.season]);
+  }, [inputValueHandler.form.game]);
 
   return (
     <>
@@ -65,6 +63,26 @@ export const TrSeason = ({ inputValueHandler, handlerSeasonSelect }) => {
         >
           <Grid item xs={12} sm={12} lg={8} variant='standard'>
             <FormControl fullWidth variant='outlined' className={classes.input}>
+              <InputLabel id='game'>Juego</InputLabel>
+              <Select
+                name='game'
+                labelId='game'
+                id='game'
+                value={inputValueHandler.form.game}
+                label='Juego'
+                {...inputValueHandler}
+              >
+                <MenuItem value={null}>
+                  <em>Ninguna</em>
+                </MenuItem>
+                {
+                  games.map((game) => <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>)
+                }
+              </Select>
+            </FormControl>
+          </Grid>
+          <Grid item xs={12} sm={12} lg={8} variant='standard'>
+            <FormControl fullWidth variant='outlined' className={classes.input}>
               <InputLabel id='season'>Temporada</InputLabel>
               <Select
                 name='season'
@@ -76,28 +94,10 @@ export const TrSeason = ({ inputValueHandler, handlerSeasonSelect }) => {
                 {...inputValueHandler}
               >
                 <MenuItem value={null}>
-                  <em>Ninguna</em>
+                  <em>Ningunda</em>
                 </MenuItem>
                 {
-                  seasons.map((season) => <MenuItem key={season.id} value={season.id}>{season.name}</MenuItem>)
-                }
-              </Select>
-            </FormControl>
-          </Grid>
-          <Grid item xs={12} sm={12} lg={8} variant='standard'>
-            <FormControl fullWidth variant='outlined' className={classes.input}>
-              <InputLabel id='game'>Juego</InputLabel>
-              <Select
-                name='game'
-                labelId='game'
-                id='game'
-                disabled={inputValueHandler.form.season !== null}
-                value={inputValueHandler.form.game}
-                label='Juego'
-                {...inputValueHandler}
-              >
-                {
-                  games.map((game) => <MenuItem key={game.id} value={game.id}>{game.name}</MenuItem>)
+                  seasonsAvailabe.map((season) => <MenuItem key={season.id} value={season.id}>{season.name}</MenuItem>)
                 }
               </Select>
             </FormControl>
@@ -105,13 +105,11 @@ export const TrSeason = ({ inputValueHandler, handlerSeasonSelect }) => {
         </Grid>
       </Grid>
       {
-        inputValueHandler.form.season !== null ? (
+        seasonsAvailabe.length > 0 ? (
           <Grid item xs={12} sm={12} lg={8} variant='standard'>
             <FormControl fullWidth variant='outlined' className={classes.input}>
               <Alert severity='info'>
-                {
-                  `${gameName} es el juego por default de la temporada ${inputValueHandler.form.season}`
-                }
+                {`El juego seleccionado tiene ${seasonsAvailabe.length} temporada registrada`}
               </Alert>
             </FormControl>
           </Grid>

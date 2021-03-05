@@ -11,7 +11,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
-import { Button, FormControl, Grid, Typography } from '@material-ui/core';
+import { Button, FormControl } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
@@ -45,7 +45,7 @@ const NewTournament = (props) => {
     cost_money: 0,
     start: null,
     center: 1,
-    game: 0,
+    game: null,
     season: null,
     description: '',
     gratifications: [],
@@ -92,15 +92,11 @@ const NewTournament = (props) => {
     }
   };
 
-  const handlerSeasonSelect = (value) => {
-    inputValueHandler.form['game'] = value;
-  };
-
   return (
     <>
       <Content>
         <TrData inputValueHandler={inputValueHandler} handlerError={handlerError} />
-        <TrSeason inputValueHandler={inputValueHandler} handlerSeasonSelect={handlerSeasonSelect} />
+        <TrSeason inputValueHandler={inputValueHandler} />
       </Content>
 
       <Content>

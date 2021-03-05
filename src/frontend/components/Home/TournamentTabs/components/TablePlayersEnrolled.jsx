@@ -19,14 +19,12 @@ const columns = [
   { field: 'player_name', headerName: 'Jugador', width: 130 },
   { field: 'points', headerName: 'Puntos', width: 100 },
   { field: 'paid', headerName: 'Pagado', width: 120 },
-  { field: 'credit', headerName: 'Credito', type: 'number', width: 100 },
+  { field: 'place', headerName: 'Lugar', type: 'number', width: 100 },
   { field: 'credit_won', headerName: 'Ganado', type: 'number', width: 120 },
 
 ];
 
-const TablePlayersEnrolled = ({ players, hanlderPlayer, change }) => {
-
-  console.log(change);
+const TablePlayersEnrolled = ({ players, hanlderPlayer }) => {
 
   return (
     <>

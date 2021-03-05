@@ -1,14 +1,47 @@
+/* eslint-disable radix */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable import/no-extraneous-dependencies */
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, Grid, Typography, Tab, Tabs, Box, List } from '@material-ui/core';
+import { Grid, Typography, Tab, Tabs, Box, List } from '@material-ui/core';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 import { DataCard } from './components/DataCard';
 import TablePlayersEnrolled from './components/TablePlayersEnrolled';
-import { AddPointsButton } from './components/AddPointsButton';
-import { CloseTrButton } from './components/CloseTrButton';
+import AddPointsButton from './components/AddPointsButton';
+import CloseTrButton from './components/CloseTrButton';
 import { RemoveButton } from './components/RemoveButton';
+
+const AntTabs = withStyles({
+  root: {
+  },
+  indicator: {
+    backgroundColor: '#3f50b5',
+  },
+})(Tabs);
+
+const AntTab = withStyles((theme) => ({
+  root: {
+    textTransform: 'none',
+    fontWeight: theme.typography.fontWeightRegular,
+    padding: theme.spacing(3),
+    borderBottom: '1px solid #e8e8e8',
+    '&:hover': {
+      color: '#3f50b5',
+      opacity: 1,
+    },
+    '&$selected': {
+      color: '#fff',
+      fontWeight: theme.typography.fontWeightMedium,
+      backgroundColor: '#3f50b5',
+    },
+    '&:focus': {
+      color: '#fff',
+      backgroundColor: '#3f50b5',
+    },
+  },
+  selected: {},
+}))((props) => <Tab disableRipple {...props} />);
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,6 +84,11 @@ const useStyles = makeStyles((theme) => ({
   },
   tabs: {
     borderRight: `1px solid ${theme.palette.divider}`,
+    maxHeight: '100vh',
+    overflowY: 'scroll',
+    '&::-webkit-scrollbar': {
+      width: '0px',
+    },
   },
   list: {
     width: '100%',
@@ -62,26 +100,22 @@ const useStyles = makeStyles((theme) => ({
 export default function VerticalTabs(props) {
   const { tournaments } = props;
   const [playerToEdit, setPlayerToEdit] = useState({});
-  const [change, setChange] = useState({});
 
   const hanlderPlayer = (player) => {
     setPlayerToEdit(player);
   };
 
-  const handlerAddPaid = (paid, competitor, tournament) => { setChange({ paid, competitor, tournament }); };
-
   const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = React.useState(typeof document !== 'undefined' ? parseInt(document.cookie.split('=')[1]) : 0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-
-    // Aqui cambiar reducer para cambiar de tab
+    typeof document !== 'undefined' ? document.cookie = `tournament_id=${newValue}` : handleChange(null, newValue);
+    setValue(parseInt(document.cookie.split('=')[1]));
   };
 
   return (
     <div className={classes.root}>
-      <Tabs
+      <AntTabs
         orientation='vertical'
         variant='scrollable'
         value={value}
@@ -92,9 +126,9 @@ export default function VerticalTabs(props) {
         className={classes.tabs}
       >
         {
-          tournaments.map((tournament, index) => <Tab key={tournament.id} label={tournament.name} {...a11yProps(index)} />)
+          tournaments.map((tournament, index) => <AntTab key={tournament.id} label={tournament.name} {...a11yProps(index)} />)
         }
-      </Tabs>
+      </AntTabs>
       {
         tournaments.map((tournament, index) => (
           <TabPanel value={value} index={index} key={tournament.id}>
@@ -124,7 +158,7 @@ export default function VerticalTabs(props) {
                   alignItems='center'
                 >
                   <Grid item xs={12} sm={12} lg={12} variant='standard'>
-                    <TablePlayersEnrolled players={tournament.competitors} hanlderPlayer={hanlderPlayer} change={change} />
+                    <TablePlayersEnrolled players={tournament.competitors} hanlderPlayer={hanlderPlayer} />
                   </Grid>
                   <Grid item xs={12} sm={12} lg={12} variant='standard'>
                     <Grid
@@ -133,8 +167,10 @@ export default function VerticalTabs(props) {
                       justify='flex-start'
                       alignItems='center'
                     >
-                      <AddPointsButton competitor={playerToEdit} handlerAddPaid={handlerAddPaid} tournament={tournament.id} />
-                      <CloseTrButton />
+                      <AddPointsButton competitor={playerToEdit} tournament={tournament.id} />
+                      {
+                        tournament.competitors.findIndex((comp) => comp.paid === 'No') !== -1 ? null : tournament.end !== null ? null : <CloseTrButton players={tournament.competitors} tournament={tournament.id} />
+                      }
                       {
                         tournament.end !== null ? <RemoveButton /> : null
                       }
