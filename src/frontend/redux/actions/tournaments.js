@@ -2,15 +2,10 @@
 /* eslint-disable handle-callback-err */
 /* eslint-disable import/named */
 import axios from 'axios';
-import { GET_TOURNAMENTS, GET_TOURNAMENT_ID_TAB } from '../../types';
+import { GET_TOURNAMENTS } from '../types';
 
 export const get_tournaments = (payload) => ({
   type: GET_TOURNAMENTS,
-  payload,
-});
-
-export const get_tournament_id_tab = (payload) => ({
-  type: GET_TOURNAMENT_ID_TAB,
   payload,
 });
 

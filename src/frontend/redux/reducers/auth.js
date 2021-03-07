@@ -1,5 +1,5 @@
 /* eslint-disable import/named */
-import { SIGNIN, LOGOUT } from '../../types';
+import { SIGNIN, LOGOUT } from '../types';
 
 const reducer = (state, action) => {
   switch (action.type) {
