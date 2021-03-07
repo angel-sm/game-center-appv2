@@ -23,7 +23,9 @@ import { TrSeason } from '../../components/NewTournament/TrSeason';
 
 import useInputValueHandle from '../../hooks/useInputHandler';
 import { rqNewTournaments, rqGetTournaments } from '../../redux/actions/tournaments';
-import TrSearch from '../../components/NewTournament/TrSearch';
+import { rqGetPlayer } from '../../redux/actions/players';
+
+import TrSearch from '../../components/shared/PlayerSearch';
 import { Content } from '../../components/shared/Content';
 
 const useStyles = makeStyles((theme) => ({
@@ -92,6 +94,10 @@ const NewTournament = (props) => {
     }
   };
 
+  const searchHandler = (value) => {
+    props.rqGetPlayer(value);
+  };
+
   return (
     <>
       <Content>
@@ -100,7 +106,7 @@ const NewTournament = (props) => {
       </Content>
 
       <Content>
-        <TrSearch />
+        <TrSearch searchHandler={searchHandler} title='Seleccionar jugadores' />
         <TrCompetitors handleEnrollPlayers={handleEnrollPlayers} />
       </Content>
       <Content>
@@ -130,6 +136,7 @@ const NewTournament = (props) => {
 const dispatchStateToProps = {
   rqNewTournaments,
   rqGetTournaments,
+  rqGetPlayer,
 };
 
 export default connect(null, dispatchStateToProps)(NewTournament);

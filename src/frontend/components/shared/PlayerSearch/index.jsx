@@ -1,11 +1,10 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-use-before-define */
 import React from 'react';
-import { connect } from 'react-redux';
 
-import { TextField, FormControl, makeStyles, Button, Grid, Typography } from '@material-ui/core';
-import { rqGetPlayer } from '../../../redux/actions/players';
+import { TextField, makeStyles, Button, Grid, Typography } from '@material-ui/core';
 import inputValueHandler from '../../../hooks/useInputHandler';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,36 +21,33 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const TrSearch = (props) => {
+const TrSearch = ({ title, searchHandler }) => {
   const classes = useStyles();
 
   const value = inputValueHandler({
     search: '',
   });
 
-  const handlerClick = () => {
-    props.rqGetPlayer(value.form);
+  const submitHandler = () => {
+    event.preventDefault();
+    searchHandler(value.form);
   };
 
   return (
     <>
       <Grid item xs={12} sm={12} lg={8} variant='standard'>
         <Typography gutterBottom variant='h6' component='h4'>
-          Seleccionar jugadores
+          {title}
         </Typography>
       </Grid>
-      <FormControl className={classes.formControl}>
+      <form onSubmit={submitHandler} className={classes.formControl}>
         <TextField id='search' name='search' label='Buscar por nombre, apellido, nickname o email' variant='outlined' {...value} className={classes.input} size='small' />
-        <Button variant='contained' color='primary' onClick={handlerClick}>
+        <Button variant='contained' color='primary' onClick={submitHandler}>
           Buscar
         </Button>
-      </FormControl>
+      </form>
     </>
   );
 };
 
-const dispatchStateToProps = {
-  rqGetPlayer,
-};
-
-export default connect(null, dispatchStateToProps)(TrSearch);
+export default TrSearch;
