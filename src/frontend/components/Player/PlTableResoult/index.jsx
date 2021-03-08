@@ -10,7 +10,7 @@ import { TrafficRounded } from '@material-ui/icons';
 
 const columns = [
   { field: 'id',
-    headerName: 'id',
+    headerName: 'ID',
     width: 70,
     sortable: false,
     disableColumnMenu: TrafficRounded },

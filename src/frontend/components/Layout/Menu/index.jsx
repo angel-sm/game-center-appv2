@@ -48,7 +48,7 @@ const options = [
     icon: <AttachMoney />,
   }, {
     option: 'Temporadas',
-    url: '/config-points',
+    url: '/seasons',
     icon: <Settings />,
   }, {
     option: 'Reportes',
