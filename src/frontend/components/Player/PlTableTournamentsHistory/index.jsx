@@ -15,7 +15,7 @@ const PlTableTournamentsHistory = ({ tournaments, hanlderTournament }) => {
   };
 
   const columns = [
-    { field: 'id', headerName: 'id', width: 70 },
+    { field: 'id', headerName: 'ID', width: 70 },
     { field: 'name', headerName: 'Torneo', width: 140 },
     { field: 'game_name', headerName: 'Juego', width: 150 },
     { field: 'season_name', headerName: 'Temporada', width: 150 },

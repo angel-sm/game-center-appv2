@@ -30,7 +30,7 @@ const Home = (props) => {
 
   useEffect(() => {
     if (props.tournaments) {
-      setFindedTournaments(props.tournaments || []);
+      setFindedTournaments(props.tournaments.filter((t) => (t.is_active === 0 ? t : null)) || []);
     }
   }, [props.tournaments]);
 
